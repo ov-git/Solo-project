@@ -9,7 +9,7 @@ function Drinks({ drinks }) {
     return (
         <div className="w-full h-screen bg-slate-500 grid sm:grid-cols-3 gap-1">
             {drinkList.map((drink) => (
-                    <Drink key={drink._id} drink={drink} />
+                <Drink key={drink._id} drink={drink}/>
             ))}
         </div>
     )

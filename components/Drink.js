@@ -1,12 +1,20 @@
 import React from 'react'
+import Link from 'next/link'
 
-function Drink({drink}) {
+function Drink({ drink }) {
+
+    const handleclick = () => {
+        console.log(drink);
+
+    }
 
     return (
-        <div>
-            <img src={drink.drinkThumb} alt={drink.drinkName} onClick={() => console.log(drink)} />
-            <h1> {drink.drinkName} </h1>
-        </div >
+        // <Link href={'/'}>
+            <div className=" h-full w-full mt-[100px]">
+                <img className=" cursor-pointer" src={drink.drinkThumb} alt={drink.drinkName} onClick={() => handleclick()} />
+                <h1> {drink.drinkName} </h1>
+            </div>
+        // </Link>
 
     )
 }
