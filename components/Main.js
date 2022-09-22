@@ -8,7 +8,7 @@ import cocktail from '../public/cocktail.jpg'
 
 function Main(props) {
 
-  const categories = ["Cocktails", "Shots", "Beer", "Ordinary Drinks"];
+  const categories = ["Cocktails", "Shots", "Beer", "Ordinary Drinks", "more"];
 
 
   const [category, setCategory] = useState('');
@@ -25,22 +25,20 @@ function Main(props) {
     }
   }
 
-
   return (
     <div className=' mt-20 h-full w-full flex-col'>
-      <div className="p-4 h-36 w-full flex justify-between text-white">
-        
-        {categories.map((cat) => (
-          <div className=' border cursor-pointer border-black h-full shrink-0 grow w-[10vw] m-2 my-0 inline-block bg-cover bg-center overflow-hidden'
-            key={cat} onClick={() => setCategory(cat)} style={{ backgroundImage: `url(${cocktail.src})` }}>
-            <p className='z-10 absolute'                          >
-              {cat}
-            </p>
 
-            <div className='bg-black h-full shrink-0 grow w-full opacity-0 hover:opacity-50' />
+      <div className="p-4 h-36 overflow-x-scroll maw-w-[90vw] flex justify-between text-white">
+        {categories.map((cat) => (
+          <div className='border cursor-pointer border-black h-full shrink-0 grow w-[10vw] min-w-[20rem] m-2 my-0 inline-block bg-cover bg-center overflow-hidden'
+            key={cat} onClick={() => setCategory(cat)} style={{ backgroundImage: `url(${cocktail.src})` }}>
+
+
+            <div className='h-full shrink-0 grow w-full bg-black bg-opacity-0 hover:bg-opacity-50'> <p className='z-10'>
+              {cat}
+            </p> </div>
 
           </div>
-          
         ))}
       </div>
 

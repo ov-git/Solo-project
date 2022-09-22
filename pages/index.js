@@ -6,12 +6,13 @@ import React, { useEffect, useState } from 'react'
 import { getAll } from '../lib/ApiService'
 import prisma from '../lib/prisma'
 import Showcase from '../components/Showcase'
+import { useRouter } from 'next/router'
 // import { PrismaClient } from '@prisma/client';
 
 
 export const getServerSideProps = async () => {
 
-  const users = await prisma.user.findMany();
+  const users = await prisma.User.findMany();
 
   return {
     props: {
@@ -27,7 +28,6 @@ export default function Home(props) {
 
   useEffect(() => {
     getDrinks();
-    // console.log(props)
   }, []);
 
   const getDrinks = async () => {
@@ -37,7 +37,7 @@ export default function Home(props) {
 
 
   return (
-    <div className="text-4xl h-[100vh] w-[98.2vw]">
+    <div className="text-4xl h-[90vh] w-[98.2vw]">
       <Navbar />
       {showcase ? <Showcase showcase={showcase} setShowcase={setShowcase} />: <></>}
       <Main drinks={drinks} setShowcase={setShowcase} />
