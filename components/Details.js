@@ -1,8 +1,9 @@
 import React from 'react'
+import Drink from './Drink'
 
 function Details() {
   return (
-    <div>Details</div>
+    <h1>Details</h1>
   )
 }
 

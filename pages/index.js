@@ -5,6 +5,7 @@ import Register from '../components/Register'
 import React, { useEffect, useState } from 'react'
 import { getAll } from '../lib/ApiService'
 import prisma from '../lib/prisma'
+import Showcase from '../components/Showcase'
 // import { PrismaClient } from '@prisma/client';
 
 
@@ -22,10 +23,11 @@ export const getServerSideProps = async () => {
 export default function Home(props) {
 
   const [drinks, setDrinks] = useState([]);
+  const [showcase, setShowcase] = useState('');
 
   useEffect(() => {
     getDrinks();
-    console.log(props)
+    // console.log(props)
   }, []);
 
   const getDrinks = async () => {
@@ -35,9 +37,10 @@ export default function Home(props) {
 
 
   return (
-    <div className=" text-orange-500 text-4xl h-[100vh] bg-slate-500">
+    <div className="text-4xl h-[100vh] w-[98.2vw]">
       <Navbar />
-      <Main drinks={drinks} />
+      {showcase ? <Showcase showcase={showcase} setShowcase={setShowcase} />: <></>}
+      <Main drinks={drinks} setShowcase={setShowcase} />
       {/* <Register /> */}
     </div>
   )
