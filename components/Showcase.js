@@ -1,8 +1,14 @@
 import React from 'react'
 import { useSession } from 'next-auth/react'
+import { addDrinkToLibrary } from '../lib/ApiService'
 function Showcase({ showcase, setShowcase }) {
 
     const { data: session } = useSession();
+
+    const handleAdd = async (adding) => {
+        const from = await addDrinkToLibrary(adding);
+        setShowcase('');
+    }
 
     return (
         <div className='z-20 flex bg fixed top-[80px] h-[100vh] w-full '>
@@ -26,7 +32,7 @@ function Showcase({ showcase, setShowcase }) {
                     </div>
                     <div className='xl:my-10'>
 
-                        <button className={session ? 'px-4 py-3 xl:px-6 border border-white rounded' : 'hidden'} onClick={() => setShowcase('')}>Add to library</button>
+                        <button className={session ? 'px-4 py-3 xl:px-6 border border-white rounded' : 'hidden'} onClick={() => handleAdd(showcase)}>Add to library</button>
                     </div>
 
                 </div>

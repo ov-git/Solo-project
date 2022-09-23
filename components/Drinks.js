@@ -6,8 +6,6 @@ function Drinks({ drinks,setShowcase }) {
 
     const drinkList = drinks;
 
-    console.log(drinks);
-
     return (
         <div className="mx-2 grid sm:grid-cols-3 md:grid-cols-4 gap-4">
             {drinkList.map((drink) => (
