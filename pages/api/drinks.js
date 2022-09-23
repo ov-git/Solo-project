@@ -6,7 +6,7 @@ export default async function handler(req, res) {
     if (req.method == 'GET') {
         try {
             const body = await prisma.Drink.findMany({
-                where: { userId: "cl8d8ywgi0055wsukse8wnvey" }
+                where: { userId: "cl8eib9oy0046m0ukx9qhogt2" }
             });
 
             res.status(200)
@@ -23,7 +23,7 @@ export default async function handler(req, res) {
             url: req.body.drinkThumb,
             instructions: req.body.drinkInstructions,
             alcohol: JSON.parse(req.body.alcohol),
-            userId: "cl8d8ywgi0055wsukse8wnvey",
+            userId: "cl8eib9oy0046m0ukx9qhogt2",
         };
 
         try {    

@@ -7,8 +7,6 @@ import { getAll } from '../lib/ApiService'
 import prisma from '../lib/prisma'
 import Showcase from '../components/Showcase'
 import { useRouter } from 'next/router'
-// import { PrismaClient } from '@prisma/client';
-
 
 export const getServerSideProps = async () => {
 
@@ -41,7 +39,6 @@ export default function Home(props) {
       <Navbar />
       {showcase ? <Showcase showcase={showcase} setShowcase={setShowcase} />: <></>}
       <Main drinks={drinks} setShowcase={setShowcase} />
-      {/* <Register /> */}
     </div>
   )
 }

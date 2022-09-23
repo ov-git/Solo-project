@@ -25,7 +25,6 @@ function Profile() {
   const handleDelete = async (deleting) => {
     const deleted = await deleteDrinkFromLibrary(deleting);
     setRedo(deleted);
-    // await router.replace(router.asPath)
   }
 
 
