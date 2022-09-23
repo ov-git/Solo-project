@@ -37,11 +37,15 @@ function Navbar() {
         <div className='z-30 text-orange-100 fixed top-0 flex items-center h-[80px] bg-black justify-between w-full'>
             <div className='flex items-center'>
 
-                    <button className='p-4 m-0' onClick={() => handleNav()}>
-                        {nav ? <CgClose /> : <HiMenu />}
-                    </button>
+                <button className='p-4 m-0' onClick={() => handleNav()}>
+                    {nav ? <CgClose /> : <HiMenu />}
+                </button>
 
-                <Link href={'/'} onClick={() => details()} className="ml-6">Drinkzz</Link>
+                <Link href={'/'} onClick={() => details()} className="ml-6">
+                    <a>
+                        Drinkzz
+                    </a>
+                </Link>
             </div>
             <div className='flex'>
                 <button className=' bg-gray-400 m-2' onClick={() => handleClick()}>{session ? "Logout" : "Login"}</button>
@@ -62,7 +66,7 @@ function Navbar() {
                     <li className='p-4 w-full border-b'>Home</li>
                     <li className='p-4 w-full'>Home</li>
                 </ul> :
-                    
+
                     <ul className='py-2 flex flex-col items-center overflow-hidden border-none'>
                         <li className='p-4 w-full border-b'><button onClick={() => handleClick()}>Sing in</button></li>
                         <li className='p-4 w-full border-b'><button onClick={() => handleClick()}>Log in</button></li>

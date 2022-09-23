@@ -25,8 +25,8 @@ function Showcase({ showcase, setShowcase }) {
 
                     <div className='pt-1 xl:pt-6 flex-col'>
                         <h3 className=' text-[1.3rem] lg:text-[1.5rem]'>Ingredients:</h3>
-                        {showcase.drinkIngredients.map((ing) => (
-                            <p className='text-sm md:text-[1.3rem]' >{ing}</p>
+                        {showcase.drinkIngredients.map((ing,i) => (
+                            <p key={i} className='text-sm md:text-[1.3rem]' >{ing}</p>
                         ))}
 
                     </div>
