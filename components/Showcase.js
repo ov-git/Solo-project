@@ -6,10 +6,8 @@ function Showcase({ showcase, setShowcase }) {
     const { data: session } = useSession();
 
     const handleAdd = async (adding) => {
-
-        console.log(session);
-
-
+       
+        adding.userEmail = session.user.email;
 
         const from = await addDrinkToLibrary(adding);
         setShowcase('');

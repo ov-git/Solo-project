@@ -2,13 +2,14 @@
 import { useEffect, useState } from 'react'
 import { getCategory } from '../lib/ApiService';
 import Drinks from './Drinks'
+import { BiRightArrow, BiLeftArrow } from 'react-icons/bi'
 
 import Image from 'next/image';
 import cocktail from '../public/cocktail.jpg'
 
 function Main(props) {
 
-  const categories = ["Cocktails", "Shots", "Beer", "Ordinary Drinks", "more"];
+  const categories = ["Cocktails", "Shots", "Beer", "Ordinary Drinks", "Homemade Liqueur", "Cocoa"];
 
 
   const [category, setCategory] = useState('');
@@ -25,14 +26,36 @@ function Main(props) {
     }
   }
 
+  const slideRight = (e) => {
+    let slider = e.target.parentElement;
+
+    slider.scrollLeft += window.innerWidth;
+
+    // if ((slider.scrollLeft + window.innerWidth + 50) < slider.scrollWidth) {
+    // } else {
+    //   slider.scrollLeft = 0;
+    // }
+  }
+
+  const slideLeft = (e) => {
+    let slider = e.target.parentElement;
+
+    slider.scrollLeft -= window.innerWidth;
+
+    // if ((slider.scrollLeft - window.innerWidth) >= 0) {
+    // } else {
+    //   slider.scrollLeft = slider.scrollWidth - 1;
+    // }
+
+  }
+
   return (
-    <div className=' mt-20 h-full w-full flex-col'>
-
-      <div className="p-4 h-36 overflow-x-scroll maw-w-[90vw] flex justify-between text-white">
+    <div className=' h-full w-full flex-col'>
+      <div className="py-4 mx-1 gap-2 pl-0 h-36 overflow-x-scroll max-w-screen flex justify-between text-white scroll-smooth">
+        <BiLeftArrow className='z-10 cursor-pointer text-black text-[50px] absolute rounded-lg left-0 bg-black px-2 h-28 w-10 hover:bg-opacity-70 hover:text-white bg-opacity-10' onClick={slideLeft}></BiLeftArrow>
         {categories.map((cat) => (
-          <div className='border cursor-pointer border-black h-full shrink-0 grow w-[10vw] min-w-[20rem] m-2 my-0 inline-block bg-cover bg-center overflow-hidden'
+          <div className=' rounded border cursor-pointer border-black h-full shrink-0 grow w-[24vw] my-0 inline-block bg-cover bg-center overflow-hidden'
             key={cat} onClick={() => setCategory(cat)} style={{ backgroundImage: `url(${cocktail.src})` }}>
-
 
             <div className='h-full shrink-0 grow w-full bg-black bg-opacity-0 hover:bg-opacity-50'> <p className='z-10'>
               {cat}
@@ -40,6 +63,7 @@ function Main(props) {
 
           </div>
         ))}
+        <BiRightArrow className='z-10 cursor-pointer text-black text-[50px] absolute rounded-lg right-0 bg-black px-2 h-28 w-10 hover:bg-opacity-70 hover:text-white bg-opacity-10' onClick={slideRight}></BiRightArrow>
       </div>
 
       <div className=' m-0 p-0'>

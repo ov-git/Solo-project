@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { deleteDrinkFromLibrary, getUserLibrary } from '../lib/ApiService'
 import Image from 'next/image';
 import { useRouter } from 'next/router'
+import cocktail from '../public/cocktail.jpg'
+import { BsFillTrashFill } from 'react-icons/bs'
 
 function Profile() {
 
@@ -10,16 +12,17 @@ function Profile() {
 
   const { data: session } = useSession();
   const [library, setLibrary] = useState([]);
-  const [selected, setSelected] = useState({});
   const [redo, setRedo] = useState({});
 
-  useEffect(() => {
+  useEffect(() => {   
     setUserLibrary();
-  }, [redo])
-  
+  }, [redo, session])
+
   const setUserLibrary = async () => {
-    const data = await getUserLibrary()
-    setLibrary(data);
+    if (session) {
+      const data = await getUserLibrary(session.user.email)
+      setLibrary(data);
+    }
   }
 
   const handleDelete = async (deleting) => {
@@ -27,29 +30,36 @@ function Profile() {
     setRedo(deleted);
   }
 
+  return (
+    <div className=' h-[80vh] w-full xl:w-[80vw] flex-col'>
+      <div className='flex py-16 justify-between'>
+        <h1 className='pt-8'>Profile</h1>
+        <h1 className='text-[30px] pt-8'>{session ? `Logged in as ${session.user.name}` : ''}</h1>
+      </div>
 
-    return (
-        <div className=' mt-20 h-full w-full xl:w-[80vw] flex-col bg-slate-500'>
-        <h1 className='p-12 text-black'>Profile of</h1>
-
-        <div className='flex w-full h-80 bg-yellow-200 items-center overflow-scroll'>
-
-          {library.map((drink) => (
-            <div className='flex flex-col w-auto h-full grow-1 shrink-0 p-4' key={drink.id}>
-              <Image className="cursor-pointer rounded hover:opacity-80" src={drink.url} alt={''} width={200} height={200} onClick={() => setSelected(drink)} />
-            <h3 className='text-[22px]'>
-              {drink.name}
-            </h3>
-
-            </div>
-          ))}
-        </div>    
+      <div className='flex flex-col w-full h-full items-center overflow-y-scroll'>
+        {library.map((drink) => (
+          <div className='w-full h-auto grid grid-cols-3 gap-8 p-4 border border-black' key={drink.id}>
+            <Image className=" col-span-1 w-full h-full cursor-pointer rounded" src={drink.url} alt={''} height={200} width={200} placeholder={'empty'} />
+            <div className=' col-span-2 h-full overflow-hidden flex'>
         
-        <div className='flex mt-2 w-full h-80 bg-red-200 items-center overflow-scroll'>
-          <button className='px-0 self-start absolute' onClick={() => {handleDelete(selected)}}>Delete</button>
-          {selected ? <h1>{selected.instructions}</h1> : 'No selected'}
-         </div>
-       </div>
+              <div className='flex w-full flex-col'>
+                <div className='justify-between flex px-0'>
+                  <h3 className='text-md py-3'>
+                    {drink.name}
+                  </h3>
+                  <button className='flex flex-col justify-center items-center bg-black bg-opacity-0 hover:bg-opacity-10 rounded-full group' onClick={() => { handleDelete(drink) }}>
+                    <p className='text-sm opacity-0 group-hover:opacity-100 '>Delete</p>
+                    <BsFillTrashFill />
+                  </button>
+                  </div>
+                <p className='text-black text-[30px]'> {drink.instructions}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   )
 }
 

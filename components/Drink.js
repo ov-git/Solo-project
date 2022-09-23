@@ -3,26 +3,24 @@ import Link from 'next/link'
 
 function Drink({ drink, setShowcase }) {
 
-    // console.log(setShowcase)
+    function truncate(name) {
 
-    const handleclick = () => {
-        console.log(drink);
+        
 
+        return name.length > 30 ? name.slice(0, 20) + '...' : name;
+        
     }
 
+
     return (
-        // <Link href={'/'}>
         <div className=" h-full w-full mt-1">
-            <div className=" h-full w-full rounded bg-black">
-                {/* <p>{drink.drinkName}</p> */}
-                <img className=" cursor-pointer rounded hover:opacity-80" src={drink.drinkThumb} alt={drink.drinkName} onClick={() => setShowcase(drink)} />
+            <div className=" h-full w-full rounded bg-black bg-opacity-60 hover:bg-opacity-80">
+                <img className="cursor-pointer rounded hover:opacity-80" src={drink.drinkThumb} alt={drink.drinkName} onClick={() => setShowcase(drink)} />
+                <p className='ml-2 text-white text-[25px]'>{truncate(drink.drinkName)}</p>
 
             </div>
-
-            {/* <Link href={'/'}> <a>{drink.drinkName} </a></Link> */}
-            {/* <Link href={`/details/${drink.drinkName}`}><a>{drink.drinkName}</a></Link> */}
         </div>
-        // </Link>
+
 
     )
 }

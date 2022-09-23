@@ -7,6 +7,7 @@ import { getAll } from '../lib/ApiService'
 import prisma from '../lib/prisma'
 import Showcase from '../components/Showcase'
 import { useRouter } from 'next/router'
+import Hero from '../components/Hero'
 
 export const getServerSideProps = async () => {
 
@@ -35,9 +36,10 @@ export default function Home(props) {
 
 
   return (
-    <div className="text-4xl h-[90vh] w-[98.2vw]">
+    <div className="text-4xl h-[99vh] w-[98.2vw]">
       <Navbar />
-      {showcase ? <Showcase showcase={showcase} setShowcase={setShowcase} />: <></>}
+      {showcase ? <Showcase showcase={showcase} setShowcase={setShowcase} /> : <></>}
+      <Hero />
       <Main drinks={drinks} setShowcase={setShowcase} />
     </div>
   )

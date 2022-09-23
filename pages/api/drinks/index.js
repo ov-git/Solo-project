@@ -1,19 +1,20 @@
 
-import prisma from "../../lib/prisma";
+import prisma from "../../../lib/prisma";
 
 export default async function handler(req, res) {
 
+    console.log('ok');
+
     if (req.method == 'GET') {
         try {
-            const body = await prisma.Drink.findMany({
-                where: { userId: "cl8eib9oy0046m0ukx9qhogt2" }
-            });
+            const body = await prisma.Drink.findMany();
 
             res.status(200)
                 .json(body)
         } catch (err) {
             console.log(err);
         }
+        res.status(404);
     }
 
     if (req.method == 'POST') {
@@ -23,7 +24,7 @@ export default async function handler(req, res) {
             url: req.body.drinkThumb,
             instructions: req.body.drinkInstructions,
             alcohol: JSON.parse(req.body.alcohol),
-            userId: "cl8eib9oy0046m0ukx9qhogt2",
+            userEmail: req.body.userEmail,
         };
 
         try {    
@@ -36,18 +37,7 @@ export default async function handler(req, res) {
 
     if (req.method == 'DELETE') {
 
-        console.log(req.body);
-
-    //     const drink = {
-    //         name: req.body.drinkName,
-    //         url: req.body.drinkThumb,
-    //         instructions: req.body.drinkInstructions,
-    //         alcohol: JSON.parse(req.body.alcohol),
-    //         userId: "cl8d8ywgi0055wsukse8wnvey",
-    //     };
-
         try {
-            // const deleted = await prisma.Drink.deleteMany({})
             const deleted = await prisma.Drink.delete({
                 where: {
                     id: req.body.id
