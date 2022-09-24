@@ -6,8 +6,8 @@ function Hero() {
 
 
   return (
-      <div className='bg-red-400 h-full w-full'>
-      <Image className=" col-span-1 w-full h-full rounded" src={bg} alt={''} layout={'fill'} />
+    <div className='bg-red-400 h-full w-full bg-gradient-to-b from-white to-black'>
+      <Image className=" opacity-50 col-span-1 w-full h-full rounded" src={bg} alt={''} layout={'fill'} />
       </div>
   )
 }

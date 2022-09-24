@@ -36,7 +36,7 @@ export default function Home(props) {
 
 
   return (
-    <div className="text-4xl h-[99vh] w-[98.2vw]">
+    <div className="text-4xl h-[99vh] w-full">
       <Navbar />
       {showcase ? <Showcase showcase={showcase} setShowcase={setShowcase} /> : <></>}
       <Hero />

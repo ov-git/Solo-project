@@ -5,6 +5,7 @@
 @layer {
     body {
         @apply font-poppins;
+        @apply bg-slate-500;
     }
 }
 
