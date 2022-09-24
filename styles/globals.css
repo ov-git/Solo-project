@@ -5,10 +5,10 @@
 @layer {
     body {
         @apply font-poppins;
-        @apply bg-slate-500;
+        @apply bg-gray-600;
     }
 }
 
- body ::-webkit-scrollbar {
+ #carousel::-webkit-scrollbar {
      display: none;
  }

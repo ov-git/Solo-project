@@ -3,8 +3,6 @@ import prisma from "../../../lib/prisma";
 
 export default async function handler(req, res) {
 
-    console.log('ok');
-
     if (req.method == 'GET') {
         try {
             const body = await prisma.Drink.findMany();
@@ -18,7 +16,7 @@ export default async function handler(req, res) {
     }
 
     if (req.method == 'POST') {
-        
+
         const drink = {
             name: req.body.drinkName,
             url: req.body.drinkThumb,
@@ -27,12 +25,12 @@ export default async function handler(req, res) {
             userEmail: req.body.userEmail,
         };
 
-        try {    
+        try {
             const posted = await prisma.Drink.create({ data: drink })
             res.status(201).json(posted)
         } catch (err) {
             console.log(err);
-        }       
+        }
     }
 
     if (req.method == 'DELETE') {
@@ -52,5 +50,5 @@ export default async function handler(req, res) {
 }
 
 const getDrinks = async () => {
-    
+
 }

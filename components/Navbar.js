@@ -23,7 +23,6 @@ function Navbar() {
 
     const handleNav = () => {
         setNav(!nav);
-        console.log(router.route)
     }
 
     return (
@@ -32,11 +31,11 @@ function Navbar() {
             <div className='flex items-center'>
 
                 <button className='p-4 m-0' onClick={() => handleNav()}>
-                    {nav ? <CgClose /> : <HiMenu />}
+                    {nav ? <CgClose className='text-5xl' /> : <HiMenu className='text-5xl'/>}
                 </button>
 
-                <Link href={'/'} className="ml-6">
-                    <a>
+                <Link href={'/'}>
+                    <a className='text-6xl pl-8 animate-pulse '>
                         Drinkzz
                     </a>
                 </Link>
