@@ -1,13 +1,15 @@
-import { useEffect } from 'react';
+
+import { useState, useEffect } from 'react';
 import Navbar from '../../components/Navbar'
-import RegisterComponent from '../../components/RegisterComponent'
-import { getSession, getProviders } from "next-auth/react";
+import LoginComponent from '../../components/LoginComponent'
+import { signIn, getSession, getProviders } from "next-auth/react";
 import { useRouter } from 'next/router';
 
-function Register(props) {
+function Login(props) {
 
     const router = useRouter();
-    useEffect(() => {
+
+    useEffect(() => { 
         checkSession();
 
     }, [])
@@ -22,7 +24,7 @@ function Register(props) {
     return (
         <div className='w-full h-screen'>
             <Navbar />
-            <RegisterComponent providers={props.providers} />
+            <LoginComponent providers={ props.providers } />
         </div>
     )
 }
@@ -31,11 +33,11 @@ export async function getServerSideProps() {
 
     var error = '';
     try {
-        return { props: { providers: await getProviders(), loginError: error } };
+        return { props: { providers: await getProviders(), loginError: error} };
     } catch (err) {
         console.log(err);
         return { props: { providers: await getProviders(), loginError: error } };
     }
 }
 
-export default Register
+export default Login

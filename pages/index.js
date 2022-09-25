@@ -1,7 +1,6 @@
 
 import Navbar from '../components/Navbar'
 import Main from '../components/Main'
-import Register from '../components/Register'
 import React, { useEffect, useState } from 'react'
 import { getAll } from '../lib/ApiService'
 import prisma from '../lib/prisma'

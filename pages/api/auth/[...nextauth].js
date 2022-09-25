@@ -1,24 +1,70 @@
 import NextAuth from "next-auth"
-import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials"
 
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import prisma from "../../../lib/prisma";
 
-export default NextAuth ({
-    adapter: PrismaAdapter(prisma),
-
+export default NextAuth({
+    // adapter: PrismaAdapter(prisma),
     providers: [
-        // GitHubProvider({
-        //     clientId: process.env.GITHUB_CLIENT,
-        //     clientSecret: process.env.GITHUB_SECRET,
-        // }),
+        CredentialsProvider({
+            name: 'Email and Password',
+            credentials: {
+                email: { label: 'Email', type: 'text' },
+                password: { label: 'Password', type: 'password' },
+            },
+            authorize: async (credentials) => {
+                const payload = {
+                    email: credentials.email,
+                    password: credentials.password,
+                };
+
+                const url = process.env.NEXT_API_DOMAIN || `http://localhost:3000//api/user`;
+                const res = await fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify(payload),
+                    headers: { "Content-Type": "application/json" }
+                });
+
+                const user = await res.json();
+                return (res.ok && user) ? user[0] : null;
+            }
+        }),
+
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         })
-        
+
     ],
+
+    pages: {
+        signIn: "/login",
+        
+    },
+    callbacks: {
+        jwt: ({ token, user }) => {
+            if (user) {
+                token.id = user.id;
+            }
+            return token;
+        },
+
+        session: ({ session, token }) => {
+            if (token) {
+                session.id = token.id
+            }
+
+            return session;
+        },
+    },
+
+    secret: "asd",
+    jwt: {
+        secret: "asd",
+        encryption: true,
+    }
 });
 
 // export default NextAuth(authOptions);

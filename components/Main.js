@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react'
 import { getAll, getCategory } from '../lib/ApiService';
 import Drinks from './Drinks'
@@ -6,7 +5,6 @@ import { BiRightArrow, BiLeftArrow } from 'react-icons/bi'
 import categories from '../lib/Categories';
 
 function Main(props) {
-
 
   const [category, setCategory] = useState('All Drinks');
   const [drinks, setDrinks] = useState([]);
@@ -58,7 +56,7 @@ function Main(props) {
         <BiLeftArrow className='z-10 cursor-pointer text-black text-[50px] absolute rounded-lg left-0 bg-black px-2 h-28 w-10 hover:bg-opacity-70 hover:text-white bg-opacity-10'
           onClick={slideLeft}></BiLeftArrow>
         {categories.map((cat) => (
-          <div className=' rounded border cursor-pointer border-black h-full shrink-0 grow w-[48vw] md:w-[36vw] lg:w-[24vw] my-0 inline-block bg-cover bg-center overflow-hidden'
+          <div className=' rounded relative border cursor-pointer border-black h-full shrink-0 grow w-[48vw] md:w-[36vw] lg:w-[24vw] my-0 inline-block bg-cover bg-center overflow-hidden'
             key={cat.name} onClick={() => setCategory(cat.name)} style={{ backgroundImage: `url(${cat.image.src})` }}>
 
             <div className='h-full shrink-0 grow w-full bg-black bg-opacity-10 hover:bg-opacity-50'>

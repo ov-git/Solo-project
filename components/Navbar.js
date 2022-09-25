@@ -10,7 +10,6 @@ function Navbar() {
 
     const router = useRouter();
     const [nav, setNav] = useState(false);
-
     const { data: session } = useSession();
 
     function handleClick() {
@@ -64,7 +63,7 @@ function Navbar() {
                 </ul> :
 
                     <ul className='py-2 flex flex-col items-center overflow-hidden border-none'>
-                        <li className='p-4 w-full border-b '><button onClick={() => handleClick()}>Sing in</button></li>
+                        <li className='p-4 w-full border-b '><Link href={'/register'}><a>Sing in</a></Link></li>
                         <li className='p-4 w-full border-b '><button onClick={() => handleClick()}>Log in</button></li>
                         <li className='p-4 mt-4 w-full border-b '>Home</li>
                         <li className='p-4 w-full border-b '>Home</li>

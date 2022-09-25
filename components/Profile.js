@@ -2,13 +2,10 @@ import { useSession } from 'next-auth/react'
 import React, { useEffect, useState } from 'react'
 import { deleteDrinkFromLibrary, getUserLibrary } from '../lib/ApiService'
 import Image from 'next/image';
-import { useRouter } from 'next/router'
 import cocktail from '../public/cocktail.jpg'
 import { BsFillTrashFill } from 'react-icons/bs'
 
 function Profile() {
-
-  const router = useRouter();
 
   const { data: session } = useSession();
   const [library, setLibrary] = useState([]);
@@ -19,6 +16,7 @@ function Profile() {
   }, [redo, session])
 
   const setUserLibrary = async () => {
+    console.log(session);
     if (session) {
       const data = await getUserLibrary(session.user.email)
       setLibrary(data);

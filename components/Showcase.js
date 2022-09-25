@@ -4,7 +4,6 @@ import { addDrinkToLibrary } from '../lib/ApiService'
 function Showcase({ showcase, setShowcase }) {
 
     const { data: session } = useSession();
-    console.log(showcase)
 
     const handleAdd = async (adding) => {
 
