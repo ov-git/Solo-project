@@ -60,9 +60,9 @@ export default NextAuth({
         },
     },
 
-    secret: "asd",
+    secret: process.env.SECRET,
     jwt: {
-        secret: "asd",
+        secret: process.env.SECRET,
         encryption: true,
     }
 });
