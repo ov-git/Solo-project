@@ -20,7 +20,7 @@ function Register(props) {
     }
 
     return (
-        <div className='w-full h-screen'>
+        <div className='w-full h-screen text-2xl'>
             <Navbar />
             <RegisterComponent providers={props.providers} />
         </div>

@@ -12,29 +12,46 @@ export default async function handler(req, res) {
         } catch (err) {
             console.log(err);
         }
-        res.status(404);
+        res.status(500);
     }
 
     if (req.method == 'POST') {
 
         const drink = {
-            name: req.body.drinkName,
-            url: req.body.drinkThumb,
-            instructions: req.body.drinkInstructions,
+            drinkName: req.body.drinkName,
+            drinkThumb: req.body.drinkThumb,
+            drinkInstructions: req.body.drinkInstructions,
             alcohol: JSON.parse(req.body.alcohol),
             userEmail: req.body.userEmail,
+            drinkIngredients: req.body.drinkIngredients,
+            drinkMeasures: JSON.stringify(req.body.drinkMeasures),
         };
 
-        try {
-            const posted = await prisma.Drink.create({ data: drink })
-            res.status(201).json(posted)
-        } catch (err) {
-            console.log(err);
+        const user = await prisma.User.findUnique({
+            where: {
+                email: req.body.userEmail,
+            },
+            include: {
+                drinks: true,
+            }
+        })
+        const alreadyIncluded = user.drinks.find(element => {
+            return (element.drinkName == drink.drinkName);
+        });
+        if (!alreadyIncluded) {
+            try {
+                const posted = await prisma.Drink.create({ data: drink })
+                res.status(201).json(posted)
+            } catch (err) {
+                console.log(err);
+                res.status(500);
+            }
+        } else {
+            res.status(300).json('Already in library');
         }
     }
 
     if (req.method == 'DELETE') {
-
         try {
             const deleted = await prisma.Drink.delete({
                 where: {
@@ -43,12 +60,8 @@ export default async function handler(req, res) {
             })
             res.status(200).json(deleted)
         } catch (err) {
-            console.log(err);
+            res.status(500);
         }
     }
-
-}
-
-const getDrinks = async () => {
 
 }

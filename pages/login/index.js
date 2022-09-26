@@ -1,8 +1,8 @@
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import Navbar from '../../components/Navbar'
 import LoginComponent from '../../components/LoginComponent'
-import { signIn, getSession, getProviders } from "next-auth/react";
+import { getSession, getProviders } from "next-auth/react";
 import { useRouter } from 'next/router';
 
 function Login(props) {
@@ -17,12 +17,12 @@ function Login(props) {
     const checkSession = async () => {
         const session = await getSession()
         if (session) {
-            router.push('/profile')
+            router.push('/')
         }
     }
 
     return (
-        <div className='w-full h-screen'>
+        <div className='w-full h-screen text-2xl'>
             <Navbar />
             <LoginComponent providers={ props.providers } />
         </div>

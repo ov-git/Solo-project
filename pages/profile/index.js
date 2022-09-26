@@ -2,9 +2,12 @@ import Navbar from '../../components/Navbar'
 import Profile from '../../components/Profile'
 import { useRouter } from 'next/router'
 import { getSession } from 'next-auth/react'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Showcase from '../../components/Showcase'
 
 export default function ProfilePage() {
+
+    const [showcase, setShowcase] = useState('');
     
     const router = useRouter();
     useEffect(() => {
@@ -20,10 +23,11 @@ export default function ProfilePage() {
     }
 
     return (
-        <div className="text-4xl h-[90vh] w-[98.2vw]">
+        <div className="text-2xl h-[90vh] w-[98.2vw]">
             <Navbar />
+            {showcase ? <Showcase showcase={showcase} setShowcase={setShowcase} /> : <></>}
             <div className='flex justify-center w-full h-full'>
-                <Profile />
+                <Profile setShowcase={setShowcase} />
             </div>
 
         </div>

@@ -25,27 +25,29 @@ function RegisterComponent({ providers }) {
         newUser(user);
     }
 
+    console.log(providers)
+
     return (
-        <div className='h-full w-full bg-green-400 flex justify-center items-center'>
-            <div className='flex flex-col h-auto p-10 w-80 xl:h-96 xl:w-96 grow-1 shrink-0 bg-white rounded'>
+        <div className='h-full w-full bg-green-900 flex justify-center items-center text-white'>
+            <div className='flex flex-col h-auto p-2 w-80 xl:h-96 xl:w-96 grow-1 shrink-0 '>
 
                 {Object.values(providers).map((provider) => (
-                  <div key={provider.name} className='p-8 border bg-slate-400'>
+                  <div key={provider.name} className='p-6 border bg-slate-600 rounded-md'>
                         {(provider.name !== 'Email and Password') ?
                             <button onClick={() => signIn(provider.id)} >
                                 Sign in with {provider.name}
                             </button> :
                             <form onSubmit={(e) => handleSubmit(e)}>
-                                <label className='w-full'>{provider.name}</label>
-                                <input placeholder='Name' value={name} onChange={(e) => setName(e.target.value)}></input>
-                                <label className='w-full'>Password</label>
+                                <label className='w-full'>Name</label>
+                                <input className='text-black rounded text-lg w-[90%]' value={name} onChange={(e) => setName(e.target.value)}></input>
+                                <label className='w-full'>Email</label>
 
-                                <input placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)}></input>
+                                <input className='text-black rounded mb-2 text-lg w-[90%]' value={email} onChange={(e) => setEmail(e.target.value)}></input>
                                 <label className='w-full'>Password</label>
-                                <input placeholder='Password' value={password} onChange={(e) => { setPassword(e.target.value) }}></input>
+                                <input className='text-black rounded mb-2 text-lg w-[90%]' type='password' value={password} onChange={(e) => { setPassword(e.target.value) }}></input>
                                 <label className='w-full'>Confirm Password</label>
-                                <input placeholder='Confirm Password' value={conf} onChange={(e) => { setConf(e.target.value) }}></input>
-                                <button className='bg-white p-2 mt-1' type="submit">Login</button>
+                                <input className='text-black rounded mb-2 text-lg w-[90%]' type='password' value={conf} onChange={(e) => { setConf(e.target.value) }}></input>
+                                <button className='text-black rounded bg-white px-2 mt-4' type="submit">Login</button>
                             </form>
                         }
                     </div>
