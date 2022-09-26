@@ -6,7 +6,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import prisma from "../../../lib/prisma";
 
 export default NextAuth({
-    // adapter: PrismaAdapter(prisma),
+    adapter: PrismaAdapter(prisma),
     providers: [
         CredentialsProvider({
             name: 'Email and Password',
@@ -36,7 +36,7 @@ export default NextAuth({
             clientId: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         })
-
+        
     ],
 
     pages: {
