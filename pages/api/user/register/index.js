@@ -18,7 +18,7 @@ export default async function handler(req, res) {
                 email: email,
             },
         });
-
+        
         if (user)
             return res
                 .status(409)

@@ -29,7 +29,7 @@ function RegisterComponent({ providers }) {
 
     return (
         <div className='h-full w-full bg-green-900 flex justify-center items-center text-white'>
-            <div className='flex flex-col h-auto p-2 w-80 xl:h-96 xl:w-96 grow-1 shrink-0 '>
+            <div className='flex flex-col h-auto p-2 w-80 xl:h-96 xl:w-96 grow-1 shrink-0'>
 
                 {Object.values(providers).map((provider) => (
                   <div key={provider.name} className='p-6 border bg-slate-600 rounded-md'>

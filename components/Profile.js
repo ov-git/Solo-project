@@ -1,17 +1,17 @@
 import { useSession } from 'next-auth/react'
 import React, { useEffect, useState } from 'react'
-import { deleteDrinkFromLibrary, getUserLibrary, newList } from '../lib/ApiService'
+import { deleteDrinkFromLibrary, getUserLibrary } from '../lib/ApiService'
 import Image from 'next/image';
 import cocktail from '../public/cocktail.jpg'
 import { BsFillTrashFill } from 'react-icons/bs'
 
-function Profile({showcase,setShowcase}) {
+function Profile({ setShowcase, change }) {
 
   const { data: session } = useSession();
   const [library, setLibrary] = useState([]);
   const [redo, setRedo] = useState({});
 
-  useEffect(() => {   
+  useEffect(() => {
     setUserLibrary();
   }, [redo, session])
 
@@ -28,30 +28,26 @@ function Profile({showcase,setShowcase}) {
   }
 
   const dev = () => {
-
-    console.log(session)
-    
-    // const list = {
-    //   name: 'test',
-    //   drinkz: library.map(d => d),
-    // }
-
-    // newList(list);
+    change();
   }
 
   return (
-    <div className=' h-[80vh] w-full xl:w-[70vw] flex-col text-white'>
-      <div className='flex pt-16 justify-between'>
-        <button onClick={() => dev()}>dev</button>
-        <h1 className='text-[30px] py-8'>{session ? `Logged in as ${session.user.name}` : ''}</h1>
+    <div className=' h-[80vh] w-full xl:w-[75vw] flex-col text-white rounded'>
+      <div className='flex pt-24 pb-8 justify-between'>
+
+        <div>
+          <h1 className='text-[30px] py-8'>{session ? `Logged in as ${session.user.name}` : ''}</h1>
+          <button onClick={() => dev()} className='text-3xl underline-offset-8 underline my-8'>Find users</button>
+        </div>
+
       </div>
 
       <div className='flex flex-col w-full h-full items-center overflow-y-auto'>
         {library.length ? library.map((drink) => (
-          <div className='w-full h-auto grid grid-cols-4 gap-8 p-4 border rounded bg-slate-500 border-black' key={drink.id}>            
+          <div className='w-full h-auto grid grid-cols-4 gap-8 p-4 border rounded bg-slate-500 border-black' key={drink.id}>
             <Image className=" col-span-1 cursor-pointer rounded" src={drink.drinkThumb} alt={''} height={200} width={250} placeholder={'empty'} onClick={() => setShowcase(drink)} />
- 
-            <div className='col-span-3 h-full overflow-hidden flex'>        
+
+            <div className='col-span-3 h-full overflow-hidden flex'>
               <div className='flex w-full flex-col'>
                 <div className='justify-between flex px-0'>
                   <h3 className='text-md py-3'>
