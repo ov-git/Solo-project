@@ -37,7 +37,7 @@ function Navbar() {
                 </button>
 
                 <Link href={'/'}>
-                    <a className='text-6xl pl-8 animate-pulse '>
+                    <a className='text-6xl pl-8 '>
                         Drinkzz
                     </a>
                 </Link>
@@ -49,8 +49,8 @@ function Navbar() {
                 </div>
 
                 : <div className='sm:flex hidden'>
-                    <Link href={'/login'} ><a className='  m-2 border border-white p-2 xl:p-3 rounded'>Log In</a></Link>
-                    <Link href={'/register'} ><a className=' bg-gray-300 text-black m-2 p-2 xl:p-3 rounded'>Sign In</a></Link>
+                    <Link href={'/login'} ><a className='  m-2 border border-white p-2 xl:p-3 rounded hover:bg-slate-200 hover:text-black'>Log In</a></Link>
+                    <Link href={'/register'} ><a className=' bg-gray-300 text-black m-2 p-2 xl:p-3 rounded hover:bg-black hover:text-white'>Sign In</a></Link>
                 </div>}
 
 
@@ -75,24 +75,39 @@ function Navbar() {
 
                         }
                     </li>
+
                     {(router.route != '/profile') ? < li className='p-4 w-full border-b flex items-center'>
                         <>
-                            <HiOutlineSearch className='text-3xl mr-4' />
-                            <Link href='#search'>Search</Link></></li> : <></>}
+                            <HiOutlineSearch className='text-4xl mr-4' />
+                            <Link href='#search'>Search</Link></></li> : < li className='p-4 w-full border-b flex items-center'>
+                        <>
+                                <HiOutlineSearch className='text-4xl mr-4' />
+                            <Link href='/#search'>Search</Link>
+                        </>
+                    </li>}
+
                     <li className='p-4 w-full border-b '>About</li>
                     <li className='p-4 w-full cursor-pointer' onClick={() => signOut()}>Log out</li>
 
                 </ul> :
                     <ul className='py-2 flex flex-col items-center overflow-hidden border-none'>
                         <li className='p-4 w-full border-b flex'>
-                            <BiHome className='text-3xl mr-4' />
+                            <BiHome className='text-4xl mr-4' />
                             <Link href={'/'}>
                                 <a>Home</a>
                             </Link>
                         </li>
+                        <li className='p-4 w-full border-b flex items-center'>
+                            <>
+                                <HiOutlineSearch className='text-4xl mr-4' />
+                                <Link href='#search'>Search</Link>
+                            </>
+                        </li>
 
                         <li className='p-4 w-full border-b '><Link href={'/register'}><a>Sing in</a></Link></li>
-                        <li className='p-4 w-full border-b '><button onClick={() => handleClick()}>Log in</button></li>
+                        <li className='p-4 w-full border-b '>
+                            <button onClick={() => handleClick()} >Log in</button>
+                        </li>
                     </ul>}
             </div>
 

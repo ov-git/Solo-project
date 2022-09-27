@@ -28,13 +28,15 @@ function Profile({showcase,setShowcase}) {
   }
 
   const dev = () => {
-    
-    const list = {
-      name: 'test',
-      drinkz: library.map(d => d),
-    }
 
-    newList(list);
+    console.log(session)
+    
+    // const list = {
+    //   name: 'test',
+    //   drinkz: library.map(d => d),
+    // }
+
+    // newList(list);
   }
 
   return (

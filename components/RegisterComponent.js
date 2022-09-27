@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { signIn } from "next-auth/react";
 import { newUser } from '../lib/ApiService'
+import { FcGoogle } from 'react-icons/Fc'
 
 function RegisterComponent({ providers }) {
 
@@ -22,10 +23,9 @@ function RegisterComponent({ providers }) {
             email,
             password,
         }
-        newUser(user);
+        const res = await newUser(user);
+        console.log(res);
     }
-
-    console.log(providers)
 
     return (
         <div className='h-full w-full bg-green-900 flex justify-center items-center text-white'>
@@ -34,8 +34,8 @@ function RegisterComponent({ providers }) {
                 {Object.values(providers).map((provider) => (
                   <div key={provider.name} className='p-6 border bg-slate-600 rounded-md'>
                         {(provider.name !== 'Email and Password') ?
-                            <button onClick={() => signIn(provider.id)} >
-                                Sign in with {provider.name}
+                            <button className='flex justify-center items-center' onClick={() => signIn(provider.id)} >
+                                Sign in with {provider.name} <FcGoogle className='ml-4 text-3xl bg-white rounded-full' />
                             </button> :
                             <form onSubmit={(e) => handleSubmit(e)}>
                                 <label className='w-full'>Name</label>

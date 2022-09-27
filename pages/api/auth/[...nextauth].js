@@ -14,22 +14,22 @@ export default NextAuth({
                 email: { label: 'Email', type: 'text' },
                 password: { label: 'Password', type: 'password' },
             },
-            authorize: async (credentials) => {
-                const payload = {
-                    email: credentials.email,
-                    password: credentials.password,
-                };
+            // authorize: async (credentials) => {
+            //     const payload = {
+            //         email: credentials.email,
+            //         password: credentials.password,
+            //     };
 
-                const url = process.env.NEXT_API_DOMAIN || `http://localhost:3000//api/user`;
-                const res = await fetch(url, {
-                    method: 'POST',
-                    body: JSON.stringify(payload),
-                    headers: { "Content-Type": "application/json" }
-                });
+            //     const url = process.env.NEXT_API_DOMAIN || `http://localhost:3000//api/user`;
+            //     const res = await fetch(url, {
+            //         method: 'POST',
+            //         body: JSON.stringify(payload),
+            //         headers: { "Content-Type": "application/json" }
+            //     });
 
-                const user = await res.json();
-                return (res.ok && user) ? user[0] : null;
-            }
+            //     const user = await res.json();
+            //     return (res.ok && user) ? user[0] : null;
+            // }
         }),
 
         GoogleProvider({
@@ -43,28 +43,28 @@ export default NextAuth({
         signIn: "/login",
         
     },
-    callbacks: {
-        jwt: ({ token, user }) => {
-            if (user) {
-                token.id = user.id;
-            }
-            return token;
-        },
+    // callbacks: {
+    //     jwt: ({ token, user }) => {
+    //         if (user) {
+    //             token.id = user.id;
+    //         }
+    //         return token;
+    //     },
 
-        session: ({ session, token }) => {
-            if (token) {
-                session.id = token.id
-            }
+    //     session: ({ session, token }) => {
+    //         if (token) {
+    //             session.id = token.id
+    //         }
 
-            return session;
-        },
-    },
+    //         return session;
+    //     },
+    // },
 
-    secret: process.env.SECRET,
-    jwt: {
-        secret: process.env.SECRET,
-        encryption: true,
-    }
+    // secret: process.env.SECRET_KEY,
+    // jwt: {
+    //     secret: process.env.SECRET,
+    //     encryption: true,
+    // }
 });
 
 // export default NextAuth(authOptions);

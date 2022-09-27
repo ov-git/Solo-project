@@ -53,7 +53,7 @@ function Main(props) {
 
     <div className=' h-full w-full flex-col text-white'>
       <h1 className='p-4 text-4xl'>Categories</h1>
-      <div id='carousel' className="py-4 mx-1 gap-2 pl-0 h-36 overflow-x-scroll max-w-screen flex justify-between text-white scroll-smooth">
+      <div id='carousel' className="py-4 mx-2 gap-3 pl-0 h-36 overflow-x-scroll max-w-screen flex justify-between text-white scroll-smooth">
 
         {/* Categories */}
         <BiLeftArrow className='z-10 cursor-pointer text-black text-[50px] absolute rounded-lg left-0 bg-black px-2 h-28 w-10 hover:bg-opacity-70 hover:text-white bg-opacity-10'
@@ -61,14 +61,12 @@ function Main(props) {
         {categories.map((cat) => (
           <div className=' rounded relative border cursor-pointer border-black h-full shrink-0 grow w-[48vw] md:w-[36vw] lg:w-[24vw] my-0 inline-block bg-cover'
             key={cat.name} onClick={() => setCategory(cat.name)}>
-            {/* style={{ backgroundImage: `url(${cat.image.src})` }} */}
-            <Image className='bg-black rounded hover:opacity-70' src={cat.image.src} objectFit={'cover'} layout={'fill'} priority />
+            <Image className='bg-black rounded opacity-90 hover:opacity-70' src={cat.image.src} objectFit={'cover'} layout={'fill'} alt={cat.name} priority />
             <div className='h-full shrink-0 grow w-full bg-black z-10'>
-              <p className='absolute z-10'> {cat.name} </p>
+              <p className='absolute z-10 px-6'> {cat.name} </p>
             </div>
-
-
           </div>
+          
         ))}
         <BiRightArrow className='z-10 cursor-pointer text-black text-[50px] absolute rounded-lg right-0 bg-black px-2 h-28 w-10 hover:bg-opacity-70 hover:text-white bg-opacity-10'
           onClick={slideRight}></BiRightArrow>
@@ -83,7 +81,7 @@ function Main(props) {
         </form>
       </div>
 
-      <div className=' m-0 p-0'>
+      <div className='min-h-[75vh] flex justify-center'>
         <Drinks drinks={handleSearch(drinks)} setShowcase={props.setShowcase} />
       </div>
     </div>

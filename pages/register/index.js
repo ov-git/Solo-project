@@ -15,7 +15,7 @@ function Register(props) {
     const checkSession = async () => {
         const session = await getSession()
         if (session) {
-            router.push('/profile')
+            router.push('/')
         }
     }
 

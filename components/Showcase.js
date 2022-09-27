@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { addDrinkToLibrary } from '../lib/ApiService'
 
@@ -8,10 +8,18 @@ function Showcase({ showcase, setShowcase }) {
 
     const handleAdd = async (adding) => {
         adding.userEmail = session.user.email;
-        const from = await addDrinkToLibrary(adding);        
+        const from = await addDrinkToLibrary(adding);
         setShowcase('');
     }
-    
+
+    function check(parsing) {
+        if (showcase.drinkMeasures.length < showcase.drinkIngredients.length) {
+            try {
+                return JSON.parse(showcase.drinkMeasures);
+            } catch (err) {}
+        }
+        return parsing;
+    }
 
     return (
         <div className='z-20 flex bg fixed top-[70px] xl:top-[80px] h-[100vh] w-full'>
@@ -29,10 +37,10 @@ function Showcase({ showcase, setShowcase }) {
                         <h3 className=' text-[1.3rem] lg:text-3xl pb-4'>Ingredients:</h3>
                         {showcase.drinkIngredients ? showcase.drinkIngredients.map((ing, i) => (
                             <div key={i} className='grid grid-cols-2 w-full'>
-                                <p className='text-sm p-1 md:text-[1.3rem] lg:text-[1.7rem]' >{ing}</p>
-                                <p className='text-sm p-1 2xl:p-2 md:text-[1.3rem] ' >{showcase.drinkMeasures[i]}</p>
+                                <p className='text-sm py-1 px-2 md:text-[1.3rem] lg:text-[1.7rem] border-r' >{ing}</p>
+                                <p className='text-sm py-1 px-2 2xl:p-2 md:text-[1.3rem] ' >{check(showcase.drinkMeasures)[i]}</p>
                             </div>
-                        )):<></>}
+                        )) : <></>}
 
                     </div>
                     <div className='xl:my-10 flex items-center'>

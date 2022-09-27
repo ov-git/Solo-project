@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { signIn, getSession } from "next-auth/react";
+import { FcGoogle } from 'react-icons/Fc'
 
 
 function Login({ providers }) {
@@ -10,11 +11,13 @@ function Login({ providers }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await signIn("credentials", {
-      redirect: false,
+      redirect: true,
       email: email,
       password: password
     });
   }
+
+  console.log(providers)
 
   return (
     <div className='h-full w-full bg-red-900 flex justify-center items-center'>
@@ -24,8 +27,8 @@ function Login({ providers }) {
 
           <div key={provider.name} className='p-8 border bg-slate-600 rounded-md text-white'>
             {(provider.name !== 'Email and Password') ?
-              <button onClick={() => signIn(provider.id)} >
-                Sign in with {provider.name}
+              <button className='flex justify-center items-center' onClick={() => signIn(provider.id)} >
+                Sign in with {provider.name} <FcGoogle className='ml-4 text-3xl bg-white rounded-full'/>
               </button> :
               <form onSubmit={(e) => handleSubmit(e)}>
                 <label className='w-full'>Email</label>
