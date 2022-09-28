@@ -36,12 +36,12 @@ export default NextAuth({
             clientId: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         })
-        
+
     ],
 
     pages: {
         signIn: "/login",
-        
+
     },
     // callbacks: {
     //     jwt: ({ token, user }) => {
@@ -60,7 +60,7 @@ export default NextAuth({
     //     },
     // },
 
-    // secret: process.env.SECRET_KEY,
+    secret: process.env.SECRET_KEY,
     // jwt: {
     //     secret: process.env.SECRET,
     //     encryption: true,

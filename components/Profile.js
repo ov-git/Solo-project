@@ -36,9 +36,9 @@ function Profile({ setShowcase, change }) {
       <div className='flex pt-24 pb-8 justify-between'>
 
         <div>
-          <h1 className='text-[30px] py-8'>{session ? `Logged in as ${session.user.name}` : ''}</h1>
-          <button onClick={() => dev()} className='text-3xl underline-offset-8 underline my-8'>Find users</button>
+          <button onClick={() => dev()} className='text-3xl underline-offset-8 underline my-2'>Find users</button>
         </div>
+          <h1 className='text-[30px] py-2'>{session ? `Logged in as ${session.user.name}` : ''}</h1>
 
       </div>
 

@@ -47,7 +47,7 @@ function RegisterComponent({ providers }) {
                                 <input className='text-black rounded mb-2 text-lg w-[90%]' type='password' value={password} onChange={(e) => { setPassword(e.target.value) }}></input>
                                 <label className='w-full'>Confirm Password</label>
                                 <input className='text-black rounded mb-2 text-lg w-[90%]' type='password' value={conf} onChange={(e) => { setConf(e.target.value) }}></input>
-                                <button className='text-black rounded bg-white px-2 mt-4' type="submit">Login</button>
+                                <button className='text-black rounded bg-white px-2 mt-4' type="submit">Register</button>
                             </form>
                         }
                     </div>

@@ -18,13 +18,12 @@ export default async function handler(req, res) {
                 email: email,
             },
         });
-        
+
         if (user)
             return res
                 .status(409)
                 .send({ error: '409', message: 'User already exists' });
         try {
-            // if (password === '') throw new Error();
             const hash = await bcrypt.hash(password, 10);
             const newUser = {
                 ...req.body,

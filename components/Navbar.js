@@ -28,7 +28,7 @@ function Navbar() {
     }
 
     return (
-        <div className='z-30 text-orange-100 fixed top-0 flex items-center h-[80px] bg-black bg-opacity-70 hover:bg-opacity-60 justify-between w-full'>
+        <div className='z-30 text-orange-100 fixed top-0 flex items-center h-[80px] bg-black bg-opacity-70 justify-between w-full'>
             <div className='flex items-center'>
 
                 <button className='p-4 m-0' onClick={() => handleNav()}>
@@ -107,7 +107,7 @@ function Navbar() {
                         </li>
 
                         <li className='p-4 w-full border-b '><Link href={'/register'}><a>Sing in</a></Link></li>
-                        <li className='p-4 w-full border-b '>
+                        <li className='p-4 pb-3 w-full '>
                             <button onClick={() => handleClick()} >Log in</button>
                         </li>
                     </ul>}

@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { addDrinkToLibrary } from '../lib/ApiService'
+import { useRouter } from 'next/router'
 
 function Showcase({ showcase, setShowcase }) {
 
     const { data: session } = useSession();
+    const router = useRouter();
 
     const handleAdd = async (adding) => {
         adding.userEmail = session.user.email;
@@ -27,7 +29,7 @@ function Showcase({ showcase, setShowcase }) {
             <div className='fixed top-[80px] h-[100vh] w-full bg-black opacity-50' onClick={() => setShowcase('')}></div>
             <div className='flex m-4 xl:m-8 h-[75vh] lg:h-[80vh] opacity-100 z-30 bg-slate-600 w-full rounded text-white'>
 
-                <img className=" m-4 w-auto max-w-[50%] h-[80%] cursor-pointer rounded" src={showcase.drinkThumb} alt={showcase.drinkName} />
+                <img className=" m-4 w-auto max-w-[50%] h-[80%] cursor-pointer rounded hidden md:block" src={showcase.drinkThumb} alt={showcase.drinkName} />
 
                 <div className='flex flex-col p-4 justify-between'>
                     <h1 className='pb-2 text-5xl text-green-200'>{showcase.drinkName}</h1>
@@ -44,8 +46,9 @@ function Showcase({ showcase, setShowcase }) {
 
                     </div>
                     <div className='xl:my-10 flex items-center'>
-                        <button className={session ? 'px-4 py-3 xl:px-6 border text-black border-white rounded bg-green-300' : 'opacity-0'}
-                            onClick={() => handleAdd(showcase)}>Add to library</button>
+                        {(router.route != '/profile') ?
+                            <button className={session ? 'px-4 py-3 xl:px-6 border text-black border-white rounded bg-green-300' : 'opacity-0'}
+                                onClick={() => handleAdd(showcase)}>Add to library</button>:<></>}
                         {/* <h1 className='ml-10 p-4 opacity-50 rounded text-green-800 bg-slate-50 h-full '>Added to {showcase.drinkName} to library</h1> */}
                     </div>
 

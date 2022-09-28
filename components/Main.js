@@ -32,7 +32,6 @@ function Main(props) {
 
   const getByCategory = async () => {
     if (category) {
-
       const data = (category == "All Drinks") ? await getAll() : await getCategory(category);
       setDrinks(data);
     }

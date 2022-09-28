@@ -32,7 +32,7 @@ function Users({ users, change }) {
 
             <div className='flex pt-24 justify-between'>
                 <div>
-                    <h1 className='text-[30px] py-8'>{session ? `Logged in as ${session.user.name}` : ''}</h1>
+                    {/* <h1 className='text-[30px] py-8'>{session ? `Logged in as ${session.user.name}` : ''}</h1> */}
                     <button onClick={change} className='text-3xl underline-offset-8 underline my-6'> My profile </button>
                 </div>
 
