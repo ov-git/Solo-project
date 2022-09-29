@@ -22,7 +22,7 @@ export default async function handler(req, res) {
         if (user)
             return res
                 .status(409)
-                .send({ error: '409', message: 'User already exists' });
+                .send({ error: '409', message: 'User already exists Error' });
         try {
             const hash = await bcrypt.hash(password, 10);
             const newUser = {
@@ -32,9 +32,9 @@ export default async function handler(req, res) {
 
             const { _id } = await prisma.User.create({ data: newUser });
             const accessToken = jwt.sign({ _id }, SECRET_KEY);
-            res.status(201).send({ accessToken });
+            res.status(201).send({ newUser , accessToken });
         } catch (error) {
-            res.status(400).send({ error, message: 'Could not create user' });
+            res.status(400);
         }
     };
 }
