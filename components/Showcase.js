@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { addDrinkToLibrary } from '../lib/ApiService'
 import { useRouter } from 'next/router'
@@ -18,7 +17,7 @@ function Showcase({ showcase, setShowcase }) {
         if (showcase.drinkMeasures.length < showcase.drinkIngredients.length) {
             try {
                 return JSON.parse(showcase.drinkMeasures);
-            } catch (err) {}
+            } catch (err) { }
         }
         return parsing;
     }
@@ -37,18 +36,18 @@ function Showcase({ showcase, setShowcase }) {
 
                     <div className='pt-1 xl:pt-6 flex-col'>
                         <h3 className=' text-[1.3rem] lg:text-3xl pb-4'>Ingredients:</h3>
-                        {showcase.drinkIngredients ? showcase.drinkIngredients.map((ing, i) => (
+                        {showcase.drinkIngredients && showcase.drinkIngredients.map((ing, i) => (
                             <div key={i} className='grid grid-cols-2 w-full'>
                                 <p className='text-sm py-1 px-2 md:text-[1.3rem] lg:text-[1.7rem] border-r' >{ing}</p>
                                 <p className='text-sm py-1 px-2 2xl:p-2 md:text-[1.3rem] ' >{check(showcase.drinkMeasures)[i]}</p>
                             </div>
-                        )) : <></>}
+                        ))}
 
                     </div>
                     <div className='xl:my-10 flex items-center'>
-                        {(router.route != '/profile') ?
+                        {(router.route != '/profile') &&
                             <button className={session ? 'px-4 py-3 xl:px-6 border text-black border-white rounded bg-green-300' : 'opacity-0'}
-                                onClick={() => handleAdd(showcase)}>Add to library</button>:<></>}
+                                onClick={() => handleAdd(showcase)}>Add to library</button>}
                         {/* <h1 className='ml-10 p-4 opacity-50 rounded text-green-800 bg-slate-50 h-full '>Added to {showcase.drinkName} to library</h1> */}
                     </div>
 

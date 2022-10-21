@@ -4,7 +4,6 @@ import Image from 'next/image';
 
 function Users({ users, change }) {
 
-    const { data: session } = useSession();
     const [userlist, setUserList] = useState([]);
     const [search, setSearch] = useState('');
 
@@ -27,12 +26,8 @@ function Users({ users, change }) {
 
     return (
         <div className=' h-[80vh] w-full xl:w-[80vw] flex-col text-white'>
-
-
-
             <div className='flex pt-24 justify-between'>
                 <div>
-                    {/* <h1 className='text-[30px] py-8'>{session ? `Logged in as ${session.user.name}` : ''}</h1> */}
                     <button onClick={change} className='text-3xl underline-offset-8 underline my-6'> My profile </button>
                 </div>
 
@@ -40,7 +35,6 @@ function Users({ users, change }) {
                     <label className='text-3xl p-2'>Search users</label>
                     <input className=' text-black text-2xl py-2 m-4 rounded' value={search} onChange={(e) => { setSearch(e.target.value) }} placeholder='Search by name'>
                     </input>
-                    {/* <button className='px-2 px-3 mb-2 self-center border rounded border-white'>Search</button> */}
                 </form>
             </div>
 
@@ -66,10 +60,6 @@ function Users({ users, change }) {
                 ))}
 
             </div>
-
-
-
-
         </div>
     )
 }

@@ -46,7 +46,7 @@ export default function ProfilePage({ users }) {
     return (
         <div className="text-2xl h-[90vh] w-[98.2vw]">
             <Navbar />
-            {showcase ? <Showcase showcase={showcase} setShowcase={setShowcase} /> : <></>}
+            {showcase && <Showcase showcase={showcase} setShowcase={setShowcase} />}
             <div className='flex justify-center w-full h-full'>
                 {component ? <Profile setShowcase={setShowcase} change={change} /> :
                     <Users users={users} change={change} /> }

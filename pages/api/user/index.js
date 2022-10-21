@@ -23,11 +23,7 @@ export default async function handler(req, res) {
         } catch (error) {
             res.status(400)
         }
-
-
     }
-
-
 
     if (req.method == 'GET') {
 

@@ -58,7 +58,8 @@ function Profile({ setShowcase, change }) {
                     <BsFillTrashFill />
                   </button>
                 </div>
-                {(drink.drinkInstructions.length < 400) ? <p className='text-yellow-200 text-[1.2rem]'> {drink.drinkInstructions}</p>
+                {(drink.drinkInstructions.length < 400) ?
+                  <p className='text-yellow-200 text-[1.2rem]'> {drink.drinkInstructions}</p>
                   : <p className='text-yellow-200 text-[1rem]'> {drink.drinkInstructions}</p>}
               </div>
             </div>

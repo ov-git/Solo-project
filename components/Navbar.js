@@ -43,8 +43,7 @@ function Navbar() {
             </div>
             {session ?
                 <div className=' m-10'>
-                    {session.user.image ? <Image src={session.user.image} alt={''} height={80} width={80} placeholder={'empty'} className='rounded-full ' />
-                        : <></>}
+                    {session.user.image && <Image src={session.user.image} alt={''} height={80} width={80} placeholder={'empty'} className='rounded-full ' />}
                 </div>
                 : <div className='sm:flex hidden'>
                     <Link href={'/login'} ><a className='  m-2 border border-white p-2 xl:p-3 rounded hover:bg-slate-200 hover:text-black'>Log In</a></Link>
@@ -84,10 +83,6 @@ function Navbar() {
                         </>
                     </li>}
 
-                    {/* <li className='p-4 w-full border-b '>
-                        <Link href='#users'>
-                            <a>Users</a>
-                        </Link></li> */}
                     <li className='p-4 w-full border-b '>About</li>
                     <li className='p-4 w-full cursor-pointer' onClick={() => signOut()}>Log out</li>
 
@@ -112,7 +107,6 @@ function Navbar() {
                         </li>
                     </ul>}
             </div>
-
         </div >
     )
 }
