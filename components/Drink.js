@@ -9,7 +9,7 @@ function Drink({ drink, setShowcase }) {
 
     return (
         <div className=" h-auto w-full p-3">
-            <div className=" h-full max-h-[300px] w-full rounded bg-black bg-opacity-60 hover:bg-opacity-90">
+            <div className=" h-full max-h-[400px] w-full rounded bg-black bg-opacity-60 hover:bg-opacity-90">
                 <Image src={drink.drinkThumb} alt={drink.drinkName} onClick={() => setShowcase(drink)} height={400} width={400} className='cursor-pointer rounded hover:opacity-70'/>
                 <p className='ml-2 text-white text-[25px]'>{truncate(drink.drinkName)}</p>
             </div>
