@@ -1,11 +1,19 @@
 import { useSession } from 'next-auth/react'
 import { addDrinkToLibrary } from '../lib/ApiService'
 import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
 
 function Showcase({ showcase, setShowcase }) {
 
+    const [ingredients, setIngredients] = useState([])
+    const [measures, setMeasures] = useState([])
+
     const { data: session } = useSession();
     const router = useRouter();
+
+    useEffect(() => {
+        check(showcase.drinkIngredients, showcase.drinkMeasures);
+    }, [])
 
     const handleAdd = async (adding) => {
         adding.userEmail = session.user.email;
@@ -13,14 +21,19 @@ function Showcase({ showcase, setShowcase }) {
         setShowcase('');
     }
 
-    function check(parsing) {
-        if (showcase.drinkMeasures.length < showcase.drinkIngredients.length) {
-            try {
-                return JSON.parse(showcase.drinkMeasures);
-            } catch (err) { }
-        }
-        return parsing;
+    function check(ingredients, measures) {
+        if (Array.isArray(ingredients)) {
+            setIngredients(ingredients);
+        } else {
+            setIngredients(JSON.parse(ingredients))
+        };
+        if (Array.isArray(measures)) {
+            setMeasures(measures)
+        } else {
+            setMeasures(JSON.parse(measures))
+        };
     }
+
 
     return (
         <div className='z-20 flex bg fixed top-[70px] xl:top-[80px] h-[100vh] w-full'>
@@ -34,16 +47,22 @@ function Showcase({ showcase, setShowcase }) {
                     <h1 className='pb-2 text-5xl text-green-200'>{showcase.drinkName}</h1>
                     <p className=' text-[1.2rem] xl:text-[1.5rem] py-3'>{showcase.drinkInstructions}</p>
 
-                    <div className='pt-1 xl:pt-6 flex-col'>
-                        <h3 className=' text-[1.3rem] lg:text-3xl pb-4'>Ingredients:</h3>
-                        {showcase.drinkIngredients && showcase.drinkIngredients.map((ing, i) => (
-                            <div key={i} className='grid grid-cols-2 w-full'>
-                                <p className='text-sm py-1 px-2 md:text-[1.3rem] lg:text-[1.7rem] border-r' >{ing}</p>
-                                <p className='text-sm py-1 px-2 2xl:p-2 md:text-[1.3rem] ' >{check(showcase.drinkMeasures)[i]}</p>
-                            </div>
-                        ))}
+                    <div className='pt-1 xl:pt-6 grid grid-cols-2 gap-8'>
 
+                        <div className='flex flex-col'>
+                            <h3 className=' text-[1.3rem] lg:text-3xl pb-4'>Ingredients:</h3>
+                            {ingredients.map((ing) => (
+                                <p className='text-lg'>{ing}</p>
+                            ))}
+                        </div>
+                        <div className='flex flex-col'>
+                            <h3 className=' text-[1.3rem] lg:text-3xl pb-4'>Measures:</h3>
+                            {measures.map((ing) => (
+                                <p className='text-lg'>{ing}</p>
+                            ))}
+                        </div>
                     </div>
+
                     <div className='xl:my-10 flex items-center'>
                         {(router.route != '/profile') &&
                             <button className={session ? 'px-4 py-3 xl:px-6 border text-black border-white rounded bg-green-300' : 'opacity-0'}

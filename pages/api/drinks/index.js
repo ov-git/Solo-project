@@ -16,6 +16,7 @@ export default async function handler(req, res) {
     }
 
     if (req.method == 'POST') {
+        console.log(JSON.stringify(req.body.drinkIngredients))
 
         const drink = {
             drinkName: req.body.drinkName,
@@ -23,7 +24,7 @@ export default async function handler(req, res) {
             drinkInstructions: req.body.drinkInstructions,
             alcohol: JSON.parse(req.body.alcohol),
             userEmail: req.body.userEmail,
-            drinkIngredients: req.body.drinkIngredients,
+            drinkIngredients: JSON.stringify(req.body.drinkIngredients),
             drinkMeasures: JSON.stringify(req.body.drinkMeasures),
         };
 
