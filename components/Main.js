@@ -14,6 +14,12 @@ function Main(props) {
   const searchRef = useRef();
 
   useEffect(() => {
+    const getByCategory = async () => {
+      if (category) {
+        const data = (category == "All Drinks") ? await getAll() : await getCategory(category);
+        setDrinks(data);
+      }
+    }
     getByCategory();
   }, [category])
 
@@ -28,12 +34,6 @@ function Main(props) {
     return filtered;
   }
 
-  const getByCategory = async () => {
-    if (category) {
-      const data = (category == "All Drinks") ? await getAll() : await getCategory(category);
-      setDrinks(data);
-    }
-  }
 
   const slideRight = (e) => {
     let slider = e.target.parentElement;

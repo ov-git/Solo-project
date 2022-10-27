@@ -12,15 +12,15 @@ function Profile({ setShowcase, change }) {
   const [redo, setRedo] = useState({});
 
   useEffect(() => {
+    const setUserLibrary = async () => {
+      if (session) {
+        const data = await getUserLibrary(session.user.email)
+        setLibrary(data);
+      }
+    }
     setUserLibrary();
   }, [redo, session])
 
-  const setUserLibrary = async () => {
-    if (session) {
-      const data = await getUserLibrary(session.user.email)
-      setLibrary(data);
-    }
-  }
 
   const handleDelete = async (deleting) => {
     const deleted = await deleteDrinkFromLibrary(deleting);
