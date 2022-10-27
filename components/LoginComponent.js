@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { signIn, getSession } from "next-auth/react";
-import { FcGoogle } from 'react-icons/Fc'
+import { FcGoogle } from 'react-icons/fc'
 import { loginUser } from '../lib/ApiService'
 
 
