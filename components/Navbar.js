@@ -1,11 +1,10 @@
 import Link from 'next/link'
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import { HiMenu, HiOutlineSearch } from 'react-icons/Hi'
-import { CgClose } from 'react-icons/cg'
+import { CgClose, CgProfile } from 'react-icons/cg'
 import { useRouter } from 'next/router'
-import { BiHome } from 'react-icons/Bi'
-import { CgProfile } from 'react-icons/cg'
+import { BiHome, BiLogOut, BiLogIn } from 'react-icons/bi'
 import Image from 'next/image';
 import Nav from '../public/Nav.png'
 
@@ -52,62 +51,22 @@ function Navbar() {
                 </div>}
 
             {/* side menu */}
+
             <div className={nav ? 'rounded-r fixed left-0 top-[80px] w-[30%] lg:w-[18%] bg-black bg-opacity-80 ease-in duration-300' : 'fixed -left-[50%] top-[80px] border w-[30%] bg-white opacity-0 ease-in duration-300'}>
-                {session ? <ul className='py-2 flex flex-col items-center overflow-hidden border-none'>
-                    <li className='p-4 w-full border-b hover:bg-opacity-80 flex items-center'>
-                        {(router.route != '/profile')
-                            ?
-                            <>
-                                <CgProfile className='text-3xl mr-4' />
-                                <Link href={'/profile'}>
-                                    <a>Profile</a>
-                                </Link>
-                            </>
-                            :
-                            <>
-                                <BiHome className='text-3xl mr-4' />
-                                <Link href={'/'}>
-                                    <a>Home</a>
-                                </Link>
-                            </>
 
-                        }
-                    </li>
 
-                    {(router.route != '/profile') ? < li className='p-4 w-full border-b flex items-center'>
-                        <>
-                            <HiOutlineSearch className='text-4xl mr-4' />
-                            <Link href='#search'>Search</Link></></li> : < li className='p-4 w-full border-b flex items-center'>
-                        <>
-                            <HiOutlineSearch className='text-4xl mr-4' />
-                            <Link href='/#search'>Search</Link>
-                        </>
-                    </li>}
-
-                    <li className='p-4 w-full border-b '>About</li>
-                    <li className='p-4 w-full cursor-pointer' onClick={() => signOut()}>Log out</li>
-
-                </ul> :
-                    <ul className='py-2 flex flex-col items-center overflow-hidden border-none'>
-                        <li className='p-4 w-full border-b flex'>
-                            <BiHome className='text-4xl mr-4' />
-                            <Link href={'/'}>
-                                <a>Home</a>
-                            </Link>
-                        </li>
-                        <li className='p-4 w-full border-b flex items-center'>
-                            <>
-                                <HiOutlineSearch className='text-4xl mr-4' />
-                                <Link href='#search'>Search</Link>
-                            </>
-                        </li>
-
-                        <li className='p-4 w-full border-b '><Link href={'/register'}><a>Sing in</a></Link></li>
-                        <li className='p-4 pb-3 w-full '>
-                            <button onClick={() => handleClick()} >Log in</button>
-                        </li>
-                    </ul>}
+                <ul className='py-3 flex flex-col overflow-hidden border-none'>
+                    {(router.route != '/profile') ?
+                        <Link href={'/profile'}>
+                            <a className='text-3xl flex gap-4 p-2 border-b'> <CgProfile />Profile</a>
+                        </Link> :
+                        <Link href={'/'}>
+                            <a className='text-3xl p-2 flex'><BiHome />Home</a>
+                        </Link>}
+                    <button className='text-3xl p-2 flex gap-4 items-center' onClick={() => handleClick()} >{session ? <><BiLogOut /> Log Out</> : <><BiLogIn /> Log In</>} </button>
+                </ul>
             </div>
+
         </div >
     )
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { getAll, getCategory } from '../lib/ApiService';
 import Drinks from './Drinks'
-import { BiRightArrow, BiLeftArrow } from 'react-icons/Bi'
+import { BiRightArrow, BiLeftArrow } from 'react-icons/bi'
 import categories from '../lib/Categories';
 import Image from 'next/image';
 
