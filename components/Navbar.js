@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { BiHome } from 'react-icons/Bi'
 import { CgProfile } from 'react-icons/cg'
 import Image from 'next/image';
+import Nav from '../public/Nav.png'
 
 function Navbar() {
 
@@ -36,8 +37,8 @@ function Navbar() {
                 </button>
 
                 <Link href={'/'}>
-                    <a className='text-6xl pl-8 '>
-                        Drinkzz
+                    <a className=' flex items-center'>
+                        <Image src={Nav} alt={''} height={80} width={300} />
                     </a>
                 </Link>
             </div>
@@ -46,8 +47,8 @@ function Navbar() {
                     {session.user.image && <Image src={session.user.image} alt={''} height={80} width={80} placeholder={'empty'} className='rounded-full ' />}
                 </div>
                 : <div className='sm:flex hidden'>
-                    <Link href={'/login'} ><a className='  m-2 border border-white p-2 xl:p-3 rounded hover:bg-slate-200 hover:text-black'>Log In</a></Link>
-                    <Link href={'/register'} ><a className=' bg-gray-300 text-black m-2 p-2 xl:p-3 rounded hover:bg-black hover:text-white'>Sign In</a></Link>
+                    <Link href={'/login'} ><a className='  m-2 border border-white p-2 rounded hover:bg-slate-200 hover:text-black'>Log In</a></Link>
+                    <Link href={'/register'} ><a className=' bg-gray-300 text-black m-2 p-2 rounded hover:bg-black hover:text-white'>Sign In</a></Link>
                 </div>}
 
             {/* side menu */}

@@ -7,7 +7,7 @@ import prisma from '../lib/prisma'
 import Showcase from '../components/Showcase'
 import Hero from '../components/Hero'
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
 
   await prisma.$connect();
   const data = await getAll();
