@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { useSession, signIn, signOut } from 'next-auth/react'
-import { HiMenu, HiOutlineSearch } from 'react-icons/Hi'
+import { HiMenu, HiOutlineSearch } from 'react-icons/hi'
 import { CgClose, CgProfile } from 'react-icons/cg'
 import { useRouter } from 'next/router'
 import { BiHome, BiLogOut, BiLogIn } from 'react-icons/bi'

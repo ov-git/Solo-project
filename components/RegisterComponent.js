@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { signIn } from "next-auth/react";
 import { newUser } from '../lib/ApiService'
-import { FcGoogle } from 'react-icons/Fc'
+import { FcGoogle } from 'react-icons/fc'
 
 function RegisterComponent({ providers }) {
 
