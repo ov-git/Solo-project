@@ -1,5 +1,5 @@
 
-import prisma from "../../../lib/prisma";
+import prisma from "../../../lib/Prisma";
 
 export default async function handler(req, res) {
 

@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { getSession } from 'next-auth/react'
 import { useEffect, useState } from 'react';
 import Showcase from '../../components/Showcase'
-import prisma from '../../lib/prisma';
+import prisma from '../../lib/Prisma';
 
 export const getServerSideProps = async () => {
 
