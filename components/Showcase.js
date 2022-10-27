@@ -51,14 +51,14 @@ function Showcase({ showcase, setShowcase }) {
 
                         <div className='flex flex-col'>
                             <h3 className=' text-[1.3rem] lg:text-3xl pb-4'>Ingredients:</h3>
-                            {ingredients.map((ing) => (
-                                <p className='text-lg'>{ing}</p>
+                            {ingredients.map((ing,i) => (
+                                <p key={i} className='text-lg'>{ing}</p>
                             ))}
                         </div>
                         <div className='flex flex-col'>
                             <h3 className=' text-[1.3rem] lg:text-3xl pb-4'>Measures:</h3>
-                            {measures.map((ing) => (
-                                <p className='text-lg'>{ing}</p>
+                            {measures.map((ing,i) => (
+                                <p key={i} className='text-lg'>{ing}</p>
                             ))}
                         </div>
                     </div>

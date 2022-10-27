@@ -29,15 +29,15 @@ export default function ProfilePage({ users }) {
 
     const router = useRouter();
     useEffect(() => {
+        const checkSession = async () => {
+            const session = await getSession()
+            if (!session) {
+                router.push('/login')
+            }
+        }
         checkSession();
     }, [])
 
-    const checkSession = async () => {
-        const session = await getSession()
-        if (!session) {
-            router.push('/login')
-        }
-    }
 
     const change = () => {
         setComponent(!component);
