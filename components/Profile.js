@@ -32,7 +32,7 @@ function Profile({ setShowcase, change }) {
   }
 
   return (
-    <div className=' h-[80vh] w-full xl:w-[75vw] flex-col text-white rounded'>
+    <div className=' h-full w-full xl:w-[75vw] flex-col text-white rounded'>
       <div className='flex pt-24 pb-8 justify-between'>
 
         <div>
@@ -64,8 +64,11 @@ function Profile({ setShowcase, change }) {
               </div>
             </div>
           </div>
+          
         )) : <p className='pt-20'>Nothing here. Add drinks to your library</p>}
+        <div className='w-full py-12'></div>
       </div>
+
     </div>
   )
 }

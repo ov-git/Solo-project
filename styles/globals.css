@@ -5,7 +5,7 @@
 @layer {
     body {
         @apply font-poppins;
-        @apply bg-gray-600;
+        @apply bg-gray-400;
     }
 }
 

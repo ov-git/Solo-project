@@ -7,6 +7,7 @@ function MyApp({ Component, pageProps, session }) {
     <div>
       <Head>
         <title>Drinkzz</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link rel="icon" href="/favicon.png" />
       </Head>
       <SessionProvider session={session}>

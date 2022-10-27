@@ -19,11 +19,9 @@ function Main(props) {
 
   useEffect(() => {
     handleSearch();
-
   }, [search])
 
   const handleSearch = () => {
-
     let filtered = drinks.filter((drink) => {
       return drink.drinkName.toLowerCase().includes(search.toLowerCase());
     })
@@ -75,7 +73,7 @@ function Main(props) {
       <div id="search" ref={searchRef}>
         <form className='flex flex-col p-8 w-full sm:w-[60vw] xl:w-[45vw] 2xl:w-[35vw]'>
           <label className='text-3xl'>Search from: <span className='text-4xl p-1 w-full text-yellow-200'> {category}</span> </label>
-          <input value={search} onChange={(e) => { setSearch(e.target.value) }} placeholder='Search drinks'
+          <input value={search} onChange={(e) => { setSearch(e.target.value) }} placeholder='Search drinks...'
             className='mt-2 text-[1.5rem] p-3 py-1 rounded text-black'></input>
         </form>
       </div>

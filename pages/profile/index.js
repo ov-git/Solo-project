@@ -26,10 +26,10 @@ export default function ProfilePage({ users }) {
 
     const [component, setComponent] = useState(true)
     const [showcase, setShowcase] = useState('');
-    
+
     const router = useRouter();
     useEffect(() => {
-        checkSession(); 
+        checkSession();
     }, [])
 
     const checkSession = async () => {
@@ -44,13 +44,14 @@ export default function ProfilePage({ users }) {
     }
 
     return (
-        <div className="text-2xl h-[90vh] w-[98.2vw]">
+        <>
+            <div className='flex justify-center w-full h-full'>
             <Navbar />
             {showcase && <Showcase showcase={showcase} setShowcase={setShowcase} />}
-            <div className='flex justify-center w-full h-full'>
                 {component ? <Profile setShowcase={setShowcase} change={change} /> :
-                    <Users users={users} change={change} /> }
+                    <Users users={users} change={change} />}
             </div>
-        </div>
+        </>
+
     )
 }

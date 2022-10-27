@@ -25,7 +25,7 @@ function Users({ users, change }) {
 
 
     return (
-        <div className=' h-[80vh] w-full xl:w-[80vw] flex-col text-white'>
+        <div className=' h-full w-full xl:w-[80vw] flex-col text-white'>
             <div className='flex pt-24 justify-between'>
                 <div>
                     <button onClick={change} className='text-3xl underline-offset-8 underline my-6'> My profile </button>
