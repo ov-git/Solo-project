@@ -1,4 +1,4 @@
-import prisma from "../../../lib/prisma"
+import prisma from "../../../lib/Prisma"
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 const SECRET_KEY = process.env.SECRET_KEY
