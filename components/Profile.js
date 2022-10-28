@@ -46,13 +46,13 @@ function Profile({ setShowcase, change }) {
         {(library && library.length) ? library.map((drink) => (
           <div className='w-full h-auto grid grid-cols-4 gap-2 md:gap-8 p-4 border rounded bg-slate-500 border-black' key={drink.id}>
 
-            <div className="col-span-1 cursor-pointer rounded relative">
-              <Image src={drink.drinkThumb} alt={drink.drinkName} fill placeholder={'empty'} onClick={() => setShowcase(drink)} />
+            <div className="col-span-1 cursor-pointer rounded relative" onClick={() => setShowcase(drink)}>
+              <Image src={drink.drinkThumb} alt={drink.drinkName} fill placeholder={'empty'} />
             </div>
             <div className='col-span-3 h-full min-h-[180px] flex'>
               <div className='flex w-full flex-col'>
                 <div className='justify-between flex px-0'>
-                  <h3 className='text-md'>
+                  <h3 className='text-md  cursor-pointer hover:underline' onClick={() => setShowcase(drink)} >
                     {drink.drinkName}
                   </h3>
                   <button className='flex flex-col items-center bg-black bg-opacity-0 hover:bg-opacity-10 rounded-full group' onClick={() => { handleDelete(drink) }}>
@@ -62,7 +62,7 @@ function Profile({ setShowcase, change }) {
                 </div>
                 {(drink.drinkInstructions.length < 100) ?
                   <p className='text-yellow-200 text-lg'> {drink.drinkInstructions}</p>
-                  : <p className='text-yellow-200 text-sm'> {drink.drinkInstructions}</p>}
+                  : <p className='text-yellow-200 lg:text-lg text-sm'> {drink.drinkInstructions}</p>}
               </div>
             </div>
           </div>
