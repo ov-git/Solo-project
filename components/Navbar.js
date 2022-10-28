@@ -1,9 +1,8 @@
 import Link from 'next/link'
 import { useState } from 'react'
-import { useSession, signIn, signOut } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import { HiMenu, HiOutlineSearch } from 'react-icons/hi'
-import { CgClose, CgProfile } from 'react-icons/cg'
-import { useRouter } from 'next/router'
+import { CgClose } from 'react-icons/cg'
 
 import Image from 'next/image';
 import Nav from '../public/Nav.png'
@@ -33,10 +32,11 @@ function Navbar() {
                 </Link>
             </div>
             {session ?
-                <div className=' m-10'>
+                <div className=' m-10 hidden sm:flex'>
                     {session.user.image && <Image src={session.user.image} alt={'profile'} height={70} width={70} placeholder={'empty'} className='rounded-full'/>}
                 </div>
-                : <div className='sm:flex hidden'>
+                :
+                <div className='sm:flex hidden'>
                     <Link href={'/login'} ><a className=' m-2 border border-white p-2 rounded hover:bg-slate-200 hover:text-black'>Log In</a></Link>
                     <Link href={'/register'} ><a className=' bg-gray-300 text-black m-2 p-2 rounded hover:bg-black hover:text-white'>Sign In</a></Link>
                 </div>}

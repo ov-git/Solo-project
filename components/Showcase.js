@@ -2,6 +2,7 @@ import { useSession } from 'next-auth/react'
 import { addDrinkToLibrary } from '../lib/ApiService'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
+import Image from 'next/future/image'
 
 function Showcase({ showcase, setShowcase }) {
 
@@ -36,27 +37,28 @@ function Showcase({ showcase, setShowcase }) {
 
 
     return (
-        <div className='z-20 flex bg fixed top-[70px] xl:top-[80px] h-[100vh] w-full'>
+        <div className='z-20 grid grid-cols-3 fixed top-[90px] h-4/5 w-full bg-slate-500 rounded'>
+            <div className='fixed top-[80px] h-[100vh] w-full bg-black opacity-20' onClick={() => setShowcase('')}></div>
+            <div className=" m-4 xl:m-8 h-4/5 cursor-pointer rounded hidden md:block bg-white relative max-h-[500px] w-auto z-30">
+                <Image className=" rounded" fill src={showcase.drinkThumb} alt={showcase.drinkName} />
+            </div>
 
-            <div className='fixed top-[80px] h-[100vh] w-full bg-black opacity-50' onClick={() => setShowcase('')}></div>
-            <div className='flex m-4 xl:m-8 h-[75vh] lg:h-[80vh] opacity-100 z-30 bg-slate-600 w-full rounded text-white'>
-
-                <img className=" m-4 w-auto max-w-[50%] h-[80%] cursor-pointer rounded hidden md:block" src={showcase.drinkThumb} alt={showcase.drinkName} />
-
-                <div className='flex flex-col p-3 justify-between'>
-                    <h1 className='text-3xl text-green-200'>{showcase.drinkName}</h1>
+            <div className='flex m-4 xl:m-8 opacity-100 z-30 rounded text-white col-span-3 md:col-span-2'>
+                
+                <div className='flex flex-col justify-between'>
+                    <h1 className='text-2xl text-green-200'>{showcase.drinkName}</h1>
                     <p className=' text-sm lg:text-lg py-1'>{showcase.drinkInstructions}</p>
 
                     <div className='pt-1 xl:pt-6 grid grid-cols-2 gap-8'>
 
                         <div className='flex flex-col'>
-                            <h3 className='text-xl lg:text-2xl'>Ingredients:</h3>
+                            <h3 className='text-lg lg:text-xl'>Ingredients:</h3>
                             {ingredients.map((ing,i) => (
                                 <p key={i} className='text-sm lg:text-lg'>{ing}</p>
                             ))}
                         </div>
                         <div className='flex flex-col'>
-                            <h3 className='text-xl lg:text-2xl'>Measures:</h3>
+                            <h3 className='text-lg lg:text-xl'>Measures:</h3>
                             {measures.map((ing,i) => (
                                 <p key={i} className='text-sm lg:text-lg'>{ing}</p>
                             ))}
