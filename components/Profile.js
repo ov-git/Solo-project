@@ -20,7 +20,7 @@ function Profile({ setShowcase, change }) {
     }
     setUserLibrary();
   }, [redo, session])
-
+  
 
   const handleDelete = async (deleting) => {
     const deleted = await deleteDrinkFromLibrary(deleting);
