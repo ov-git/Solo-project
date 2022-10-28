@@ -36,7 +36,7 @@ function Navbar() {
                 </button>
 
                 <Link href={'/'}>
-                    <a className=' px-4 flex items-center'>
+                    <a className=' px-4 flex items-center select-none'>
                         <Image src={Nav} alt={'Logo'} height={80} width={300} />
                     </a>
                 </Link>

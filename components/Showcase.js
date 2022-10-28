@@ -43,7 +43,7 @@ function Showcase({ showcase, setShowcase }) {
 
                 <img className=" m-4 w-auto max-w-[50%] h-[80%] cursor-pointer rounded hidden md:block" src={showcase.drinkThumb} alt={showcase.drinkName} />
 
-                <div className='flex flex-col p-4 justify-between'>
+                <div className='flex flex-col p-3 justify-between'>
                     <h1 className='text-3xl text-green-200'>{showcase.drinkName}</h1>
                     <p className=' text-sm lg:text-lg py-1'>{showcase.drinkInstructions}</p>
 
