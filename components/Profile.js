@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/react'
 import React, { useEffect, useState } from 'react'
 import { deleteDrinkFromLibrary, getUserLibrary } from '../lib/ApiService'
-import Image from 'next/image';
+import Image from 'next/future/image';
 import { BsFillTrashFill } from 'react-icons/bs'
 
 function Profile({ setShowcase, change }) {
@@ -19,7 +19,7 @@ function Profile({ setShowcase, change }) {
     }
     setUserLibrary();
   }, [redo, session])
-  
+
 
   const handleDelete = async (deleting) => {
     const deleted = await deleteDrinkFromLibrary(deleting);
@@ -31,39 +31,42 @@ function Profile({ setShowcase, change }) {
   }
 
   return (
-    <div className=' h-full w-full xl:w-[75vw] flex-col text-white rounded'>
+    <div className=' h-full w-full lg:w-[90vw] xl:w-[75vw] flex-col text-white rounded'>
       <div className='flex pt-24 pb-8 justify-between'>
 
         <div>
           <button onClick={() => dev()} className='text-3xl underline-offset-8 underline my-2'>Find users</button>
         </div>
-          <h1 className='text-[30px] py-2'>{session ? `Logged in as ${session.user.name}` : ''}</h1>
+        <h1 className='text-[30px] py-2'>{session ? `Logged in as ${session.user.name}` : ''}</h1>
 
       </div>
 
       <div className='flex flex-col w-full h-full items-center overflow-y-auto'>
-        {(library && library.length) ? library.map((drink) => (
-          <div className='w-full h-auto grid grid-cols-4 gap-8 p-4 border rounded bg-slate-500 border-black' key={drink.id}>
-            <Image className=" col-span-1 cursor-pointer rounded" src={drink.drinkThumb} alt={drink.drinkName} height={200} width={250} placeholder={'empty'} onClick={() => setShowcase(drink)} />
 
-            <div className='col-span-3 h-full overflow-hidden flex'>
+        {(library && library.length) ? library.map((drink) => (
+          <div className='w-full h-auto grid grid-cols-4 gap-2 md:gap-8 p-4 border rounded bg-slate-500 border-black' key={drink.id}>
+
+            <div className="col-span-1 cursor-pointer rounded relative">
+              <Image src={drink.drinkThumb} alt={drink.drinkName} fill placeholder={'empty'} onClick={() => setShowcase(drink)} />
+            </div>
+            <div className='col-span-3 h-full min-h-[180px] flex'>
               <div className='flex w-full flex-col'>
                 <div className='justify-between flex px-0'>
-                  <h3 className='text-md py-3'>
+                  <h3 className='text-md'>
                     {drink.drinkName}
                   </h3>
-                  <button className='flex px-4 flex-col justify-center items-center bg-black bg-opacity-0 hover:bg-opacity-10 rounded-full group' onClick={() => { handleDelete(drink) }}>
-                    <p className='text-sm opacity-0 group-hover:opacity-100'> Delete </p>
+                  <button className='flex flex-col items-center bg-black bg-opacity-0 hover:bg-opacity-10 rounded-full group' onClick={() => { handleDelete(drink) }}>
+                    <p className='hidden lg:block text-sm opacity-0 group-hover:opacity-100'> Delete </p>
                     <BsFillTrashFill />
                   </button>
                 </div>
-                {(drink.drinkInstructions.length < 400) ?
-                  <p className='text-yellow-200 text-[1.2rem]'> {drink.drinkInstructions}</p>
-                  : <p className='text-yellow-200 text-[1rem]'> {drink.drinkInstructions}</p>}
+                {(drink.drinkInstructions.length < 100) ?
+                  <p className='text-yellow-200 text-lg'> {drink.drinkInstructions}</p>
+                  : <p className='text-yellow-200 text-sm'> {drink.drinkInstructions}</p>}
               </div>
             </div>
           </div>
-          
+
         )) : <p className='pt-20'>Nothing here. Add drinks to your library</p>}
         <div className='w-full py-12'></div>
       </div>
