@@ -2,7 +2,6 @@ import { useSession } from 'next-auth/react'
 import React, { useEffect, useState } from 'react'
 import { deleteDrinkFromLibrary, getUserLibrary } from '../lib/ApiService'
 import Image from 'next/image';
-import cocktail from '../public/cocktail.jpg'
 import { BsFillTrashFill } from 'react-icons/bs'
 
 function Profile({ setShowcase, change }) {
@@ -43,9 +42,9 @@ function Profile({ setShowcase, change }) {
       </div>
 
       <div className='flex flex-col w-full h-full items-center overflow-y-auto'>
-        {library.length ? library.map((drink) => (
+        {(library && library.length) ? library.map((drink) => (
           <div className='w-full h-auto grid grid-cols-4 gap-8 p-4 border rounded bg-slate-500 border-black' key={drink.id}>
-            <Image className=" col-span-1 cursor-pointer rounded" src={drink.drinkThumb} alt={''} height={200} width={250} placeholder={'empty'} onClick={() => setShowcase(drink)} />
+            <Image className=" col-span-1 cursor-pointer rounded" src={drink.drinkThumb} alt={drink.drinkName} height={200} width={250} placeholder={'empty'} onClick={() => setShowcase(drink)} />
 
             <div className='col-span-3 h-full overflow-hidden flex'>
               <div className='flex w-full flex-col'>

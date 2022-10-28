@@ -16,7 +16,6 @@ function Showcase({ showcase, setShowcase }) {
     }, [])
 
     const handleAdd = async (adding) => {
-        console.log('hi')
         adding.userEmail = session.user.email;
         const from = await addDrinkToLibrary(adding);
         setShowcase('');
@@ -45,28 +44,28 @@ function Showcase({ showcase, setShowcase }) {
                 <img className=" m-4 w-auto max-w-[50%] h-[80%] cursor-pointer rounded hidden md:block" src={showcase.drinkThumb} alt={showcase.drinkName} />
 
                 <div className='flex flex-col p-4 justify-between'>
-                    <h1 className='pb-2 text-5xl text-green-200'>{showcase.drinkName}</h1>
-                    <p className=' text-[1.2rem] xl:text-[1.5rem] py-3'>{showcase.drinkInstructions}</p>
+                    <h1 className='text-3xl text-green-200'>{showcase.drinkName}</h1>
+                    <p className=' text-sm lg:text-lg py-1'>{showcase.drinkInstructions}</p>
 
                     <div className='pt-1 xl:pt-6 grid grid-cols-2 gap-8'>
 
                         <div className='flex flex-col'>
-                            <h3 className=' text-[1.3rem] lg:text-3xl pb-4'>Ingredients:</h3>
+                            <h3 className='text-xl lg:text-2xl'>Ingredients:</h3>
                             {ingredients.map((ing,i) => (
-                                <p key={i} className='text-lg'>{ing}</p>
+                                <p key={i} className='text-sm lg:text-lg'>{ing}</p>
                             ))}
                         </div>
                         <div className='flex flex-col'>
-                            <h3 className=' text-[1.3rem] lg:text-3xl pb-4'>Measures:</h3>
+                            <h3 className='text-xl lg:text-2xl'>Measures:</h3>
                             {measures.map((ing,i) => (
-                                <p key={i} className='text-lg'>{ing}</p>
+                                <p key={i} className='text-sm lg:text-lg'>{ing}</p>
                             ))}
                         </div>
                     </div>
 
                     <div className='xl:my-10 flex items-center'>
                         {(router.route != '/profile') &&
-                            <button className={session ? 'px-4 py-3 xl:px-6 border text-black border-white rounded bg-green-300' : 'opacity-0'}
+                            <button className={session ? 'px-3 py-2 xl:px-6 border text-black border-white rounded bg-green-300' : 'opacity-0'}
                                 onClick={() => handleAdd(showcase)}>Add to library</button>}
                         {/* <h1 className='ml-10 p-4 opacity-50 rounded text-green-800 bg-slate-50 h-full '>Added to {showcase.drinkName} to library</h1> */}
                     </div>

@@ -61,7 +61,7 @@ model Drink {
   id                String     @id @default(cuid())
   drinkName         String
   drinkThumb        String
-  drinkInstructions String
+  drinkInstructions String     @db.VarChar(500)
   alcohol           Boolean
   user              User?      @relation(fields: [userEmail], references: [email])
   userEmail         String?
