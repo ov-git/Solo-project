@@ -1,19 +1,21 @@
 import { useSession } from 'next-auth/react'
-import React, { useEffect, useState } from 'react'
-import { deleteDrinkFromLibrary, getUserLibrary } from '../lib/ApiService'
+import React, { useContext, useEffect, useState } from 'react'
+import { deleteDrinkFromLibrary, getUserLibrary } from '../../lib/ApiService'
 import Image from 'next/future/image';
 import { BsFillTrashFill } from 'react-icons/bs'
+import AuthContext from '../contexts/AuthContext';
 
 function Profile({ setShowcase, change }) {
 
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
+  const { session } = useContext(AuthContext);
   const [library, setLibrary] = useState([]);
   const [redo, setRedo] = useState({});
 
   useEffect(() => {
     const setUserLibrary = async () => {
       if (session) {
-        const data = await getUserLibrary(session.user.email)
+        const data = await getUserLibrary(session.email)
         setLibrary(data);
       }
     }
@@ -37,7 +39,7 @@ function Profile({ setShowcase, change }) {
         <div>
           <button onClick={() => dev()} className='text-3xl underline-offset-8 underline my-2'>Find users</button>
         </div>
-        <h1 className='text-[30px] py-2'>{session ? `Logged in as ${session.user.name}` : ''}</h1>
+        <h1 className='text-[30px] py-2'>{session ? `Logged in as ${session.email}` : ''}</h1>
 
       </div>
 

@@ -1,11 +1,12 @@
 
-import Navbar from '../components/Navbar'
-import Main from '../components/Main'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getAll } from '../lib/ApiService'
 import prisma from '../lib/Prisma'
-import Showcase from '../components/Showcase'
-import Hero from '../components/Hero'
+
+import Navbar from '../src/components/Navbar'
+import Main from '../src/components/Main'
+import Showcase from '../src/components/Showcase'
+import Hero from '../src/components/Hero'
 
 export const getStaticProps = async () => {
 

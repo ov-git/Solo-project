@@ -1,15 +1,17 @@
 import { useSession } from 'next-auth/react'
-import { addDrinkToLibrary } from '../lib/ApiService'
+import { addDrinkToLibrary } from '../../lib/ApiService'
 import { useRouter } from 'next/router'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import Image from 'next/future/image'
+import AuthContext from '../contexts/AuthContext'
 
 function Showcase({ showcase, setShowcase }) {
 
     const [ingredients, setIngredients] = useState([])
     const [measures, setMeasures] = useState([])
 
-    const { data: session } = useSession();
+    // const { data: session } = useSession();
+    const { session } = useContext(AuthContext)
     const router = useRouter();
 
     useEffect(() => {
@@ -17,7 +19,7 @@ function Showcase({ showcase, setShowcase }) {
     }, [])
 
     const handleAdd = async (adding) => {
-        adding.userEmail = session.user.email;
+        adding.userEmail = session.email;
         const from = await addDrinkToLibrary(adding);
         setShowcase('');
     }
@@ -34,7 +36,6 @@ function Showcase({ showcase, setShowcase }) {
             setMeasures(JSON.parse(measures))
         };
     }
-
 
     return (
         <div className='z-20 grid grid-cols-3 fixed top-[90px] h-4/5 w-full bg-slate-500 rounded'>

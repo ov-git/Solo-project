@@ -1,17 +1,20 @@
 import Link from 'next/link'
-import { useState } from 'react'
-import { useSession } from 'next-auth/react'
+import { useState, useContext } from 'react'
+
 import { HiMenu, HiOutlineSearch } from 'react-icons/hi'
 import { CgClose } from 'react-icons/cg'
+import defaultUserImage from "../../public/defaultUserImage.png"
 
 import Image from 'next/image';
-import Nav from '../public/Nav.png'
+import Nav from '../../public/Nav.png'
 import SideMenu from './SideMenu'
+import AuthContext from '../contexts/AuthContext'
 
 function Navbar() {
 
     const [nav, setNav] = useState(false);
-    const { data: session } = useSession();
+    // const { data: session } = useSession();
+    const {session } = useContext(AuthContext)
 
     const handleNav = () => {
         setNav(!nav);
@@ -31,14 +34,16 @@ function Navbar() {
                     </a>
                 </Link>
             </div>
+
             {session ?
                 <div className=' m-10 hidden sm:flex'>
-                    {session.user.image && <Image src={session.user.image} alt={'profile'} height={70} width={70} placeholder={'empty'} className='rounded-full'/>}
+                    {session && <h1>{session.email}</h1>}
+                    <Image src={session.image || defaultUserImage} alt={'profile'} height={70} width={70} placeholder={'empty'} className='rounded-full'/>
                 </div>
                 :
                 <div className='sm:flex hidden'>
-                    <Link href={'/login'} ><a className=' m-2 border border-white p-2 rounded hover:bg-slate-200 hover:text-black'>Log In</a></Link>
-                    <Link href={'/register'} ><a className=' bg-gray-300 text-black m-2 p-2 rounded hover:bg-black hover:text-white'>Sign In</a></Link>
+                    <Link href={'/signin'} ><a className=' m-2 border border-white p-2 rounded hover:bg-slate-200 hover:text-black'>Log In</a></Link>
+                    {/* <Link href={'/register'} ><a className=' bg-gray-300 text-black m-2 p-2 rounded hover:bg-black hover:text-white'>Sign In</a></Link> */}
                 </div>}
             
             <SideMenu nav={nav} handleNav={handleNav} />

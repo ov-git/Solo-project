@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import { SessionProvider } from 'next-auth/react'
+import { AuthProvider } from '../src/contexts/AuthContext'
 import Head from 'next/head'
 
 function MyApp({ Component, pageProps, session }) {
@@ -11,7 +12,9 @@ function MyApp({ Component, pageProps, session }) {
         <link rel="icon" href="/favicon.png" />
       </Head>
       <SessionProvider session={session}>
+        <AuthProvider >
         <Component {...pageProps} />
+        </AuthProvider >
       </SessionProvider>
     </>
   )
