@@ -1,9 +1,7 @@
-import { useSession } from 'next-auth/react'
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { deleteDrinkFromLibrary, getUserLibrary } from '../../lib/ApiService'
-import Image from 'next/future/image';
-import { BsFillTrashFill } from 'react-icons/bs'
 import AuthContext from '../contexts/AuthContext';
+import CreateDrink from './CreateDrink';
 import ProfileDrinkList from './ProfileDrinkList';
 
 function Profile({ setShowcase, change }) {
@@ -42,6 +40,8 @@ function Profile({ setShowcase, change }) {
         <h1 className='text-[30px] py-2'>{session ? `Logged in as ${session.email}` : ''}</h1>
 
       </div>
+
+      <CreateDrink />
 
       <ProfileDrinkList library={library} handleDelete={handleDelete} setShowcase={setShowcase} />
 
