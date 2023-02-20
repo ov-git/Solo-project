@@ -1,3 +1,4 @@
+"use client";
 import { useSession } from "next-auth/react";
 import { addDrinkToLibrary } from "../lib/ApiService";
 import { useRouter } from "next/router";
@@ -44,21 +45,21 @@ function Showcase({ showcase, setShowcase }) {
       ></div>
       <div className=" m-4 xl:m-8 h-4/5 cursor-pointer rounded hidden md:block bg-white relative max-h-[500px] w-auto z-30">
         {/* <Image
-          className=" rounded"
+          className="rounded "
           fill
           src={showcase.drinkThumb}
           alt={showcase.drinkName}
         /> */}
       </div>
 
-      <div className="flex m-4 xl:m-8 opacity-100 z-30 rounded text-white col-span-3 md:col-span-2">
+      <div className="z-30 flex col-span-3 m-4 text-white rounded opacity-100 xl:m-8 md:col-span-2">
         <div className="flex flex-col justify-between">
           <h1 className="text-2xl text-green-200">{showcase.drinkName}</h1>
-          <p className=" text-sm lg:text-lg py-1">
+          <p className="py-1 text-sm  lg:text-lg">
             {showcase.drinkInstructions}
           </p>
 
-          <div className="pt-1 xl:pt-6 grid grid-cols-2 gap-8">
+          <div className="grid grid-cols-2 gap-8 pt-1 xl:pt-6">
             <div className="flex flex-col">
               <h3 className="text-lg lg:text-xl">Ingredients:</h3>
               {ingredients.map((ing, i) => (
@@ -77,7 +78,7 @@ function Showcase({ showcase, setShowcase }) {
             </div>
           </div>
 
-          <div className="xl:my-10 flex items-center">
+          <div className="flex items-center xl:my-10">
             {router.route != "/profile" && (
               <button
                 className={
@@ -90,11 +91,11 @@ function Showcase({ showcase, setShowcase }) {
                 Add to library
               </button>
             )}
-            {/* <h1 className='ml-10 p-4 opacity-50 rounded text-green-800 bg-slate-50 h-full '>Added to {showcase.drinkName} to library</h1> */}
+            {/* <h1 className='h-full p-4 ml-10 text-green-800 rounded opacity-50 bg-slate-50 '>Added to {showcase.drinkName} to library</h1> */}
           </div>
         </div>
         <button
-          className=" text-black absolute right-8"
+          className="absolute text-black  right-8"
           onClick={() => setShowcase("")}
         >
           X

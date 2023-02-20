@@ -1,52 +1,35 @@
-import { useContext, useEffect, useState } from 'react'
-import { deleteDrinkFromLibrary, getUserLibrary } from '../../lib/ApiService'
-import AuthContext from '../contexts/AuthContext';
-import CreateDrink from './CreateDrink';
-import ProfileDrinkList from './ProfileDrinkList';
+import { getUserFromCookie } from "../lib/auth";
+import { cookies } from "next/headers";
+import Image from "next/image";
+import Link from "next/link";
 
-function Profile({ setShowcase, change }) {
+const getData = async () => {
+  const user = getUserFromCookie(cookies());
+  return user;
+};
 
-  const { session } = useContext(AuthContext);
-  const [library, setLibrary] = useState([]);
-  const [redo, setRedo] = useState({});
-
-  useEffect(() => {
-    const setUserLibrary = async () => {
-      if (session) {
-        const data = await getUserLibrary(session.email)
-        setLibrary(data);
-      }
-    }
-    setUserLibrary();
-  }, [redo, session])
-
-
-  const handleDelete = async (deleting) => {
-    const deleted = await deleteDrinkFromLibrary(deleting);
-    setRedo(deleted);
-  }
-
-  const dev = () => {
-    change();
-  }
-
+const Profile = async () => {
+  const user = await getData();
+  const { drinks } = user;
   return (
-    <div className=' h-full w-full lg:w-[90vw] xl:w-[75vw] flex-col text-white rounded'>
-      <div className='flex pt-24 pb-8 justify-between'>
-
-        <div>
-          <button onClick={() => dev()} className='text-3xl underline-offset-8 underline my-2'>Find users</button>
-        </div>
-        <h1 className='text-[30px] py-2'>{session ? `Logged in as ${session.email}` : ''}</h1>
-
+    <div className="flex flex-col h-full">
+      <div className="w-full h-64 bg-black border border-white">
+        <h1 className="text-white">{user?.email}</h1>
       </div>
-
-      <CreateDrink />
-
-      <ProfileDrinkList library={library} handleDelete={handleDelete} setShowcase={setShowcase} />
-
+      <div className="flex w-full h-full gap-4 overflow-x-scroll bg-white border border-white">
+        {drinks.map((el) => (
+          <div
+            key={el.id}
+            className="bg-black text-white h-full min-w-[320px] max-w-[320px] flex-grow flex-shrink-0"
+          >
+            <Image src={el.image} alt={el.name} width={300} height={300} />
+            <p>{el.name}</p>
+            <Link href={`drink/${el.id}`}>View Details</Link>
+          </div>
+        ))}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

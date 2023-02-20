@@ -3,128 +3,66 @@ const url =
     ? "http://localhost:3000"
     : "https://drinkzz.vercel.app";
 // Drinks
-export const getAll = async () => {
-  const data = await fetch(
-    `https://cocktail-recipes-tully4school.herokuapp.com/drinks`
-  );
-  console.log(data);
-  //   const drinks = await data.json();
-  //   return drinks.filter((drink) => drink.drinkNumber);
+
+const dataApiOptions = {
+  method: "GET",
+  headers: {
+    "X-RapidAPI-Key": process.env.DRINK_API_KEY,
+    "X-RapidAPI-Host": "the-cocktail-db.p.rapidapi.com",
+  },
 };
 
-export const getCategory = async (category) => {
-  const data = await fetch(
-    `https://cocktail-recipes-tully4school.herokuapp.com/drinks/category/${category}`
-  );
-  const drinks = await data.json();
-
-  return drinks;
-};
-
-export const getUserLibrary = async (email) => {
+const fetcher = async (url, options) => {
   try {
-    const data = await fetch(`${url}/api/drinks/${email}`);
-    const drinks = await data.json();
-
-    return drinks;
+    const response = await fetch(url, options);
+    const data = await response.json();
+    return data;
   } catch (err) {
     console.log(err);
   }
 };
 
-export const addDrinkToLibrary = async (drink) => {
-  console.log(drink);
+export const getPopular = async () => {
+  return fetcher(`${process.env.DRINK_API_URL}/popular.php`, dataApiOptions);
+};
 
-  const data = await fetch(`${url}/api/drinks`, {
+export const getCocktail = () => {
+  return fetcher(
+    `${process.env.DRINK_API_URL}/filter.php?c=Cocktail`,
+    dataApiOptions
+  );
+};
+
+export const getById = (id) => {
+  return fetcher(
+    `${process.env.DRINK_API_URL}/lookup.php?i=${id}`,
+    dataApiOptions
+  );
+};
+
+//User
+
+export const registerUser = (url, user) => {
+  const userApiOptions = {
+    method: "POST",
+    body: JSON.stringify(user),
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  };
+  fetcher(`api/user${url}`, userApiOptions);
+};
+
+export const addDrinktoLibrary = async (drink) => {
+  const userApiOptions = {
     method: "POST",
     body: JSON.stringify(drink),
     headers: {
-      "Content-type": "application/json",
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
-  });
-
-  const posted = await data.json();
-  return posted;
-};
-
-export const deleteDrinkFromLibrary = async (drink) => {
-  const data = await fetch(`${url}/api/drinks`, {
-    method: "DELETE",
-    body: JSON.stringify(drink),
-    headers: {
-      "Content-type": "application/json",
-    },
-  });
-  const deleted = await data.json();
-
-  return deleted;
-};
-
-export const newList = async (list) => {
-  const data = await fetch(`${url}/api/list`, {
-    method: "POST",
-    body: JSON.stringify(list),
-    headers: {
-      "Content-type": "application/json",
-    },
-  });
-
-  const created = await data.json();
-  return created;
-};
-
-// Users
-
-export const newUser = async (user) => {
-  try {
-    const data = await fetch(`${url}/api/user/register`, {
-      method: "POST",
-      credentials: "include",
-      body: JSON.stringify(user),
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
-
-    const registered = await data.json();
-    return registered;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const loginUser = async (user) => {
-  try {
-    const data = await fetch(`${url}/api/user`, {
-      method: "POST",
-      credentials: "include",
-      body: JSON.stringify(user),
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
-    const loggedIn = await data.json();
-    return loggedIn;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const getMe = async () => {
-  const res = await fetch(`${url}/api/user/me`);
-  const data = await res.json();
-  return data;
-};
-
-export const logoutUser = async () => {
-  try {
-    const res = await fetch(`${url}/api/user/logout`, {
-      method: "GET",
-      credentials: "include",
-    });
-
-    return res;
-  } catch (err) {
-    console.log(err);
-  }
+  };
+  const resp = await fetcher("api/user", userApiOptions);
+  console.log(resp);
 };

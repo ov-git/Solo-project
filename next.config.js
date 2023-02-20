@@ -2,6 +2,7 @@
 const nextConfig = {
   experimental: {
     appDir: true,
+    serverComponentsExternalPackages: ["bcrypt"],
   },
   reactStrictMode: true,
   swcMinify: true,

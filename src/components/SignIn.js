@@ -1,52 +1,74 @@
-import { loginUser } from '../../lib/ApiService'
-import { useEffect, useState, useRef, useContext } from 'react'
-import { useRouter } from 'next/router'
-import { FcGoogle } from 'react-icons/fc'
-import AuthContext from '../contexts/AuthContext'
+"use client";
 
-const SignIn = ({ toggleComponent }) => {
-    const router = useRouter();
-    const { googleLogin } = useContext(AuthContext);
+import { useEffect, useState, useRef, useContext } from "react";
+import { useRouter, usePathname } from "next/navigation";
+import { FcGoogle } from "react-icons/fc";
+import Link from "next/link";
+import { registerUser } from "../lib/ApiService";
 
-    const [form, setForm] = useState({
-        email: '',
-        password: '',
-    })
+const SignIn = ({ mode }) => {
+  const path = usePathname();
 
-    // useEffect(() => {
-    //     console.log(form);
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
 
-    // }, [form.password, form.email])
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const user = {
+      email: form.email,
+      password: form.password,
+    };
+    registerUser(path, user);
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const user = {
-            email: form.email,
-            password: form.password,
-        }
-        const { error } = await loginUser(user);
-        if (!error) {
-            router.push('/')
-        }
-    }
+  return (
+    <>
+      <div className="flex items-center justify-center py-8 text-5xl font-bold text-white">
+        <h1>{mode === "signin" ? "Welcome back!" : "Welcome"}</h1>
+      </div>
+      <form
+        className="flex flex-col gap-4 p-12 font-bold bg-gray-500 border border-red-900 rounded"
+        onSubmit={(e) => handleSubmit(e)}
+      >
+        <label>Email</label>
+        <input
+          placeholder={"example@mail.com"}
+          onChange={(e) =>
+            setForm((prev) => {
+              return { ...prev, email: e.target.value };
+            })
+          }
+        />
+        <label>Password</label>
+        <input
+          type="password"
+          onChange={(e) =>
+            setForm((prev) => {
+              return { ...prev, password: e.target.value };
+            })
+          }
+        />
+        <button type="submit" className="bg-white rounded">
+          Submit
+        </button>
+        {/* <button
+        type="button"
+        className="flex items-center justify-center w-full bg-white"
+        onClick={() => googleLogin()}
+      >
+        Sign in with Google{" "}
+        <FcGoogle className="ml-4 text-3xl bg-white rounded-full" />
+      </button> */}
+        {mode === "signin" ? (
+          <Link href="/register">New User?</Link>
+        ) : (
+          <Link href="/signin">Already have an account?</Link>
+        )}
+      </form>
+    </>
+  );
+};
 
-    return (
-        <div className='bg-red-400 w-72 h-[300px]'>
-            <form className="flex flex-col p-8 gap-3" onSubmit={(e) => handleSubmit(e)}>
-                <label>Email</label>
-                <input placeholder={'ok'} onChange={(e) => setForm(prev => { return { ...prev, email: e.target.value } })} />
-                <label>Password</label>
-                <input placeholder={'ok'} type="password" onChange={(e) => setForm(prev => { return { ...prev, password: e.target.value } })} />
-                <button type="submit" className='bg-white rounded'> Submit </button>
-                <button type="button" className='flex justify-center items-center w-full bg-white' onClick={() => googleLogin()} >
-                    Sign in with Google <FcGoogle className='ml-4 text-3xl bg-white rounded-full' />
-                </button>
-                <button onClick={toggleComponent}>New User?</button>
-            </form>
-        </div>
-    )
-}
-
-
-export default SignIn
-
+export default SignIn;
