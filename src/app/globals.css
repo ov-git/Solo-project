@@ -2,15 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @layer {
-    body {
-        @apply font-poppins;
-        @apply bg-gray-400;
-    }
-} */
-
-* {
-  box-sizing: border-box;
+@layer {
+  body {
+    @apply box-border;
+    @apply font-poppins;
+  }
 }
 
 #carousel::-webkit-scrollbar {
