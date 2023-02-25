@@ -4,6 +4,7 @@ import { serialize } from "cookie";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  console.log(req.body);
   if (req.method === "POST") {
     try {
       const { email, password } = req.body;

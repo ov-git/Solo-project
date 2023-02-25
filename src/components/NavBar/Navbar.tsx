@@ -1,19 +1,29 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { HiMenu, HiOutlineSearch } from "react-icons/hi";
 import { CgClose } from "react-icons/cg";
-import defaultUserImage from "../../../public/defaultUserImage.png";
 
 import Image from "next/image";
 import Nav from "../../../public/Nav.png";
 import SideMenu from "./SideMenu";
 import ProfileMenu from "./ProfileMenu";
+import { getUser } from "@/lib/ApiService";
 
 function Navbar() {
   const [nav, setNav] = useState(false);
-  // const { data: session } = useSession();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = await getUser();
+      if (user) {
+        setUser(user.data);
+      }
+    };
+    fetchUser();
+  }, []);
 
   const handleNav = () => {
     setNav(!nav);
@@ -31,12 +41,12 @@ function Navbar() {
         </button>
 
         <Link className="flex h-full px-4 select-none " href={"/"}>
-          <Image src={Nav} alt={"Logo"} width={200} />
+          <Image src={Nav} alt={"Logo"} width={200} height={60} />
         </Link>
       </div>
 
-      <ProfileMenu />
-      <SideMenu nav={nav} handleNav={handleNav} />
+      <ProfileMenu user={user} />
+      <SideMenu nav={nav} handleNav={handleNav} loggedIn={!!user} />
     </div>
   );
 }

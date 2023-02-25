@@ -31,7 +31,6 @@ const CategoryCarousel = ({ setCategory }: Props) => {
         id="carousel"
         className="flex justify-between gap-3 py-4 pl-0 mx-2 overflow-x-scroll text-white h-36 max-w-screen scroll-smooth"
       >
-        {/* Categories */}
         <BiLeftArrow className="z-10 cursor-pointer text-black text-[50px] absolute rounded-lg left-0 bg-black px-2 h-28 w-10 hover:bg-opacity-70 hover:text-white bg-opacity-10">
           <button onClick={(e) => slideLeft(e)}></button>
         </BiLeftArrow>

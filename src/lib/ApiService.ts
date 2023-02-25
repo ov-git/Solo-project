@@ -24,7 +24,7 @@ const fetcher = async ({ url, options = {} }: FetcherProps) => {
     const response = await fetch(url, options);
 
     if (!response.ok) {
-      throw new Error("API Error");
+      throw new Error("API call Error");
     }
     const data = await response.json();
     return data;
@@ -69,11 +69,26 @@ export const registerUser = (
   const userApiOptions = {
     method: "POST",
     body: JSON.stringify(user),
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
   };
   if (!url) {
     throw new Error("Path error");
   }
-  fetcher({ url: `/api/user${url}`, options: userApiOptions });
+  return fetcher({ url: `/api/user${url}`, options: userApiOptions });
+};
+
+export const logUserOut = () => {
+  const userApiOptions = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  };
+  return fetcher({ url: `/api/user/logout`, options: userApiOptions });
 };
 
 export const getUser = () => {

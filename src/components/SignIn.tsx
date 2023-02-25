@@ -12,6 +12,7 @@ type Props = {
 
 const SignIn = ({ mode }: Props) => {
   const path = usePathname();
+  const router = useRouter();
 
   const [form, setForm] = useState({
     email: "",
@@ -24,7 +25,10 @@ const SignIn = ({ mode }: Props) => {
       email: form.email,
       password: form.password,
     };
-    registerUser(path, user);
+    const resp = await registerUser(path, user);
+    if (resp) {
+      router.push("/");
+    }
   };
 
   return (

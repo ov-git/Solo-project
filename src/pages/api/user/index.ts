@@ -16,7 +16,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         drinks: true,
       },
     });
-    console.log(user);
     res.status(200);
     res.json({ data: user });
     return;
