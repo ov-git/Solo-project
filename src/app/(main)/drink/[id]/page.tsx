@@ -9,6 +9,7 @@ type Props = {
 };
 
 const DrinkDetailPage = ({ params }: Props) => {
+  //@ts-ignore
   return <DrinkDetails params={params} />;
 };
 

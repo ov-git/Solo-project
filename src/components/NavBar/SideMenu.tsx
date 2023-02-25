@@ -15,11 +15,9 @@ function SideMenu({ nav, handleNav, loggedIn }: Props) {
   const router = useRouter();
   // const { data: session } = useSession();
 
-  async function handleLogOut(e) {
-    const res = await logUserOut();
+  async function handleLogOut() {
+    await logUserOut();
     window.location.reload();
-    // router.replace("/");
-    // router.refresh();
   }
 
   return (
@@ -46,7 +44,7 @@ function SideMenu({ nav, handleNav, loggedIn }: Props) {
             <button
               key={el.name}
               className="flex gap-4 p-2 ml-4 text-3xl"
-              onClick={(e) => handleLogOut(e)}
+              onClick={() => handleLogOut()}
             >
               {el.svg} Log Out
             </button>
