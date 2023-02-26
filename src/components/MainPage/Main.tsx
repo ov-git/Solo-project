@@ -40,7 +40,6 @@ function Main() {
         setUser(user.data);
       }
       // const ing = await getIngredientsList();
-      // console.log(ing);
     };
     fetchData();
   }, [category]);

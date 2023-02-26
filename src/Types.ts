@@ -17,6 +17,9 @@ export type DrinkApiType = {
   strDrinkThumb: string;
   strDrink: string;
   idDrink: string;
+  strInstructions: string;
+  strGlass: string;
+  strAlcoholic: string;
   strIngredient1: string | null;
   strIngredient2: string | null;
   strIngredient3: string | null;

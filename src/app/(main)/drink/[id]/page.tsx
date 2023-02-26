@@ -8,9 +8,12 @@ type Props = {
   params: Params;
 };
 
-const DrinkDetailPage = ({ params }: Props) => {
-  //@ts-ignore
-  return <DrinkDetails params={params} />;
+const page = ({ params }: Props) => {
+  return (
+    <>
+      <DrinkDetails params={params} />;
+    </>
+  );
 };
 
-export default DrinkDetailPage;
+export default page;

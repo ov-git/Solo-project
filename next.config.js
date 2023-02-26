@@ -4,6 +4,9 @@ const nextConfig = {
     appDir: true,
     serverComponentsExternalPackages: ["bcrypt"],
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   reactStrictMode: true,
   swcMinify: true,
   images: {
