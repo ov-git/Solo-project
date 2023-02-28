@@ -1,10 +1,10 @@
 import Image from "next/image";
-import bg from "../../../public/bg.jpg";
+import bg from "../../../public/bg2.jpg";
 
 function Hero() {
   return (
     <div className="relative flex justify-center h-[75vh] border-b-2 select-none bg-gradient-to-b from-white to-black text-slate-300">
-      <div className="absolute z-30 pt-48 pr-40">
+      <div className="absolute z-10 self-center pr-40">
         <h1 className="font-bold text-7xl pt-28">
           Find your
           <br />
@@ -17,7 +17,7 @@ function Hero() {
       </div>
 
       <Image
-        className="w-full col-span-1 px-24 rounded opacity-40"
+        className="w-full col-span-1 rounded opacity-40"
         src={bg}
         alt={"Drinkzz"}
         priority

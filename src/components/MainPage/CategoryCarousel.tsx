@@ -38,7 +38,7 @@ const CategoryCarousel = ({ setCategory }: Props) => {
           <button
             className=" text-2xl rounded relative border cursor-pointer border-black h-full shrink-0 grow w-[45vw] md:w-[32vw] lg:w-[24vw] my-0 inline-block bg-cover"
             key={cat.name}
-            onClick={() => setCategory(cat.name)}
+            onClick={() => setCategory(cat.link)}
           >
             <Image
               className="object-cover bg-black rounded opacity-90 hover:opacity-70"

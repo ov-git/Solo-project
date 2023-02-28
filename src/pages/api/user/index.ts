@@ -4,7 +4,6 @@ import prisma from "../../../lib/Prisma";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const jwt = req.cookies[process.env.COOKIE_NAME as string] || null;
-
   if (jwt) {
     /* @ts-ignore */
     const { id } = await validateJWT(jwt);

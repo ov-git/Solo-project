@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { getById } from "../lib/ApiService";
 import Link from "next/link";
-import { DrinkApiType } from "@/Types";
+import { DrinkApiType, DrinkWithDetails } from "@/Types";
 
 const getData = async (id: string) => {
   const data = await getById(id);
@@ -66,11 +66,11 @@ const DrinkDetails = async ({ params }: Props) => {
   );
 };
 
-const formatMeasures = (drink: DrinkApiType) => {
+const formatMeasures = (drink: DrinkWithDetails) => {
   const formated = [];
   for (let i = 1; i < 15; i++) {
-    const ingredient = drink[`strIngredient${i}` as keyof DrinkApiType];
-    const measure = drink[`strMeasure${i}` as keyof DrinkApiType];
+    const ingredient = drink[`strIngredient${i}` as keyof DrinkWithDetails];
+    const measure = drink[`strMeasure${i}` as keyof DrinkWithDetails];
 
     if (ingredient && measure) {
       formated.push(ingredient + " :  " + measure);

@@ -9,17 +9,17 @@ import all from "../../public/all.jpg";
 const categories = [
   {
     name: "Popular",
-    link: "/popular",
+    link: "popular",
     image: all,
   },
   {
     name: "Cocktails",
-    link: "cocktails",
+    link: "cocktail",
     image: cocktail,
   },
   {
     name: "Ordinary Drinks",
-    link: "ordinary-drinks",
+    link: "ordinary_drink",
     image: od,
   },
   // {

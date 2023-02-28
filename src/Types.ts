@@ -17,6 +17,9 @@ export type DrinkApiType = {
   strDrinkThumb: string;
   strDrink: string;
   idDrink: string;
+};
+
+export interface DrinkWithDetails extends DrinkApiType {
   strInstructions: string;
   strGlass: string;
   strAlcoholic: string;
@@ -50,4 +53,4 @@ export type DrinkApiType = {
   strMeasure13: string | null;
   strMeasure14: string | null;
   strMeasure15: string | null;
-};
+}

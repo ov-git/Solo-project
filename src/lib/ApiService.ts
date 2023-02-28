@@ -1,4 +1,10 @@
-import { Drink, DrinkApiType, ErrorType, User } from "@/Types";
+import {
+  Drink,
+  DrinkApiType,
+  DrinkWithDetails,
+  ErrorType,
+  User,
+} from "@/Types";
 
 const url =
   process.env.NODE_ENV === "development"
@@ -19,14 +25,13 @@ type FetcherProps = {
   options?: RequestInit;
 };
 
-const fetcher = async ({ url, options = {} }: FetcherProps) => {
+export const fetcher = async ({ url, options = {} }: FetcherProps) => {
   try {
     const response = await fetch(url, options);
-
     if (!response || !response.ok) {
       throw new Error("API call Error");
     }
-    const data = (await response.json()) || null;
+    const data = await response.json();
     return data;
   } catch (err) {
     console.log("fetch error", err);
@@ -57,7 +62,7 @@ export const getOrdinary = () => {
 
 export const getById = (
   id: string
-): Promise<{ drinks: DrinkApiType[] } | null> => {
+): Promise<{ drinks: DrinkWithDetails[] } | null> => {
   return fetcher({
     url: `${process.env.NEXT_PUBLIC_DRINK_API_URL}/lookup.php?i=${id}`,
     options: dataApiOptions,
@@ -94,6 +99,17 @@ export const logUserOut = () => {
 };
 
 export const getUser = () => {
+  const userApiOptions = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  };
+  const data = fetcher({ url: `/api/user`, options: userApiOptions });
+  return data;
+};
+
+export const getswrUser = () => {
   const userApiOptions = {
     headers: {
       Accept: "application/json",
