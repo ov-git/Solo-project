@@ -4,7 +4,7 @@ import { useEffect, useState, useRef, useContext } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
-import { registerUser } from "../lib/ApiService";
+import { registerUser } from "../../lib/ApiService";
 
 type Props = {
   mode: "signin" | "register";
@@ -32,25 +32,26 @@ const SignIn = ({ mode }: Props) => {
   };
 
   return (
-    <>
-      <div className="flex items-center justify-center py-8 text-5xl font-bold text-white">
+    <div className="flex flex-col items-center">
+      <div className="flex items-center justify-center py-4 text-5xl font-bold text-white">
         <h1>{mode === "signin" ? "Welcome back!" : "Welcome"}</h1>
       </div>
       <form
-        className="flex flex-col gap-4 p-12 font-bold bg-gray-500 border border-red-900 rounded"
+        className="flex flex-col gap-6 p-12 font-semibold text-white bg-gray-800 bg-opacity-50 border border-red-900 rounded w-80"
         onSubmit={(e) => handleSubmit(e)}
       >
-        <label>Email</label>
         <input
-          placeholder={"example@mail.com"}
+          className="text-black"
+          placeholder=" Username or Email..."
           onChange={(e) =>
             setForm((prev) => {
               return { ...prev, email: e.target.value };
             })
           }
         />
-        <label>Password</label>
         <input
+          className="text-black"
+          placeholder=" Password..."
           type="password"
           onChange={(e) =>
             setForm((prev) => {
@@ -58,25 +59,33 @@ const SignIn = ({ mode }: Props) => {
             })
           }
         />
-        <button type="submit" className="bg-white rounded">
-          Submit
+        <button type="submit" className="p-1 rounded bg-dLightGreen ">
+          {mode === "signin" ? "Login" : "Register"}
         </button>
-        {/* <button
+
+        {mode === "signin" ? (
+          <Link className="underline underline-offset-2" href="/register">
+            New User?
+          </Link>
+        ) : (
+          <Link className="underline underline-offset-2" href="/signin">
+            Already have an account?
+          </Link>
+        )}
+      </form>
+    </div>
+  );
+};
+
+{
+  /* <button
         type="button"
         className="flex items-center justify-center w-full bg-white"
         onClick={() => googleLogin()}
       >
         Sign in with Google{" "}
         <FcGoogle className="ml-4 text-3xl bg-white rounded-full" />
-      </button> */}
-        {mode === "signin" ? (
-          <Link href="/register">New User?</Link>
-        ) : (
-          <Link href="/signin">Already have an account?</Link>
-        )}
-      </form>
-    </>
-  );
-};
+      </button> */
+}
 
 export default SignIn;
