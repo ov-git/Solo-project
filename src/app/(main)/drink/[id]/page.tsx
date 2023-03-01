@@ -1,4 +1,4 @@
-import DrinkDetails from "../../../../components/DrinkDetails";
+import DrinkDetails from "../../../../components/DrinkDetails/DrinkDetails";
 
 type Params = {
   id: string;

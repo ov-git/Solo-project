@@ -1,11 +1,15 @@
 import { Prisma } from "@prisma/client";
 
 const DrinkType = Prisma.validator<Prisma.DrinkArgs>()({});
-const UserType = Prisma.validator<Prisma.UserArgs>()({
+const UserWithDrinks = Prisma.validator<Prisma.UserArgs>()({
   include: { drinks: true },
 });
 
+const UserType = Prisma.validator<Prisma.UserArgs>()({});
+
 export type User = Prisma.UserGetPayload<typeof UserType>;
+
+export type UserWithDrinks = Prisma.UserGetPayload<typeof UserWithDrinks>;
 
 export type Drink = Prisma.DrinkGetPayload<typeof DrinkType>;
 

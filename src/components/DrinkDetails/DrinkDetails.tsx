@@ -1,7 +1,9 @@
 import Image from "next/image";
-import { getById } from "../lib/ApiService";
+import { getById } from "../../lib/ApiService";
 import Link from "next/link";
 import { DrinkApiType, DrinkWithDetails } from "@/Types";
+import AddButton from "../MainPage/AddButton";
+import DrinkReviews from "./DrinkReviews";
 
 const getData = async (id: string) => {
   const data = await getById(id);
@@ -31,8 +33,8 @@ const DrinkDetails = async ({ params }: Props) => {
           {drink.strDrink}
         </h1>
       </div>
-      <div className="grid w-full grid-cols-6 max-w-[1200px] bg-dLightGreen p-3 rounded-md">
-        <div className="w-full h-full col-span-3">
+      <div className="grid w-full grid-cols-2 gap-4 max-w-[1200px] bg-dLightGreen p-3 rounded-md">
+        <div className="w-full h-full">
           <Image
             className="rounded-md"
             src={drink.strDrinkThumb}
@@ -41,7 +43,7 @@ const DrinkDetails = async ({ params }: Props) => {
             width={570}
           />
         </div>
-        <div className="flex flex-col justify-around col-span-3 gap-4 p-8 text-lg rounded-md bg-dYellow">
+        <div className="flex flex-col justify-around gap-4 p-8 text-lg rounded-md bg-dYellow">
           <p>{drink.strInstructions}</p>
           <div className="grid grid-cols-2">
             <div className="">
@@ -60,6 +62,7 @@ const DrinkDetails = async ({ params }: Props) => {
           </div>
         </div>
       </div>
+      <DrinkReviews drink={drink} />
     </div>
   ) : (
     <h1>Error</h1>

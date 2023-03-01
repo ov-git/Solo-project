@@ -8,6 +8,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { id } = await validateJWT(jwt);
 
   if (req.method === "POST") {
+    console.log("posting:", req.body.id);
     const drink = await prisma.drink.upsert({
       where: {
         id: req.body.id,
@@ -33,9 +34,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(201);
     res.json({ message: drink });
   } else if (req.method === "DELETE") {
+    console.log("deleting:", req.body);
     const drink = await prisma.drink.update({
       where: {
-        id: req.body,
+        id: req.body.id,
       },
       data: {
         users: {
@@ -51,7 +53,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (!drink.users.length) {
       const d = await prisma.drink.delete({
         where: {
-          id: req.body,
+          id: req.body.id,
         },
       });
     }

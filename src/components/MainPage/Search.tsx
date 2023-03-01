@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import useSWR from "swr";
 import Image from "next/image";
 import Link from "next/link";
+import useDebounce from "@/lib/hooks/useDebounce";
 
 const fetcher = async (
   term: string
@@ -24,7 +25,9 @@ const fetcher = async (
 const Search = () => {
   const [search, setSearch] = useState("");
 
-  const { isLoading, data } = useSWR(search ? search : null, fetcher);
+  const debouncedSearch = useDebounce(search);
+
+  const { data } = useSWR(debouncedSearch ? debouncedSearch : null, fetcher);
 
   let list = null;
   if (data && Array.isArray(data.drinks)) {

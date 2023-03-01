@@ -1,12 +1,11 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useContext } from "react";
 import defaultUserImage from "../../../public/defaultUserImage.png";
 import { User } from "@/Types";
 
 type Props = {
-  user: User | null;
+  user: Partial<User> | null;
 };
 
 const ProfileMenu = ({ user }: Props) => {

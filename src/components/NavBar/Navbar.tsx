@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { HiMenu, HiOutlineSearch } from "react-icons/hi";
 import { CgClose } from "react-icons/cg";
@@ -9,21 +9,11 @@ import Image from "next/image";
 import Nav from "../../../public/Nav.png";
 import SideMenu from "./SideMenu";
 import ProfileMenu from "./ProfileMenu";
-import { getUser } from "@/lib/ApiService";
+import useUser from "@/lib/hooks/useUser";
 
 function Navbar() {
   const [nav, setNav] = useState(false);
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const user = await getUser();
-      if (user) {
-        setUser(user.data);
-      }
-    };
-    fetchUser();
-  }, []);
+  const { user } = useUser();
 
   const handleNav = () => {
     setNav(!nav);
