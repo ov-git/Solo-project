@@ -20,7 +20,7 @@ const DrinkCarousel = ({ drinks }: Props) => {
     id: string
   ) => {
     e.preventDefault();
-    await deleteDrinkFromLibrary(id);
+    await deleteDrinkFromLibrary({ id });
     router.refresh();
   };
 

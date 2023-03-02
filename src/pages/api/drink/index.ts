@@ -32,7 +32,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     res.status(201);
-    res.json({ message: drink });
+    res.json(drink);
   } else if (req.method === "DELETE") {
     console.log("deleting:", req.body);
     const drink = await prisma.drink.update({

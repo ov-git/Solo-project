@@ -1,77 +1,93 @@
 "use client";
 
-import {
-  addDrinktoLibrary,
-  deleteDrinkFromLibrary,
-} from "../../lib/ApiService";
-import { useState, FC, useEffect } from "react";
-import useUser from "@/lib/hooks/useUser";
-import { DrinkApiType } from "@/Types";
-import useSWRMutation from "swr/mutation";
+import { useState, FC, useEffect, memo } from "react";
+import { Drink, DrinkApiType } from "@/Types";
+import useSWR from "swr";
+import { addDrinktoLibrary, deleteDrinkFromLibrary } from "@/lib/ApiService";
 
+const addDrinkOptions = (adding: Drink) => {
+  return {
+    optimisticData: (drinks: Drink[]) => [...drinks, adding],
+    rollbackOnError: true,
+    populateCache: (added: Drink, drinks: Drink[]) => [...drinks, added],
+    revalidate: false,
+  };
+};
+const deleteDrinkOptions = (deleting: { id: string }) => {
+  return {
+    optimisticData: (drinks: Drink[]) =>
+      drinks.filter((el) => el.id !== deleting.id),
+    rollbackOnError: true,
+    populateCache: (deleted: any, drinks: Drink[]) =>
+      drinks.filter((el) => el.id !== deleting.id),
+    revalidate: false,
+  };
+};
+
+const fetcher = async () => {
+  const res = await fetch("/api/user");
+  const data = await res.json();
+  return data.data.drinks;
+};
 type Props = {
   drink: DrinkApiType;
 };
 
-type sendRequestArgs = {
-  arg: {
-    id: string;
-    image?: string;
-    name?: string;
-    method: string;
-  };
-};
-
-async function sendRequest(url: string, { arg }: sendRequestArgs) {
-  console.log(arg);
-
-  return fetch(url, {
-    method: arg.method,
-    body: JSON.stringify(arg),
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-  }).then((res) => res.json());
-}
-
 const AddButton: FC<Props> = ({ drink }) => {
-  const { trigger, isMutating } = useSWRMutation(
-    "/api/drink",
-    sendRequest /* options */
+  const { data, mutate, isLoading } = useSWR(
+    `/api/user/${drink.idDrink}`,
+    fetcher
   );
-  const { userDrinkIds } = useUser();
-  const [saved, setSaved] = useState<boolean | null>(null);
 
-  useEffect(() => {
-    const checkInit = (list: string[] | null, id: string) => {
-      if (list) {
-        setSaved(list.includes(id));
-      }
-    };
-    checkInit(userDrinkIds, drink.idDrink);
-  }, [userDrinkIds?.values]);
+  let ids: string[] = [];
+  if (data && Array.isArray(data)) {
+    ids = data.map((el) => el.id);
+  }
 
   const handleClick = async () => {
-    const { strDrink: name, strDrinkThumb: image, idDrink: id } = drink;
-    if (saved) {
-      const result = await trigger({ id, method: "DELETE" });
+    if (!ids.includes(drink.idDrink)) {
+      try {
+        await mutate(
+          addDrinktoLibrary({
+            id: drink.idDrink,
+            name: drink.strDrink,
+            image: drink.strDrinkThumb,
+          }),
+          addDrinkOptions({
+            id: drink.idDrink,
+            name: drink.strDrink,
+            image: drink.strDrinkThumb,
+          })
+        );
+      } catch (err) {
+        console.log(err);
+      }
     } else {
-      const result = await trigger({ image, name, id, method: "POST" });
+      try {
+        await mutate(
+          deleteDrinkFromLibrary({
+            id: drink.idDrink,
+          }),
+          deleteDrinkOptions({
+            id: drink.idDrink,
+          })
+        );
+      } catch (err) {
+        console.log(err);
+      }
     }
-    setSaved(!saved);
   };
 
-  if (!saved && saved !== false) return null;
+  if (!data) return <div className="h-[24px]"></div>;
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <div className="z-30 flex justify-end rounded">
       <button
-        disabled={isMutating}
         className="px-2 font-bold rounded bg-dDarkOrange"
         onClick={handleClick}
       >
-        {saved ? "In Library" : "Add Drink"}
+        {ids.includes(drink.idDrink) ? "In Library" : "Add Drink"}
       </button>
     </div>
   );

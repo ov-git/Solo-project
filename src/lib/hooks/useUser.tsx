@@ -4,10 +4,13 @@ import useSWR from "swr";
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const useUser = () => {
-  const { data, isLoading, error } = useSWR<{ data: UserWithDrinks }>(
-    `/api/user/`,
-    fetcher
+  const { data, isLoading, error, mutate } = useSWR<{ data: UserWithDrinks }>(
+    "/api/user",
+    fetcher,
+    { revalidateOnMount: true, revalidateIfStale: true }
   );
+
+  console.log(data);
 
   let userDrinks: Drink[] | null = null;
   let userDrinkIds: string[] | null = null;
@@ -31,6 +34,7 @@ const useUser = () => {
     userDrinkIds,
     isLoading,
     isError: error,
+    mutate,
   };
 };
 

@@ -134,12 +134,13 @@ export const addDrinktoLibrary = async (drink: {
     },
   };
   const resp = await fetcher({ url: "/api/drink", options: userApiOptions });
+  return resp;
 };
 
-export const deleteDrinkFromLibrary = async (id: string) => {
+export const deleteDrinkFromLibrary = async (id) => {
   const userApiOptions = {
     method: "DELETE",
-    body: id,
+    body: JSON.stringify(id),
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
