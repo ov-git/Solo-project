@@ -3,7 +3,7 @@ import bg from "../../../public/bg2.jpg";
 
 function Hero() {
   return (
-    <div className="relative flex justify-center h-[75vh] border-b-2 select-none bg-gradient-to-b from-white to-black text-slate-300">
+    <div className="relative flex justify-center h-[75vh] border-b-2 border-dLightGreen select-none bg-gradient-to-b from-white to-black text-slate-300">
       <div className="absolute z-10 self-center pr-40">
         <h1 className="font-bold text-7xl pt-28">
           Find your
