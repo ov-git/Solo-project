@@ -4,7 +4,7 @@ import Link from "next/link";
 import { deleteDrinkFromLibrary } from "../../lib/ApiService";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Drink } from "@/Types";
+import { Drink } from "types/Types";
 
 type Props = {
   drinks: Drink[];

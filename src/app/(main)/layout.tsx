@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import Navbar from "../../components/NavBar/Navbar";
-import "../globals.css";
 
 type Props = {
   children: ReactNode;

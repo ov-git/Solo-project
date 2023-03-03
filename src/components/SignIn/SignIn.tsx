@@ -5,6 +5,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import { registerUser } from "../../lib/ApiService";
+import { signIn } from "next-auth/react";
 
 type Props = {
   mode: "signin" | "register";
@@ -25,9 +26,18 @@ const SignIn = ({ mode }: Props) => {
       email: form.email,
       password: form.password,
     };
-    const resp = await registerUser(path, user);
-    if (resp) {
-      router.push("/");
+    if (path === "/register") {
+      const result = await registerUser(path, user);
+      if (result.ok) {
+        router.push("/");
+      }
+    } else {
+      const result = await signIn("credentials", {
+        email: form.email,
+        password: form.password,
+        redirect: true,
+        callbackUrl: "/",
+      });
     }
   };
 

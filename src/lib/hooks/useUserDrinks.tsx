@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { UserWithDrinks } from "../../Types";
+import { UserWithDrinks } from "../../../types/Types";
 
 const fetcher = async (): Promise<{ data: UserWithDrinks }> => {
   const res = await fetch("/api/user");

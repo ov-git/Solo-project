@@ -1,11 +1,11 @@
+import { getServerSession } from "next-auth/next";
 import { NextApiRequest, NextApiResponse } from "next/types";
-import { validateJWT } from "../../../lib/auth";
 import prisma from "../../../lib/Prisma";
+import { authOptions } from "../auth/[...nextauth]";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const jwt = req.cookies[process.env.COOKIE_NAME as string] || null;
-  /* @ts-ignore */
-  const { id } = await validateJWT(jwt);
+  const session = await getServerSession(req, res, authOptions);
+  const id = session?.user.id;
 
   if (req.method === "POST") {
     console.log("posting:", req.body.id);

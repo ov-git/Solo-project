@@ -1,12 +1,14 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { validateJWT } from "../../../lib/auth";
+import { getServerSession } from "next-auth/next";
+// import { validateJWT } from "../../../lib/auth";
 import prisma from "../../../lib/Prisma";
+import { authOptions } from "../auth/[...nextauth]";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const jwt = req.cookies[process.env.COOKIE_NAME as string] || null;
-  if (jwt) {
-    /* @ts-ignore */
-    const { id } = await validateJWT(jwt);
+  // const jwt = req.cookies[process.env.COOKIE_NAME as string] || null;
+  const session = await getServerSession(req, res, authOptions);
+  const id = session?.user.id;
+  if (id) {
     const user = await prisma.user.findUnique({
       where: {
         id,

@@ -1,4 +1,3 @@
-import "../globals.css";
 import Image from "next/image";
 import bg from "../../../public/cocktail.jpg";
 

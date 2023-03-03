@@ -4,7 +4,7 @@ import {
   DrinkWithDetails,
   ErrorType,
   User,
-} from "@/Types";
+} from "types/Types";
 
 const url =
   process.env.NODE_ENV === "development"

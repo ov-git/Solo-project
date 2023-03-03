@@ -1,4 +1,4 @@
-import { Drink, DrinkApiType, ErrorType, User } from "@/Types";
+import { Drink, DrinkApiType, ErrorType, User } from "types/Types";
 
 const url =
   process.env.NODE_ENV === "development"

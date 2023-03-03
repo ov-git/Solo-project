@@ -4,6 +4,7 @@ import { CgProfile } from "react-icons/cg";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { logUserOut } from "@/lib/ApiService";
+import { signOut } from "next-auth/react";
 
 type Props = {
   nav: Boolean;
@@ -44,7 +45,7 @@ function SideMenu({ nav, handleNav, loggedIn }: Props) {
             <button
               key={el.name}
               className="flex gap-4 p-2 ml-4 text-3xl"
-              onClick={() => handleLogOut()}
+              onClick={() => signOut()}
             >
               {el.svg} Log Out
             </button>

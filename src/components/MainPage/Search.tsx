@@ -1,5 +1,5 @@
 "use client";
-import { DrinkWithDetails } from "@/Types";
+import { DrinkWithDetails } from "types/Types";
 import React from "react";
 import { useState, useEffect } from "react";
 import useSWR from "swr";

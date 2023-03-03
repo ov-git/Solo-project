@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import AddButton from "./AddButton";
-import { DrinkApiType } from "@/Types";
-import { useState } from "react";
+import { DrinkApiType } from "types/Types";
 
 type Props = {
   drink: DrinkApiType;

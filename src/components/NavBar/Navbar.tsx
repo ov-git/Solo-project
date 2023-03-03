@@ -10,10 +10,12 @@ import Nav from "../../../public/Nav.png";
 import SideMenu from "./SideMenu";
 import ProfileMenu from "./ProfileMenu";
 import useUser from "@/lib/hooks/useUser";
+import { useSession } from "next-auth/react";
 
 function Navbar() {
   const [nav, setNav] = useState(false);
-  const { user } = useUser();
+  // const { user } = useUser();
+  const { data } = useSession();
 
   const handleNav = () => {
     setNav(!nav);
@@ -35,8 +37,8 @@ function Navbar() {
         </Link>
       </div>
 
-      <ProfileMenu user={user} />
-      <SideMenu nav={nav} handleNav={handleNav} loggedIn={!!user} />
+      <ProfileMenu user={data?.user} />
+      <SideMenu nav={nav} handleNav={handleNav} loggedIn={!!data?.user} />
     </div>
   );
 }

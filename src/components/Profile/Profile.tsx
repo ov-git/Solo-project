@@ -1,10 +1,14 @@
-import { getUserFromCookie } from "../../lib/auth";
+// import { getUserFromCookie } from "../../lib/auth";
 import { cookies } from "next/headers";
 import DrinkCarousel from "./DrinkCarousel";
 import { RequestCookies } from "next/dist/server/web/spec-extension/cookies";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { getUserSession } from "@/lib/auth";
+import { getSession } from "next-auth/react";
 
 const getData = async () => {
-  const user = getUserFromCookie(cookies() as RequestCookies);
+  const user = getUserSession();
   return user;
 };
 

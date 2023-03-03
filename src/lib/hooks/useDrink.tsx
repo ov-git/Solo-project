@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { DrinkApiType } from "@/Types";
+import { DrinkApiType } from "types/Types";
 
 const options = {
   method: "GET",

@@ -1,6 +1,6 @@
-import { serialize } from "cookie";
 import { NextApiRequest, NextApiResponse } from "next";
-import { createJWT, hashPassword, validatePassword } from "../../../lib/auth";
+
+import { hashPassword } from "../../../lib/auth";
 import prisma from "../../../lib/Prisma";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -14,22 +14,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         },
       });
 
-      const jwt = await createJWT(user);
-      res.setHeader(
-        "Set-Cookie",
-        serialize(process.env.COOKIE_NAME as string, jwt, {
-          httpOnly: true,
-          path: "/",
-          maxAge: 60 * 60 * 24,
-        })
-      );
-
       res.status(201);
-      res.json({ name: user });
+      res.json(user);
     } catch (err) {
       console.log(err);
+      res.status(404);
     }
   }
+  res.status(500).json({ message: "HTTP method not valid only POST Accepted" });
 };
 
 export default handler;

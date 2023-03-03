@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, FC, useEffect, memo } from "react";
-import { Drink, DrinkApiType } from "@/Types";
+import { Drink, DrinkApiType } from "types/Types";
 import useSWR from "swr";
 import { addDrinktoLibrary, deleteDrinkFromLibrary } from "@/lib/ApiService";
 

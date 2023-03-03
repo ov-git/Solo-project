@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { getById } from "../../lib/ApiService";
 import Link from "next/link";
-import { DrinkApiType, DrinkWithDetails } from "@/Types";
+import { DrinkApiType, DrinkWithDetails } from "types/Types";
 import AddButton from "../MainPage/AddButton";
 import DrinkReviews from "./DrinkReviews";
 

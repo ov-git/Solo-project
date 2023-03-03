@@ -1,4 +1,4 @@
-import { Drink, User, UserWithDrinks } from "@/Types";
+import { Drink, User, UserWithDrinks } from "types/Types";
 import useSWR from "swr";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
@@ -6,8 +6,7 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const useUser = () => {
   const { data, isLoading, error, mutate } = useSWR<{ data: UserWithDrinks }>(
     "/api/user",
-    fetcher,
-    { revalidateOnMount: true, revalidateIfStale: true }
+    fetcher
   );
 
   console.log(data);

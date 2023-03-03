@@ -2,7 +2,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import defaultUserImage from "../../../public/defaultUserImage.png";
-import { User } from "@/Types";
+import { User } from "types/Types";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 type Props = {
   user: Partial<User> | null;
@@ -13,6 +14,7 @@ const ProfileMenu = ({ user }: Props) => {
     <>
       {user ? (
         <div className="flex m-10">
+          <button onClick={() => signIn()}>X</button>
           <Image
             src={user.image || defaultUserImage}
             alt={"profile"}
@@ -24,15 +26,15 @@ const ProfileMenu = ({ user }: Props) => {
         </div>
       ) : (
         <div className="flex">
-          <Link
-            className="p-2 m-2 border border-white rounded hover:bg-slate-200 hover:text-black"
-            href={"/signin"}
+          <button
+            className="p-2 m-2 border border-white rounded hover:bg-dLightGreen"
+            onClick={() => signIn()}
           >
-            Log In
-          </Link>
+            Sign In
+          </button>
           <Link
             href={"/register"}
-            className="p-2 m-2 text-black bg-gray-300 rounded hover:bg-black hover:text-white"
+            className="p-2 m-2 text-black bg-gray-300 rounded hover:bg-dLightGreen hover:text-white"
           >
             Sign Up
           </Link>
