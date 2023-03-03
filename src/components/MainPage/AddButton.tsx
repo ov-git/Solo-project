@@ -3,7 +3,7 @@
 import { useState, FC, useEffect, memo } from "react";
 import { Drink, DrinkApiType } from "types/Types";
 import useSWR from "swr";
-import { addDrinktoLibrary, deleteDrinkFromLibrary } from "@/lib/ApiService";
+import { addDrinktoLibrary, deleteDrinkFromLibrary } from "@/lib/api/UserApi";
 
 const addDrinkOptions = (adding: Drink) => {
   return {

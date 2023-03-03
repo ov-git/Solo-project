@@ -37,24 +37,18 @@ export const registerUser = (
   return fetcher({ url: `/api/user${url}`, options: userApiOptions });
 };
 
-export const logUserOut = () => {
+export const getUser = () => {
   const userApiOptions = {
-    method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
   };
-  return fetcher({ url: `/api/user/logout`, options: userApiOptions });
+  const data = fetcher({ url: `/api/user`, options: userApiOptions });
+  return data;
 };
 
-export const getUser = () => {};
-
-export const addDrinktoLibrary = async (drink: {
-  image: string;
-  name: string;
-  id: string;
-}) => {
+export const addDrinktoLibrary = async (drink: Drink) => {
   const userApiOptions = {
     method: "POST",
     body: JSON.stringify(drink),
@@ -64,12 +58,13 @@ export const addDrinktoLibrary = async (drink: {
     },
   };
   const resp = await fetcher({ url: "/api/drink", options: userApiOptions });
+  return resp;
 };
 
-export const deleteDrinkFromLibrary = async (id: string) => {
+export const deleteDrinkFromLibrary = async (id: { id: string }) => {
   const userApiOptions = {
     method: "DELETE",
-    body: id,
+    body: JSON.stringify(id),
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

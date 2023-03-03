@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import useSWR from "swr";
 
 import Drinks from "./Drinks";
 import CategoryCarousel from "./CategoryCarousel";

@@ -1,6 +1,5 @@
 "use client";
 import useDrink from "@/lib/hooks/useDrink";
-import { User } from "types/Types";
 import Drink from "./Drink";
 
 type Props = {

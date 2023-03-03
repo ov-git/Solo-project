@@ -1,9 +1,13 @@
 "use client";
+
+import { useEffect, useState } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
-import { deleteDrinkFromLibrary } from "../../lib/ApiService";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+
+import { deleteDrinkFromLibrary } from "@/lib/api/UserApi";
+
 import { Drink } from "types/Types";
 
 type Props = {

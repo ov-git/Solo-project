@@ -1,12 +1,26 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import defaultUserImage from "../../../public/defaultUserImage.png";
-import { User } from "types/Types";
-import { useSession, signIn, signOut } from "next-auth/react";
 
+import defaultUserImage from "../../../public/defaultUserImage.png";
+
+import { signIn } from "next-auth/react";
+
+import { User } from "types/Types";
+
+// type Props = {
+//   user: Partial<User> | undefined;
+// };
 type Props = {
-  user: Partial<User> | null;
+  user:
+    | ({
+        id: string;
+      } & {
+        name?: string | null | undefined;
+        email?: string | null | undefined;
+        image?: string | null | undefined;
+      })
+    | undefined;
 };
 
 const ProfileMenu = ({ user }: Props) => {
@@ -14,7 +28,6 @@ const ProfileMenu = ({ user }: Props) => {
     <>
       {user ? (
         <div className="flex m-10">
-          <button onClick={() => signIn()}>X</button>
           <Image
             src={user.image || defaultUserImage}
             alt={"profile"}

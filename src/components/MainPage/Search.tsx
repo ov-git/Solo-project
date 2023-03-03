@@ -1,11 +1,11 @@
 "use client";
-import { DrinkWithDetails } from "types/Types";
-import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import useSWR from "swr";
 import Image from "next/image";
 import Link from "next/link";
+
 import useDebounce from "@/lib/hooks/useDebounce";
+import { DrinkWithDetails } from "types/Types";
 
 const fetcher = async (
   term: string

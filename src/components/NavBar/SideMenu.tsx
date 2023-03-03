@@ -1,26 +1,17 @@
 "use client";
-import { BiHome, BiLogOut, BiLogIn } from "react-icons/bi";
-import { CgProfile } from "react-icons/cg";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { logUserOut } from "@/lib/ApiService";
+
 import { signOut } from "next-auth/react";
+
+import { CgProfile } from "react-icons/cg";
+import { BiHome, BiLogOut, BiLogIn } from "react-icons/bi";
 
 type Props = {
   nav: Boolean;
-  handleNav: () => void;
   loggedIn: Boolean;
 };
 
-function SideMenu({ nav, handleNav, loggedIn }: Props) {
-  const router = useRouter();
-  // const { data: session } = useSession();
-
-  async function handleLogOut() {
-    await logUserOut();
-    window.location.reload();
-  }
-
+function SideMenu({ nav, loggedIn }: Props) {
   return (
     <div
       className={

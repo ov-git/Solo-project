@@ -1,20 +1,22 @@
 "use client";
-import Link from "next/link";
+
 import { useState } from "react";
+
+import Link from "next/link";
+import Image from "next/image";
+
+import { useSession } from "next-auth/react";
+
+import Nav from "../../../public/Nav.png";
+import SideMenu from "./SideMenu";
+import ProfileMenu from "./ProfileMenu";
 
 import { HiMenu, HiOutlineSearch } from "react-icons/hi";
 import { CgClose } from "react-icons/cg";
 
-import Image from "next/image";
-import Nav from "../../../public/Nav.png";
-import SideMenu from "./SideMenu";
-import ProfileMenu from "./ProfileMenu";
-import useUser from "@/lib/hooks/useUser";
-import { useSession } from "next-auth/react";
-
 function Navbar() {
   const [nav, setNav] = useState(false);
-  // const { user } = useUser();
+
   const { data } = useSession();
 
   const handleNav = () => {
@@ -38,7 +40,7 @@ function Navbar() {
       </div>
 
       <ProfileMenu user={data?.user} />
-      <SideMenu nav={nav} handleNav={handleNav} loggedIn={!!data?.user} />
+      <SideMenu nav={nav} loggedIn={!!data?.user} />
     </div>
   );
 }

@@ -13,6 +13,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           password: await hashPassword(password),
         },
       });
+      console.log(user);
 
       res.status(201);
       res.json(user);
@@ -20,8 +21,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       console.log(err);
       res.status(404);
     }
+  } else {
+    res.status(500);
+    res.json({ message: "HTTP method not valid only POST Accepted" });
   }
-  res.status(500).json({ message: "HTTP method not valid only POST Accepted" });
 };
 
 export default handler;

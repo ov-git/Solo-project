@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect, useState, useRef, useContext } from "react";
+import { useState } from "react";
+
 import { useRouter, usePathname } from "next/navigation";
-import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
-import { registerUser } from "../../lib/ApiService";
 import { signIn } from "next-auth/react";
+
+import { registerUser } from "@/lib/api/UserApi";
+import { FcGoogle } from "react-icons/fc";
 
 type Props = {
   mode: "signin" | "register";
@@ -28,7 +30,7 @@ const SignIn = ({ mode }: Props) => {
     };
     if (path === "/register") {
       const result = await registerUser(path, user);
-      if (result.ok) {
+      if (result) {
         router.push("/");
       }
     } else {

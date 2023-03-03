@@ -1,9 +1,11 @@
 import Image from "next/image";
-import { getById } from "../../lib/ApiService";
 import Link from "next/link";
-import { DrinkApiType, DrinkWithDetails } from "types/Types";
-import AddButton from "../MainPage/AddButton";
+
+import { getById } from "@/lib/api/DrinkApi";
+
 import DrinkReviews from "./DrinkReviews";
+
+import { DrinkWithDetails } from "types/Types";
 
 const getData = async (id: string) => {
   const data = await getById(id);

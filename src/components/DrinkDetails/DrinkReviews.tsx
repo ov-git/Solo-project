@@ -1,8 +1,10 @@
 "use client";
 
-import useUser from "@/lib/hooks/useUser";
-import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
+import useUser from "@/lib/hooks/useUser";
+
 import AddButton from "../MainPage/AddButton";
 
 const DrinkReviews = ({ drink }) => {

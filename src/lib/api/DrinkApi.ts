@@ -1,4 +1,10 @@
-import { Drink, DrinkApiType, ErrorType, User } from "types/Types";
+import {
+  Drink,
+  DrinkApiType,
+  DrinkWithDetails,
+  ErrorType,
+  User,
+} from "types/Types";
 
 const url =
   process.env.NODE_ENV === "development"
@@ -6,7 +12,7 @@ const url =
     : "https://drinkzz.vercel.app";
 // Drinks
 
-const options = {
+const dataApiOptions = {
   method: "GET",
   headers: {
     "X-RapidAPI-Key": process.env.NEXT_PUBLIC_DRINK_API_KEY || "",
@@ -36,29 +42,29 @@ export const fetcher = async ({ url, options = {} }: FetcherProps) => {
 export const getPopular = async () => {
   return fetcher({
     url: `${process.env.NEXT_PUBLIC_DRINK_API_URL}/popular.php`,
-    options: options as RequestInit,
+    options: dataApiOptions as RequestInit,
   });
 };
 
 export const getCocktail = () => {
   return fetcher({
     url: `${process.env.NEXT_PUBLIC_DRINK_API_URL}/filter.php?c=Cocktail`,
-    options: options,
+    options: dataApiOptions,
   });
 };
 
 export const getOrdinary = () => {
   return fetcher({
     url: `${process.env.NEXT_PUBLIC_DRINK_API_URL}/filter.php?c=Ordinary_Drink`,
-    options: options,
+    options: dataApiOptions,
   });
 };
 
 export const getById = (
   id: string
-): Promise<{ drinks: DrinkApiType[] } | null> => {
+): Promise<{ drinks: DrinkWithDetails[] } | null> => {
   return fetcher({
     url: `${process.env.NEXT_PUBLIC_DRINK_API_URL}/lookup.php?i=${id}`,
-    options: options,
+    options: dataApiOptions,
   });
 };

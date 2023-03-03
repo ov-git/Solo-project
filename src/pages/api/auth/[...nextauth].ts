@@ -1,5 +1,5 @@
 import CredentialsProvider from "next-auth/providers/credentials";
-import NextAuth, { ISODateString, NextAuthOptions, Session } from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 const url =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000"
