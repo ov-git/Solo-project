@@ -16,8 +16,8 @@ function SideMenu({ nav, loggedIn }: Props) {
     <div
       className={
         nav
-          ? "rounded-r fixed left-0 top-[80px] w-full md:w-1/5 bg-black bg-opacity-80 ease-in duration-300"
-          : "fixed -left-[50%] top-[80px] border w-[30%] bg-white opacity-0 ease-in duration-300"
+          ? "rounded-r fixed left-0 top-[4.2rem] w-full md:w-1/5 bg-dDarkGreen bg-opacity-80 ease-in duration-300"
+          : "fixed -left-[50%] top-[80px] w-[30%] bg-white opacity-0 ease-in duration-300"
       }
     >
       <ul className="flex flex-col">
@@ -25,7 +25,7 @@ function SideMenu({ nav, loggedIn }: Props) {
           return el.name !== "Log Out" ? (
             <Link
               key={el.name}
-              className="flex gap-4 p-2 ml-4 text-3xl"
+              className="flex gap-4 p-3 pl-4 text-3xl border border-l-0 rounded border-dLightGreen hover:bg-dLightGreen"
               href={el.link}
               prefetch={false}
             >
@@ -35,7 +35,7 @@ function SideMenu({ nav, loggedIn }: Props) {
           ) : (
             <button
               key={el.name}
-              className="flex gap-4 p-2 ml-4 text-3xl"
+              className="flex gap-4 p-3 pl-4 text-3xl border border-l-0 rounded border-dLightGreen hover:bg-dLightGreen"
               onClick={() => signOut()}
             >
               {el.svg} Log Out
