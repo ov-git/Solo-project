@@ -14,8 +14,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       if (!user || !user.password) {
         res.status(401);
-        res.json({ error: "Invalid login" });
-        return;
+        throw new Error("User not found");
       }
 
       const validPassword = await validatePassword(password, user.password);
@@ -24,11 +23,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         res.status(200);
         res.json(user);
       } else {
-        throw new Error("Invalid login");
+        res.status(401);
+        throw new Error("Incorrect password");
       }
     } catch (err) {
       console.log(err);
+      res.json({ error: err });
+      res.status(404);
     }
+  } else {
+    res.status(500);
+    res.json({ message: "HTTP method not valid only POST Accepted" });
   }
 };
 

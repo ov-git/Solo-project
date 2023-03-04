@@ -30,6 +30,9 @@ const SignInForm = () => {
       });
       if (response && response.ok) {
         router.push("/");
+      } else {
+        console.log(response);
+        throw new Error("No succesful response");
       }
     } catch (err) {
       console.log("err", err);

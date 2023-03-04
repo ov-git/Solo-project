@@ -1,6 +1,6 @@
 import { registerUser } from "@/lib/api/UserApi";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
@@ -8,7 +8,6 @@ const PWD_REGEX = /^(?=.*[A-Za-z])[A-Za-z\d!?-]{6,24}$/;
 
 const RegisterForm = () => {
   const userRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
 
   const [validEmail, setValidEmail] = useState(false);
   const [validPassword, setValidPassword] = useState(false);
@@ -46,8 +45,13 @@ const RegisterForm = () => {
           email: form.email,
           password: form.password,
         });
-        if (resp.ok) {
-          router.push("/");
+        if (resp) {
+          const response = await signIn("credentials", {
+            email: form.email,
+            password: form.password,
+            redirect: true,
+            callbackUrl: "/",
+          });
         }
       } catch (err) {
         console.log(err);

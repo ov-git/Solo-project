@@ -23,14 +23,10 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, req) {
         const { email, password } = credentials as any;
-        const logging = {
-          email,
-          password,
-        };
         try {
           const options = {
             method: "POST",
-            body: JSON.stringify(logging),
+            body: JSON.stringify({ email, password }),
             headers: {
               Accept: "application/json",
               "Content-Type": "application/json",
@@ -41,8 +37,9 @@ export const authOptions: NextAuthOptions = {
           const user = await response.json();
           if (response.ok && user) {
             return user;
+          } else {
+            return null;
           }
-          return null;
         } catch (err) {
           console.log("error at signin", err);
         }
@@ -65,6 +62,7 @@ export const authOptions: NextAuthOptions = {
 
   pages: {
     signIn: "/signin",
+    signOut: "/auth/signout",
   },
 };
 export default NextAuth(authOptions);
