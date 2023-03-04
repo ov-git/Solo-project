@@ -1,90 +1,20 @@
 "use client";
 
-import { useState } from "react";
-
-import { useRouter, usePathname } from "next/navigation";
-import Link from "next/link";
-import { signIn } from "next-auth/react";
-
-import { registerUser } from "@/lib/api/UserApi";
 import { FcGoogle } from "react-icons/fc";
+import RegisterForm from "./RegisterForm";
+import SignInForm from "./SignInForm";
 
 type Props = {
   mode: "signin" | "register";
 };
 
 const SignIn = ({ mode }: Props) => {
-  const path = usePathname();
-  const router = useRouter();
-
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const user = {
-      email: form.email,
-      password: form.password,
-    };
-    if (path === "/register") {
-      const result = await registerUser(path, user);
-      if (result) {
-        router.push("/");
-      }
-    } else {
-      const result = await signIn("credentials", {
-        email: form.email,
-        password: form.password,
-        redirect: true,
-        callbackUrl: "/",
-      });
-    }
-  };
-
   return (
     <div className="flex flex-col items-center">
       <div className="flex items-center justify-center py-4 text-5xl font-bold text-white">
         <h1>{mode === "signin" ? "Welcome back!" : "Welcome"}</h1>
       </div>
-      <form
-        className="flex flex-col gap-6 p-12 font-semibold text-white bg-gray-800 bg-opacity-50 border border-red-900 rounded w-80"
-        onSubmit={(e) => handleSubmit(e)}
-      >
-        <input
-          className="text-black"
-          placeholder=" Username or Email..."
-          onChange={(e) =>
-            setForm((prev) => {
-              return { ...prev, email: e.target.value };
-            })
-          }
-        />
-        <input
-          className="text-black"
-          placeholder=" Password..."
-          type="password"
-          onChange={(e) =>
-            setForm((prev) => {
-              return { ...prev, password: e.target.value };
-            })
-          }
-        />
-        <button type="submit" className="p-1 rounded bg-dLightGreen ">
-          {mode === "signin" ? "Login" : "Register"}
-        </button>
-
-        {mode === "signin" ? (
-          <Link className="underline underline-offset-2" href="/register">
-            New User?
-          </Link>
-        ) : (
-          <Link className="underline underline-offset-2" href="/signin">
-            Already have an account?
-          </Link>
-        )}
-      </form>
+      {mode === "signin" ? <SignInForm /> : <RegisterForm />}
     </div>
   );
 };

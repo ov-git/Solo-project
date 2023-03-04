@@ -6,11 +6,6 @@ import defaultUserImage from "../../../public/defaultUserImage.png";
 
 import { signIn } from "next-auth/react";
 
-import { User } from "types/Types";
-
-// type Props = {
-//   user: Partial<User> | undefined;
-// };
 type Props = {
   user:
     | ({

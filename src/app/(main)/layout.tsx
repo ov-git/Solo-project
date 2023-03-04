@@ -7,19 +7,10 @@ type Props = {
 
 export default function RootLayout({ children }: Props) {
   return (
-    <html lang="en">
-      {/*
-        <head /> will contain the components returned by the nearest parent
-        head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
-      <head />
-      <body>
-        <main className="flex flex-col w-full h-full min-h-screen bg-dDarkGreen">
-          <Navbar />
+    <main className="flex flex-col w-full h-full min-h-screen bg-dDarkGreen">
+      <Navbar />
 
-          <div className="h-full mt-16">{children}</div>
-        </main>
-      </body>
-    </html>
+      <div className="h-full mt-16">{children}</div>
+    </main>
   );
 }
