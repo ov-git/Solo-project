@@ -9,9 +9,18 @@ import { BiHome, BiLogOut, BiLogIn } from "react-icons/bi";
 type Props = {
   nav: Boolean;
   loggedIn: Boolean;
+  user:
+    | ({
+        id: string;
+      } & {
+        name?: string | null | undefined;
+        email?: string | null | undefined;
+        image?: string | null | undefined;
+      })
+    | undefined;
 };
 
-function SideMenu({ nav, loggedIn }: Props) {
+function SideMenu({ nav, user, loggedIn }: Props) {
   return (
     <div
       className={
@@ -21,7 +30,7 @@ function SideMenu({ nav, loggedIn }: Props) {
       }
     >
       <ul className="flex flex-col">
-        {generateList(loggedIn).map((el) => {
+        {generateList(loggedIn, user?.id).map((el) => {
           return el.name !== "Log Out" ? (
             <Link
               key={el.name}
@@ -47,13 +56,13 @@ function SideMenu({ nav, loggedIn }: Props) {
   );
 }
 
-const generateList = (logged: Boolean) => {
+const generateList = (logged: Boolean, id: string | undefined) => {
   return logged
     ? [
         {
           name: "Profile",
           svg: <CgProfile />,
-          link: "/profile/todo",
+          link: `/profile/${id}`,
         },
         {
           name: "Home",

@@ -116,7 +116,6 @@ const RegisterForm = () => {
       <button
         type="submit"
         className="p-1 rounded bg-dLightGreen disabled:bg-gray-400"
-        // disabled={validEmail && validPassword ? false : true}
       >
         Register
       </button>

@@ -40,7 +40,7 @@ function Navbar() {
       </div>
 
       <ProfileMenu user={data?.user} />
-      <SideMenu nav={nav} loggedIn={!!data?.user} />
+      <SideMenu nav={nav} user={data?.user} loggedIn={!!data?.user} />
     </div>
   );
 }
