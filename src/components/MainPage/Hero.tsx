@@ -17,7 +17,7 @@ function Hero() {
       </div>
 
       <Image
-        className="w-full col-span-1 rounded opacity-40"
+        className="object-cover w-full col-span-1 rounded md:object-fill opacity-40"
         src={bg}
         alt={"Drinkzz"}
         priority

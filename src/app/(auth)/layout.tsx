@@ -9,7 +9,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
         className="absolute w-full h-full -z-20"
         src={bg}
         alt={"login"}
-      ></Image>
+      />
       {children}
     </div>
   );
