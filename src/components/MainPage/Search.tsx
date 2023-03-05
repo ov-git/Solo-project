@@ -36,7 +36,7 @@ const Search = () => {
 
   return (
     <div className="flex h-36">
-      <div className="absolute flex flex-col items-center w-1/3 px-24">
+      <div className="absolute flex flex-col items-center px-24 lg:w-1/3">
         <form className="flex flex-col items-center justify-center w-full p-2">
           <label className="font-bold">Search by drink name:</label>
           <input

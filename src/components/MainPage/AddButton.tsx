@@ -10,7 +10,6 @@ const addDrinkOptions = (adding: Drink) => {
     optimisticData: (drinks: Drink[]) => [...drinks, adding],
     rollbackOnError: true,
     populateCache: (added: Drink, drinks: Drink[]) => [...drinks, added],
-    revalidate: false,
   };
 };
 const deleteDrinkOptions = (deleting: { id: string }) => {
@@ -20,7 +19,6 @@ const deleteDrinkOptions = (deleting: { id: string }) => {
     rollbackOnError: true,
     populateCache: (deleted: any, drinks: Drink[]) =>
       drinks.filter((el) => el.id !== deleting.id),
-    revalidate: false,
   };
 };
 
@@ -34,10 +32,7 @@ type Props = {
 };
 
 const AddButton: FC<Props> = ({ drink }) => {
-  const { data, mutate, isLoading } = useSWR(
-    `/api/user/${drink.idDrink}`,
-    fetcher
-  );
+  const { data, mutate, isLoading } = useSWR(`/api/user/`, fetcher);
 
   let ids: string[] = [];
   if (data && Array.isArray(data)) {

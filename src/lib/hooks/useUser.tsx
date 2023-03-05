@@ -9,8 +9,6 @@ const useUser = () => {
     fetcher
   );
 
-  console.log(data);
-
   let userDrinks: Drink[] | null = null;
   let userDrinkIds: string[] | null = null;
   let user: Partial<User> | null = null;
