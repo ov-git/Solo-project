@@ -10,7 +10,7 @@ export default function RootLayout({ children }: Props) {
     <main className="flex flex-col w-full h-full min-h-screen bg-dDarkGreen">
       <Navbar />
 
-      <div className="h-full mt-16">{children}</div>
+      <div className="w-full h-full mt-16">{children}</div>
     </main>
   );
 }

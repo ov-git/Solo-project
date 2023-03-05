@@ -20,7 +20,7 @@ type Props = {
 
 const ProfileMenu = ({ user }: Props) => {
   return (
-    <>
+    <div className="hidden sm:block">
       {user ? (
         <div className="flex m-10">
           <Image
@@ -48,7 +48,7 @@ const ProfileMenu = ({ user }: Props) => {
           </Link>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
