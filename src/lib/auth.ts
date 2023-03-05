@@ -25,6 +25,7 @@ export const getUserSession = async () => {
         drinks: true,
       },
     });
+
     return user;
   } else {
     return null;

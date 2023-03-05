@@ -1,4 +1,5 @@
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 import NextAuth, { NextAuthOptions } from "next-auth";
 const url =
   process.env.NODE_ENV === "development"
@@ -8,6 +9,11 @@ const url =
 export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    }),
+
     CredentialsProvider({
       name: "Credentials",
 
@@ -51,6 +57,34 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   callbacks: {
+    async signIn({ account, profile }) {
+      console.log("here2", account);
+      if (account?.provider === "google") {
+        const { email, name, picture, sub } = profile;
+        const user = {
+          id: sub,
+          email,
+          name,
+          image: picture,
+        };
+        const options = {
+          method: "POST",
+          body: JSON.stringify(user),
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        };
+        const response = await fetch(`${url}/api/user/oauth`, options);
+        return response.ok ? true : false;
+      } else if (account?.provider === "credentials") {
+        // already authorized above
+        return true;
+      } else {
+        return null;
+      }
+    },
+
     async jwt({ token, user }) {
       return { ...token, ...user };
     },

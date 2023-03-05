@@ -35,9 +35,15 @@ const SignInForm = () => {
         throw new Error("No succesful response");
       }
     } catch (err) {
-      console.log("err", err);
-      setError("Error sending the request");
+      setError("Invalid login credentials");
     }
+  };
+
+  const handleGoogleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    await signIn("google", {
+      callbackUrl: "/",
+    });
   };
 
   return (
@@ -71,6 +77,12 @@ const SignInForm = () => {
       />
       <button type="submit" className="p-1 rounded bg-dLightGreen ">
         Login
+      </button>
+      <button
+        onClick={(e) => handleGoogleLogin(e)}
+        className="p-1 rounded bg-dLightGreen "
+      >
+        Google
       </button>
 
       <Link className="underline underline-offset-2" href="/register">

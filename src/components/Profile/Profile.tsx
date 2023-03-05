@@ -10,6 +10,7 @@ const getData = async () => {
 const Profile = async () => {
   const user = await getData();
   const drinks = user?.drinks || [];
+
   return (
     <div className="flex flex-col h-full px-12 ">
       <div className="flex items-center justify-center w-full h-64">
