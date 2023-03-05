@@ -2,11 +2,16 @@ import { registerUser } from "@/lib/api/UserApi";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { FcGoogle } from "react-icons/fc";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[A-Za-z])[A-Za-z\d!?-]{6,24}$/;
 
-const RegisterForm = () => {
+type Props = {
+  handleGoogleLogin: (e: React.MouseEvent<HTMLButtonElement>) => Promise<void>;
+};
+
+const RegisterForm = ({ handleGoogleLogin }: Props) => {
   const userRef = useRef<HTMLInputElement>(null);
 
   const [validEmail, setValidEmail] = useState(false);
@@ -119,6 +124,17 @@ const RegisterForm = () => {
       >
         Register
       </button>
+      <div className="w-full">
+        <p className="text-sm">or login with:</p>
+
+        <button
+          onClick={handleGoogleLogin}
+          className="flex items-center justify-center w-full gap-2 p-1 bg-black rounded "
+        >
+          <FcGoogle className="text-xl" />
+          <p>Google</p>
+        </button>
+      </div>
 
       <Link className="underline underline-offset-2" href="/signin">
         Already have an account?

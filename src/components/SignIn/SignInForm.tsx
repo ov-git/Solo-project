@@ -3,8 +3,13 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
+import { FcGoogle } from "react-icons/fc";
 
-const SignInForm = () => {
+type Props = {
+  handleGoogleLogin: (e: React.MouseEvent<HTMLButtonElement>) => Promise<void>;
+};
+
+const SignInForm = ({ handleGoogleLogin }: Props) => {
   const router = useRouter();
   const userRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState("");
@@ -39,13 +44,6 @@ const SignInForm = () => {
     }
   };
 
-  const handleGoogleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    await signIn("google", {
-      callbackUrl: "/",
-    });
-  };
-
   return (
     <form
       className="flex flex-col gap-5 px-12 py-8 font-semibold text-white bg-gray-800 bg-opacity-50 border border-red-900 rounded w-80"
@@ -78,12 +76,17 @@ const SignInForm = () => {
       <button type="submit" className="p-1 rounded bg-dLightGreen ">
         Login
       </button>
-      <button
-        onClick={(e) => handleGoogleLogin(e)}
-        className="p-1 rounded bg-dLightGreen "
-      >
-        Google
-      </button>
+      <div className="w-full">
+        <p className="text-sm">or login with:</p>
+
+        <button
+          onClick={handleGoogleLogin}
+          className="flex items-center justify-center w-full gap-2 p-1 bg-black rounded "
+        >
+          <FcGoogle className="text-xl" />
+          <p>Google</p>
+        </button>
+      </div>
 
       <Link className="underline underline-offset-2" href="/register">
         New User?

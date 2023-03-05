@@ -58,7 +58,6 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async signIn({ account, profile }) {
-      console.log("here2", account);
       if (account?.provider === "google") {
         const { email, name, picture, sub } = profile;
         const user = {
