@@ -25,7 +25,7 @@ function SideMenu({ nav, user, loggedIn }: Props) {
     <div
       className={
         nav
-          ? "rounded-r fixed left-0 top-[4.2rem] w-full md:w-1/5 bg-dDarkGreen bg-opacity-80 ease-in duration-300"
+          ? "rounded-r fixed left-0 top-[4.2rem] w-full sm:w-1/3 xl:w-1/5 bg-dDarkGreen bg-opacity-80 ease-in duration-300"
           : "fixed -left-[50%] top-[80px] w-[30%] bg-white opacity-0 ease-in duration-300"
       }
     >
@@ -36,7 +36,6 @@ function SideMenu({ nav, user, loggedIn }: Props) {
               key={el.name}
               className="flex gap-4 p-3 pl-4 text-3xl border border-l-0 rounded border-dLightGreen hover:bg-dLightGreen"
               href={el.link}
-              prefetch={false}
             >
               <div className="text-4xl">{el.svg}</div>
               <p>{el.name}</p>

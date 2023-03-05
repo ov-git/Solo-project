@@ -35,7 +35,7 @@ const DrinkDetails = async ({ params }: Props) => {
           {drink.strDrink}
         </h1>
       </div>
-      <div className="grid w-full grid-cols-2 gap-4 max-w-[1200px] bg-dLightGreen p-3 rounded-md">
+      <div className="grid w-full md:grid-cols-2 gap-4 max-w-[1200px] bg-dLightGreen p-3 rounded-md">
         <div className="w-full h-full">
           <Image
             className="rounded-md"

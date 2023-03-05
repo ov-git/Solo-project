@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { deleteDrinkFromLibrary } from "@/lib/api/UserApi";
 
 import { Drink } from "types/Types";
+import PageControls from "./PageControls";
 
 type Props = {
   drinks: Drink[];
@@ -39,13 +40,17 @@ const DrinkCarousel = ({ drinks }: Props) => {
 
   return (
     <>
-      <div className="flex w-full gap-4 h-[350px] max-w-[1600px] self-center">
+      <div className="lg:hidden">
+        <PageControls page={page} setPage={setPage} length={drinks.length} />
+      </div>
+
+      <div className="flex flex-col h-full lg:flex-row w-full gap-4 lg:h-[350px] max-w-[1600px] self-center">
         {savedDrinks.map((el) => (
           <div
             key={el.id}
             className="flex flex-col items-center justify-center h-full p-2 text-white rounded-md hover:bg-dLightGreen"
           >
-            <p className="font-bold">{el.name}</p>
+            <p className="text-xl font-bold ">{el.name}</p>
             <Image
               className="rounded-md"
               src={el.image}
@@ -53,7 +58,7 @@ const DrinkCarousel = ({ drinks }: Props) => {
               width={300}
               height={300}
             />
-            <div className="flex justify-between w-full ">
+            <div className="flex justify-between w-full max-w-[300px]">
               <Link className="font-bold underline" href={`drink/${el.id}`}>
                 Details
               </Link>
@@ -62,25 +67,7 @@ const DrinkCarousel = ({ drinks }: Props) => {
           </div>
         ))}
       </div>
-      <div className="flex justify-end w-full gap-5 px-6 py-4 text-white">
-        <button
-          className="disabled:text-gray-500"
-          disabled={page === 1}
-          onClick={() => setPage(page - 1)}
-        >
-          Prev
-        </button>
-        <p>
-          Page {page}/{Math.ceil(drinks?.length / 5)}
-        </p>
-        <button
-          className="disabled:text-gray-500"
-          disabled={page >= Math.ceil(drinks?.length / 5)}
-          onClick={() => setPage(page + 1)}
-        >
-          Next
-        </button>
-      </div>
+      <PageControls page={page} setPage={setPage} length={drinks.length} />
     </>
   );
 };
