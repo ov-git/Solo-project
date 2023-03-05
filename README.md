@@ -6,3 +6,5 @@ Application is built with next.js and uses Next-Auth for authentication and stor
 
 
 ![Drinkzz landing](https://user-images.githubusercontent.com/107475096/198328891-4442cce9-96f8-4423-899c-ba980260363b.jpg)
+
+Application page: [drinkzz.vercel.app](https://drinkzz.vercel.app/)
