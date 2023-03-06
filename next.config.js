@@ -10,7 +10,11 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["www.thecocktaildb.com", "lh3.googleusercontent.com"],
+    domains: [
+      "www.thecocktaildb.com",
+      "lh3.googleusercontent.com",
+      "res.cloudinary.com",
+    ],
   },
 };
 

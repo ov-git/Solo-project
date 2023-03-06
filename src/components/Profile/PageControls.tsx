@@ -1,6 +1,12 @@
-import React from "react";
+import { SetStateAction } from "react";
 
-const PageControls = ({ page, setPage, length }) => {
+type Props = {
+  page: number;
+  setPage: React.Dispatch<SetStateAction<number>>;
+  length: number;
+};
+
+const PageControls = ({ page, setPage, length }: Props) => {
   return (
     <div className="flex justify-end w-full gap-5 px-6 py-4 text-white">
       <button

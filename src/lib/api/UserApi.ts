@@ -48,6 +48,26 @@ export const getUser = () => {
   return data;
 };
 
+export const createNewDrink = async (drink: {
+  image: string;
+  instructions: string;
+  name: string;
+}) => {
+  const userApiOptions = {
+    method: "POST",
+    body: JSON.stringify(drink),
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  };
+  const resp = await fetcher({
+    url: "/api/drink/create",
+    options: userApiOptions,
+  });
+  return resp;
+};
+
 export const addDrinktoLibrary = async (drink: Drink) => {
   const userApiOptions = {
     method: "POST",
