@@ -1,13 +1,15 @@
 "use client";
 import useDrink from "@/lib/hooks/useDrink";
+import { Ingredient } from "types/Types";
 import Drink from "./Drink";
 
 type Props = {
   category: string;
+  ingredients: string[];
 };
 
-export default function Drinks({ category }: Props) {
-  const { drinks, isLoading, isError } = useDrink(category);
+export default function Drinks({ category, ingredients }: Props) {
+  const { drinks, isLoading, isError } = useDrink(category, ingredients);
 
   if (isLoading) return <h1>Loading...</h1>;
 

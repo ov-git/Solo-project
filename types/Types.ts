@@ -58,3 +58,7 @@ export interface DrinkWithDetails extends DrinkApiType {
   strMeasure14: string | null;
   strMeasure15: string | null;
 }
+
+export type Ingredient = {
+  strIngredient1: string;
+};

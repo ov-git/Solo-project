@@ -1,70 +1,70 @@
-import {
-  Drink,
-  DrinkApiType,
-  DrinkWithDetails,
-  ErrorType,
-  User,
-} from "types/Types";
+import axios from "axios";
 
-const url =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:3000"
-    : "https://drinkzz.vercel.app";
-// Drinks
+import { DrinkApiType, DrinkWithDetails, Ingredient } from "types/Types";
 
-const dataApiOptions = {
-  method: "GET",
-  headers: {
-    "X-RapidAPI-Key": process.env.NEXT_PUBLIC_DRINK_API_KEY || "",
-    "X-RapidAPI-Host": "the-cocktail-db.p.rapidapi.com",
-  },
+const drinksApi = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_DRINK_API_URL,
+});
+
+// Get
+export const getPopular = async (): Promise<{
+  drinks: DrinkApiType[];
+} | null> => {
+  const response = await drinksApi.get("/popular.php");
+  return response.data;
 };
 
-type FetcherProps = {
-  url: string;
-  options?: RequestInit;
+export const getLatest = async (): Promise<{
+  drinks: DrinkApiType[];
+} | null> => {
+  const response = await drinksApi.get("/latest.php");
+  return response.data;
 };
 
-export const fetcher = async ({ url, options = {} }: FetcherProps) => {
-  try {
-    const response = await fetch(url, options);
-    if (!response || !response.ok) {
-      throw new Error("API call Error");
-    }
-    const data = await response.json();
-    return data;
-  } catch (err) {
-    console.log("fetch error", err);
-    return null;
-  }
+export const getByCategory = async (
+  category: string
+): Promise<{ drinks: DrinkApiType[] } | null> => {
+  const response = await drinksApi.get(`/filter.php?c=${category}`);
+  return response.data;
 };
 
-export const getPopular = async () => {
-  return fetcher({
-    url: `${process.env.NEXT_PUBLIC_DRINK_API_URL}/popular.php`,
-    options: dataApiOptions as RequestInit,
-  });
-};
-
-export const getCocktail = () => {
-  return fetcher({
-    url: `${process.env.NEXT_PUBLIC_DRINK_API_URL}/filter.php?c=Cocktail`,
-    options: dataApiOptions,
-  });
-};
-
-export const getOrdinary = () => {
-  return fetcher({
-    url: `${process.env.NEXT_PUBLIC_DRINK_API_URL}/filter.php?c=Ordinary_Drink`,
-    options: dataApiOptions,
-  });
-};
-
-export const getById = (
+export const getDetailsById = async (
   id: string
 ): Promise<{ drinks: DrinkWithDetails[] } | null> => {
-  return fetcher({
-    url: `${process.env.NEXT_PUBLIC_DRINK_API_URL}/lookup.php?i=${id}`,
-    options: dataApiOptions,
-  });
+  const response = await drinksApi.get(`/lookup.php?i=${id}`);
+  return response.data;
+};
+
+export const getIngredients = async (): Promise<{
+  drinks: Ingredient[];
+} | null> => {
+  const response = await drinksApi.get(`/list.php?i=list`);
+  return response.data;
+};
+//Search
+
+export const searchByName = async (
+  term: string
+): Promise<{ drinks: DrinkWithDetails[] } | null> => {
+  const response = await drinksApi.get(`/search.php?s=${term}`);
+  return response.data;
+};
+
+export const searchByIngredient = async (
+  term: string
+): Promise<{ drinks: Ingredient[] } | null> => {
+  const response = await drinksApi.get(`/search.php?i=${term}`);
+  return response.data;
+};
+
+export const getDrinksByIngredients = async (
+  ingredients: string[]
+): Promise<{ drinks: DrinkApiType[] }> => {
+  if (ingredients.length) {
+    // const format = ingredients.join(",");
+    const format = ingredients[0];
+    const response = await drinksApi.get(`/filter.php?i=${format}`);
+    return response.data;
+  }
+  return { drinks: [] };
 };

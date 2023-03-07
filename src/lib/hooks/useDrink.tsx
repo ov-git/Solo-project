@@ -1,26 +1,32 @@
 import useSWR from "swr";
-import { DrinkApiType } from "types/Types";
+import { DrinkApiType, Ingredient } from "types/Types";
+import {
+  getByCategory,
+  getDrinksByIngredients,
+  getPopular,
+} from "../api/DrinkApi";
 
-const options = {
-  method: "GET",
-  headers: {
-    "X-RapidAPI-Key": process.env.NEXT_PUBLIC_DRINK_API_KEY || "",
-    "X-RapidAPI-Host": "the-cocktail-db.p.rapidapi.com",
-  },
+type FetcherArguments = {
+  category: string;
+  ingredients: string[];
 };
 
-const fetcher = async (url: string): Promise<{ drinks: DrinkApiType[] }> => {
-  const response = await fetch(url, options);
-  return await response.json();
+const fetcher = async ({
+  category,
+  ingredients,
+}: FetcherArguments): Promise<{ drinks: DrinkApiType[] }> => {
+  console.log(ingredients);
+  const response =
+    category === "popular"
+      ? await getPopular()
+      : category === "search"
+      ? await getDrinksByIngredients(ingredients)
+      : await getByCategory(category);
+  return response ? response : { drinks: [] };
 };
 
-export default function useDrink(category: string) {
-  const url =
-    category == "popular"
-      ? `${process.env.NEXT_PUBLIC_DRINK_API_URL}/popular.php`
-      : `${process.env.NEXT_PUBLIC_DRINK_API_URL}/filter.php?c=${category}`;
-
-  const { data, error, isLoading } = useSWR(url, fetcher);
+export default function useDrink(category: string, ingredients: string[] = []) {
+  const { data, error, isLoading } = useSWR({ category, ingredients }, fetcher);
 
   const drinks = data?.drinks && Array.isArray(data.drinks) ? data.drinks : [];
 

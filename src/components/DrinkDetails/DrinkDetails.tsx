@@ -1,14 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { getById } from "@/lib/api/DrinkApi";
+import { getDetailsById } from "@/lib/api/DrinkApi";
 
 import DrinkReviews from "./DrinkReviews";
 
 import { DrinkWithDetails } from "types/Types";
 
 const getData = async (id: string) => {
-  const data = await getById(id);
+  const data = await getDetailsById(id);
   if (data && data.drinks) {
     return data.drinks[0];
   }
