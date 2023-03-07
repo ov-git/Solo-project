@@ -26,7 +26,11 @@ function Navbar() {
   return (
     <div className="fixed top-0 z-30 flex items-center justify-between w-full h-16 text-orange-100 border-b-2 bg-dDarkGreen border-dLightGreen">
       <div className="flex items-center h-full">
-        <button className="p-4 hover:animate-pulse" onClick={() => handleNav()}>
+        <button
+          aria-label="menu button"
+          className="p-4 hover:animate-pulse"
+          onClick={() => handleNav()}
+        >
           {nav ? (
             <CgClose className="text-5xl" />
           ) : (
@@ -34,8 +38,8 @@ function Navbar() {
           )}
         </button>
 
-        <Link className="flex h-full px-4 select-none " href={"/"}>
-          <Image src={Nav} alt={"Logo"} width={200} height={60} />
+        <Link className="flex w-[300px] h-full px-4 select-none " href={"/"}>
+          <Image className="" src={Nav} alt={"Logo"} height={60} width={300} />
         </Link>
       </div>
 

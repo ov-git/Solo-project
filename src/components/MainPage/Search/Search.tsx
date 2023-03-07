@@ -12,7 +12,7 @@ type Props = {
 const Search = ({ setIngredients }: Props) => {
   return (
     <div className="flex justify-center h-48">
-      <div className="absolute flex items-start justify-between w-full px-24 max-w-[1400px] ">
+      <div className="absolute flex items-start justify-between w-full px-4 lg:px-24 max-w-[1400px]">
         <SearchByNameForm />
         <SearchIngredients setIngredients={setIngredients} />
       </div>

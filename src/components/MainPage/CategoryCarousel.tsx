@@ -20,7 +20,7 @@ const CategoryCarousel = ({ setCategory, category }: Props) => {
           nulla dolor at sequi veritatis, maiores quasi, cupiditate aspernatur
           officia accusantium eos.
         </p> */}
-        <div className="flex gap-2 flex-wrap items-center justify-center max-w-[80vw]">
+        <div className="flex gap-2 flex-wrap items-center justify-center lg:max-w-[80vw] px-4">
           {categories.map((cat) => {
             const active =
               category === cat.link

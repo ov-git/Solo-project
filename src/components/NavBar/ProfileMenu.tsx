@@ -26,10 +26,9 @@ const ProfileMenu = ({ user }: Props) => {
           <Image
             src={user.image || defaultUserImage}
             alt={"profile"}
-            height={70}
-            width={70}
+            height={50}
             placeholder={"empty"}
-            className="rounded-full"
+            className="w-auto rounded-full"
           />
         </div>
       ) : (

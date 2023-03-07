@@ -15,7 +15,6 @@ const fetcher = async ({
   category,
   ingredients,
 }: FetcherArguments): Promise<{ drinks: DrinkApiType[] }> => {
-  console.log(ingredients);
   const response =
     category === "popular"
       ? await getPopular()
