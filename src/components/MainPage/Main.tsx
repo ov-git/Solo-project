@@ -1,24 +1,27 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import Drinks from "./Drinks";
 import CategoryCarousel from "./CategoryCarousel";
 import Search from "./Search/Search";
-import { Ingredient } from "types/Types";
-import MyToggle from "./MyToggle";
 
 function Main() {
   const [category, setCategory] = useState("popular");
   const [ingredients, setIngredients] = useState<string[]>([]);
 
-  useEffect(() => {
-    setCategory("search");
-  }, [ingredients]);
+  const setToSearch = (ingredients: string[]) => {
+    if (ingredients.length) {
+      setIngredients(ingredients);
+      setCategory("search");
+    } else {
+      setCategory("popular");
+    }
+  };
 
   return (
     <div className="flex-col w-full h-full text-white ">
       <CategoryCarousel setCategory={setCategory} category={category} />
-      <Search setIngredients={setIngredients} />
+      <Search setToSearch={setToSearch} />
 
       <div className="min-h-[75vh] flex justify-center 2xl:px-12">
         <MyToggle />
