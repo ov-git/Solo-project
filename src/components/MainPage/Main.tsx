@@ -4,6 +4,7 @@ import { useState } from "react";
 import Drinks from "./Drinks";
 import CategoryCarousel from "./CategoryCarousel";
 import Search from "./Search/Search";
+import MyToggle from "./MyToggle";
 
 function Main() {
   const [category, setCategory] = useState("popular");
@@ -23,7 +24,7 @@ function Main() {
       <CategoryCarousel setCategory={setCategory} category={category} />
       <Search setToSearch={setToSearch} />
 
-      <div className="min-h-[75vh] flex justify-center 2xl:px-12">
+      <div className="min-h-[75vh] flex flex-col items-center 2xl:px-12">
         <MyToggle />
         <Drinks category={category} ingredients={ingredients} />
       </div>

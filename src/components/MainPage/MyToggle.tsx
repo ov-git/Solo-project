@@ -10,7 +10,7 @@ function MyToggle() {
       onChange={setEnabled}
       className={`${
         enabled ? "bg-blue-600" : "bg-gray-200"
-      } relative inline-flex h-6 w-11 items-center rounded-full`}
+      } relative inline-flex h-6 w-11 items-center rounded-full ml-auto`}
     >
       <span className="sr-only">Enable notifications</span>
       <span
