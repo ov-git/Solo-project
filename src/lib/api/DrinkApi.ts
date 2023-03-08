@@ -61,8 +61,8 @@ export const getDrinksByIngredients = async (
   ingredients: string[]
 ): Promise<{ drinks: DrinkApiType[] }> => {
   if (ingredients.length) {
-    // const format = ingredients.join(",");
-    const format = ingredients[0];
+    const format = ingredients.join(",");
+    // const format = ingredients[0];
     const response = await drinksApi.get(`/filter.php?i=${format}`);
     return response.data;
   }
