@@ -5,6 +5,7 @@ import Drinks from "./Drinks";
 import CategoryCarousel from "./CategoryCarousel";
 import Search from "./Search/Search";
 import { Ingredient } from "types/Types";
+import MyToggle from "./MyToggle";
 
 function Main() {
   const [category, setCategory] = useState("popular");
@@ -20,6 +21,7 @@ function Main() {
       <Search setIngredients={setIngredients} />
 
       <div className="min-h-[75vh] flex justify-center 2xl:px-12">
+        <MyToggle />
         <Drinks category={category} ingredients={ingredients} />
       </div>
     </div>
