@@ -1,10 +1,10 @@
 Description:
-Drink-wiki is a drink library web-app where users can search and find recepies and ingredients for drinks. Drink-wiki get's it's data from api allows signed in users to create their own accounts and drink collections. Users are able to see other users drink collections and their usernames.
+Drink-wiki is a drink library web-app where users can search and find recepies and ingredients for drinks. Drink-wiki allows signed in users to create their own accounts and drink collections from multiple drink categories.   
 
 Tech Stack:
-Application is built with next.js and uses Next-Auth for authentication and stores user data to postgreSQL database. For styling application uses tailwind css.
+Application is built with TypeScript and Next.js version 13. Authentication is done with Next-Auth and data is stored to MySQL database through Prisma orm. For styling application uses Tailwind css.
 
 
-![Drinkzz landing](https://user-images.githubusercontent.com/107475096/198328891-4442cce9-96f8-4423-899c-ba980260363b.jpg)
+![Drinkzz landing](https://gyazo.com/93ec440bcb46cb04fac75efd20bb7c5b.jpg)
 
 Application page: [drinkzz.vercel.app](https://drinkzz.vercel.app/)
