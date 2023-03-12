@@ -1,5 +1,6 @@
 import { getServerSession } from "next-auth/next";
 import { NextApiRequest, NextApiResponse } from "next/types";
+import { Drink } from "types/Types";
 import prisma from "../../../lib/Prisma";
 import { authOptions } from "../auth/[...nextauth]";
 
@@ -8,10 +9,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const id = session?.user.id;
 
   if (req.method === "POST") {
-    console.log("posting:", req.body.id);
+    console.log("posting:", req.body.drink.id);
+    const newDrink: Drink = req.body.drink;
     const drink = await prisma.drink.upsert({
       where: {
-        id: req.body.id,
+        id: newDrink.id,
       },
       update: {
         users: {
@@ -19,9 +21,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         },
       },
       create: {
-        id: req.body.id,
-        name: req.body.name,
-        image: req.body.image,
+        id: newDrink.id,
+        name: newDrink.name,
+        image: newDrink.image,
         users: {
           connect: { id: id },
         },
@@ -35,9 +37,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     res.json(drink);
   } else if (req.method === "DELETE") {
     console.log("deleting:", req.body);
+    const drinkId: string = req.body;
     const drink = await prisma.drink.update({
       where: {
-        id: req.body.id,
+        id: drinkId,
       },
       data: {
         users: {
@@ -53,14 +56,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (!drink.users.length) {
       const d = await prisma.drink.delete({
         where: {
-          id: req.body.id,
+          id: drinkId,
         },
       });
     }
     res.status(200);
-    res.json({ message: drink });
+    res.json(drink);
   } else {
-    res.status(200);
+    res.status(500);
   }
 };
 

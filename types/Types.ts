@@ -13,6 +13,10 @@ export type UserWithDrinks = Prisma.UserGetPayload<typeof UserWithDrinks>;
 
 export type Drink = Prisma.DrinkGetPayload<typeof DrinkType>;
 
+const createdDrink = Prisma.validator<Prisma.CreatedDrinkArgs>()({});
+
+export type CreatedDrink = Prisma.CreatedDrinkGetPayload<typeof createdDrink>;
+
 export type ErrorType = {
   message: string;
 };

@@ -74,7 +74,7 @@ const SearchIngredients = ({ setToSearch }: Props) => {
                 >
                   {({ active }) => (
                     <div
-                      className={`p-1 w-full text-black border ${
+                      className={`p-1 w-full text-black border  cursor-pointer ${
                         active ? "bg-dLightGreen" : "bg-white"
                       }`}
                       // onClick={(e) => handleSelect(e, ingredient)}
@@ -90,8 +90,8 @@ const SearchIngredients = ({ setToSearch }: Props) => {
 
       {/* //Currently selected ingredients */}
       {selected.length ? (
-        <ul className="flex flex-col items-center gap-1 h-48 p-2 text-black max-h-48 ">
-          <p className="text-white font-bold">Currently selected</p>
+        <ul className="flex flex-col items-center h-48 gap-1 p-2 text-black max-h-48 ">
+          <p className="font-bold text-white">Currently selected</p>
           {selected.map((el) => (
             <div
               className="flex justify-between w-full px-2 bg-white rounded"

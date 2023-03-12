@@ -22,7 +22,7 @@ type Props = {
 const DrinkDetails = async ({ params }: Props) => {
   const { id } = params;
   const drink = (await getData(id)) || null;
-  console.log(drink?.strInstructions.length);
+  console.log(drink);
   return drink ? (
     <div className="flex flex-col items-center text-black">
       <div className="flex w-full p-8 pt-12 items-center max-w-[1200px]">

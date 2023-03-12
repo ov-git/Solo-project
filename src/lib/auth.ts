@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 export const hashPassword = (password: string) => {
+  console.log("here");
   return bcrypt.hash(password, 10);
 };
 
