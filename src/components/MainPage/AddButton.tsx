@@ -1,28 +1,11 @@
 "use client";
 
-import { useState, FC, useEffect, memo, useMemo } from "react";
+import { FC } from "react";
 import { Drink, DrinkApiType } from "types/Types";
 import useSWR from "swr";
 import { addDrinktoLibrary, deleteDrinkFromLibrary } from "@/lib/api/UserApi";
 
-const addDrinkOptions = (adding: Drink) => {
-  return {
-    optimisticData: (drinks: Drink[]) => [...drinks, adding],
-    rollbackOnError: true,
-    populateCache: (added: Drink, drinks: Drink[]) => [...drinks, added],
-  };
-};
-const deleteDrinkOptions = (deleting: { id: string }) => {
-  return {
-    optimisticData: (drinks: Drink[]) =>
-      drinks.filter((el) => el.id !== deleting.id),
-    rollbackOnError: true,
-    populateCache: (deleted: any, drinks: Drink[]) =>
-      drinks.filter((el) => el.id !== deleting.id),
-  };
-};
-
-const fetcher = async () => {
+const fetcher = async (): Promise<Drink[] | undefined> => {
   const res = await fetch("/api/user");
   const data = await res.json();
   return data.data.drinks;
@@ -32,57 +15,48 @@ type Props = {
 };
 
 const AddButton: FC<Props> = ({ drink }) => {
-  const { data, mutate, isLoading } = useSWR(`/api/user/`, fetcher);
+  const {
+    data: userDrinks,
+    mutate,
+    isLoading,
+    isValidating,
+  } = useSWR(`/api/user/`, fetcher);
 
-  let ids: string[] = [];
-  if (data && Array.isArray(data)) {
-    ids = data.map((el) => el.id);
-  }
+  if (!userDrinks) return null;
+  if (isLoading) return <p>Loading...</p>;
 
-  const handleClick = async () => {
-    if (!ids.includes(drink.idDrink)) {
-      try {
-        await mutate(
-          addDrinktoLibrary({
-            id: drink.idDrink,
-            name: drink.strDrink,
-            image: drink.strDrinkThumb,
-          }),
-          addDrinkOptions({
-            id: drink.idDrink,
-            name: drink.strDrink,
-            image: drink.strDrinkThumb,
-          })
-        );
-      } catch (err) {
-        console.log(err);
-      }
-    } else {
-      try {
-        await mutate(
-          deleteDrinkFromLibrary({
-            id: drink.idDrink,
-          }),
-          deleteDrinkOptions({
-            id: drink.idDrink,
-          })
-        );
-      } catch (err) {
-        console.log(err);
-      }
-    }
+  const toSend: Drink = {
+    id: drink.idDrink,
+    name: drink.strDrink,
+    image: drink.strDrinkThumb,
   };
 
-  if (!data) return <div className="h-[24px]"></div>;
-  if (isLoading) return <p>Loading...</p>;
+  const isAdded = userDrinks.map((el) => el.id).includes(drink.idDrink);
+
+  const handleClick = async () => {
+    if (isAdded) {
+      const response = deleteDrinkFromLibrary(toSend.id);
+      mutate([...userDrinks.filter((el) => el.id !== toSend.id)], {
+        revalidate: false,
+        rollbackOnError: true,
+      });
+    } else {
+      const response = await addDrinktoLibrary(toSend);
+      mutate([...userDrinks, toSend], {
+        revalidate: false,
+        rollbackOnError: true,
+      });
+    }
+  };
 
   return (
     <div className="z-30 flex justify-end rounded">
       <button
         className="px-2 font-bold rounded bg-dDarkOrange"
         onClick={handleClick}
+        disabled={isValidating}
       >
-        {ids.includes(drink.idDrink) ? "In Library" : "Add Drink"}
+        {isAdded ? "In Library" : "Add Drink"}
       </button>
     </div>
   );

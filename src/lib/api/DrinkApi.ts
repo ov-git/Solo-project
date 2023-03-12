@@ -41,8 +41,8 @@ export const getIngredients = async (): Promise<{
   const response = await drinksApi.get(`/list.php?i=list`);
   return response.data;
 };
-//Search
 
+//Search
 export const searchByName = async (
   term: string
 ): Promise<{ drinks: DrinkWithDetails[] } | null> => {

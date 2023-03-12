@@ -6,7 +6,7 @@ import prisma from "../../../lib/Prisma";
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     try {
-      const { email, password } = req.body;
+      const { email, password } = req.body.user;
       const user = await prisma.user.create({
         data: {
           email,
