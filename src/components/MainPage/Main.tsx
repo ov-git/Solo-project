@@ -1,18 +1,27 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Drinks from "./Drinks";
 import CategoryCarousel from "./CategoryCarousel";
 import Search from "./Search/Search";
-import MyToggle from "./MyToggle";
 
 function Main() {
-  const [category, setCategory] = useState("popular");
+  const [category, setCategory] = useState(
+    localStorage.getItem("category") || "popular"
+  );
   const [ingredients, setIngredients] = useState<string[]>([]);
+
+  useEffect(() => {
+    const storedIngedients = localStorage.getItem("ingredients");
+    if (storedIngedients) {
+      setIngredients(JSON.parse(storedIngedients));
+    }
+  }, []);
 
   const setToSearch = (ingredients: string[]) => {
     if (ingredients.length) {
       setIngredients(ingredients);
+      localStorage.setItem("ingredients", JSON.stringify(ingredients));
       setCategory("search");
     } else {
       setCategory("popular");
@@ -25,7 +34,6 @@ function Main() {
       <Search setToSearch={setToSearch} />
 
       <div className="min-h-[75vh] flex flex-col items-center 2xl:px-12">
-        <MyToggle />
         <Drinks category={category} ingredients={ingredients} />
       </div>
     </div>

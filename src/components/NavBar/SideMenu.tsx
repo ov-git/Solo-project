@@ -4,7 +4,7 @@ import Link from "next/link";
 import { signOut } from "next-auth/react";
 
 import { CgProfile } from "react-icons/cg";
-import { BiHome, BiLogOut, BiLogIn } from "react-icons/bi";
+import { BiHome, BiLogOut, BiLogIn, BiDrink } from "react-icons/bi";
 
 type Props = {
   nav: Boolean;
@@ -59,15 +59,21 @@ const generateList = (logged: Boolean, id: string | undefined) => {
   return logged
     ? [
         {
+          name: "Home",
+          svg: <BiHome />,
+          link: "/",
+        },
+        {
           name: "Profile",
           svg: <CgProfile />,
           link: `/profile/${id}`,
         },
         {
-          name: "Home",
-          svg: <BiHome />,
-          link: "/",
+          name: "Upload Drink",
+          svg: <BiDrink />,
+          link: `/create-drink`,
         },
+
         {
           name: "Log Out",
           svg: <BiLogOut />,

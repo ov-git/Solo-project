@@ -54,7 +54,7 @@ const AddButton: FC<Props> = ({ drink }) => {
       <button
         className="px-2 font-bold rounded bg-dDarkOrange"
         onClick={handleClick}
-        disabled={isValidating}
+        disabled={isValidating || isLoading}
       >
         {isAdded ? "In Library" : "Add Drink"}
       </button>

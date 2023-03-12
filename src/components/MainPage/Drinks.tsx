@@ -10,6 +10,8 @@ type Props = {
 export default function Drinks({ category, ingredients }: Props) {
   const { drinks, isLoading, isError } = useDrink(category, ingredients);
 
+  localStorage.setItem("category", category);
+
   if (isLoading) return <h1>Loading...</h1>;
 
   return (

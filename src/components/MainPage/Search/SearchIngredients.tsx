@@ -37,6 +37,7 @@ const SearchIngredients = ({ setToSearch }: Props) => {
   };
 
   const handleChange = (ingredients: Ingredient[]) => {
+    setSearch("");
     setSelected(ingredients);
     setToSearch(ingredients.map((el) => el.strIngredient1));
   };
@@ -77,7 +78,6 @@ const SearchIngredients = ({ setToSearch }: Props) => {
                       className={`p-1 w-full text-black border  cursor-pointer ${
                         active ? "bg-dLightGreen" : "bg-white"
                       }`}
-                      // onClick={(e) => handleSelect(e, ingredient)}
                     >
                       {ingredient.strIngredient1}
                     </div>
