@@ -22,10 +22,14 @@ const CategoryCarousel = ({ setCategory, category }: Props) => {
         </p> */}
         <div className="flex gap-2 flex-wrap items-center justify-center lg:max-w-[80vw] px-4">
           {categories.map((cat) => {
-            const active =
-              category === cat.link
-                ? "border-2 border-dDarkOrange"
-                : "hover:opacity-80";
+            let active = "";
+            if (typeof window !== "undefined") {
+              // to avoid defaulting to popular while compiling
+              active =
+                category === cat.link
+                  ? "border-2 border-dDarkOrange"
+                  : "hover:opacity-80";
+            }
             return (
               <button
                 className={`relative flex rounded-lg w-[200px] h-[120px] bg-black ${active}`}

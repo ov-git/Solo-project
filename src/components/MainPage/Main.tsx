@@ -5,10 +5,16 @@ import Drinks from "./Drinks";
 import CategoryCarousel from "./CategoryCarousel";
 import Search from "./Search/Search";
 
+const getStored = () => {
+  if (typeof window !== "undefined") {
+    const item = localStorage.getItem("category");
+    return item ? item : "popular";
+  }
+  return "popular";
+};
+
 function Main() {
-  const [category, setCategory] = useState(
-    localStorage.getItem("category") || "popular"
-  );
+  const [category, setCategory] = useState(getStored());
   const [ingredients, setIngredients] = useState<string[]>([]);
 
   useEffect(() => {
