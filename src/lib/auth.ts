@@ -24,6 +24,7 @@ export const getUserSession = async () => {
       },
       include: {
         drinks: true,
+        createdDrinks: true,
       },
     });
 

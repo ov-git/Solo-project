@@ -9,7 +9,17 @@ const getData = async () => {
 
 const Profile = async () => {
   const user = await getData();
+
   const drinks = user?.drinks || [];
+  const createdDrinks = user?.createdDrinks || [];
+
+  const formated = createdDrinks.map((el) => {
+    return {
+      name: el.strDrink,
+      image: el.strDrinkThumb,
+      id: el.idDrink,
+    };
+  });
 
   return (
     <div className="flex flex-col h-full px-12 ">
@@ -19,6 +29,7 @@ const Profile = async () => {
         </h1>
       </div>
       <DrinkCarousel drinks={drinks} />
+      <DrinkCarousel drinks={formated} />
     </div>
   );
 };
