@@ -26,13 +26,11 @@ const CategoryCarousel = ({ setCategory, category }: Props) => {
             if (typeof window !== "undefined") {
               // to avoid defaulting to popular while compiling
               active =
-                category === cat.link
-                  ? "border-2 border-dDarkOrange"
-                  : "hover:opacity-80";
+                category === cat.link ? "border-2 border-dDarkOrange" : "";
             }
             return (
               <button
-                className={`relative flex rounded-lg w-[200px] h-[120px] bg-black ${active}`}
+                className={`relative flex rounded-lg w-[200px] h-[120px] bg-black hover:opacity-80 ${active}`}
                 key={cat.name}
                 onClick={() => setCategory(cat.link)}
               >

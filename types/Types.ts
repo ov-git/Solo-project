@@ -31,6 +31,7 @@ export interface DrinkWithDetails extends DrinkApiType {
   strInstructions: string;
   strGlass: string;
   strAlcoholic: string;
+  strCategory: string;
   strIngredient1: string | null;
   strIngredient2: string | null;
   strIngredient3: string | null;

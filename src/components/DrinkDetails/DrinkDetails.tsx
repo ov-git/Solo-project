@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import prisma from "@/lib/Prisma";
 
 import { getDetailsById } from "@/lib/api/DrinkApi";
 
@@ -8,11 +9,14 @@ import DrinkReviews from "./DrinkReviews";
 import { DrinkWithDetails } from "types/Types";
 
 const getData = async (id: string) => {
-  const data = await getDetailsById(id);
-  if (data && data.drinks) {
-    return data.drinks[0];
+  let drink = null;
+  if (id.length > 20) {
+    drink = await prisma.createdDrink.findUnique({ where: { idDrink: id } });
+  } else {
+    const data = await getDetailsById(id);
+    drink = data?.drinks[0] || null;
   }
-  return null;
+  return drink;
 };
 
 type Props = {
@@ -21,7 +25,7 @@ type Props = {
 
 const DrinkDetails = async ({ params }: Props) => {
   const { id } = params;
-  const drink = (await getData(id)) || null;
+  const drink = await getData(id);
   return drink ? (
     <div className="flex flex-col items-center text-black">
       <div className="flex w-full p-8 pt-12 items-center max-w-[1200px]">
@@ -56,10 +60,17 @@ const DrinkDetails = async ({ params }: Props) => {
             </div>
             <div className="flex flex-col justify-between gap-8 ml-8">
               <div>
-                <p>Served from:</p>
+                <p className="font-bold ">Drink category:</p>
+                <p>{drink.strCategory}</p>
+              </div>
+              <div>
+                <p className="font-bold ">Served from:</p>
                 <p>{drink.strGlass}</p>
               </div>
-              <p>Drink type: {drink.strAlcoholic}</p>
+              <div>
+                <p className="font-bold ">Drink type:</p>
+                <p>{drink.strAlcoholic}</p>
+              </div>
             </div>
           </div>
         </div>

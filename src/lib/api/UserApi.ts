@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { CreatedDrink, Drink, User } from "types/Types";
+import { CreatedDrink, Drink, DrinkApiType, User } from "types/Types";
 
 const userApi = axios.create({});
 
@@ -38,5 +38,14 @@ export const createNewDrink = async (drink: Partial<CreatedDrink>) => {
   const response = await userApi.post("/api/drink/create", {
     drink,
   });
+  return response.data;
+};
+
+export const getLocalByCategory = async (
+  category: string
+): Promise<{
+  drinks: DrinkApiType[];
+} | null> => {
+  const response = await userApi.get(`/api/drink/list?category=${category}`);
   return response.data;
 };

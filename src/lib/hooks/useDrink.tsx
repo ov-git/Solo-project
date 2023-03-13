@@ -1,10 +1,11 @@
 import useSWR from "swr";
-import { DrinkApiType, Ingredient } from "types/Types";
+import { DrinkApiType } from "types/Types";
 import {
   getByCategory,
   getDrinksByIngredients,
   getPopular,
 } from "../api/DrinkApi";
+import { getLocalByCategory } from "../api/UserApi";
 
 type FetcherArguments = {
   category: string;
@@ -20,7 +21,8 @@ const fetcher = async ({
       ? await getPopular()
       : category === "search"
       ? await getDrinksByIngredients(ingredients)
-      : await getByCategory(category);
+      : // : await getByCategory(category);
+        await handleCategoryFetch(category);
   return response ? response : { drinks: [] };
 };
 
@@ -35,3 +37,15 @@ export default function useDrink(category: string, ingredients: string[] = []) {
     isError: error,
   };
 }
+
+const handleCategoryFetch = async (category: string) => {
+  const result = await Promise.all([
+    getByCategory(category),
+    getLocalByCategory(category),
+  ]);
+  const temp = result.map((el) => el?.drinks || []);
+
+  return {
+    drinks: temp.flat().sort((a, b) => a.strDrink.localeCompare(b.strDrink)),
+  };
+};

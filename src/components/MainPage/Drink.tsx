@@ -23,7 +23,7 @@ function Drink({ drink }: Props) {
           alt={drink.strDrink}
           height={220}
           width={220}
-          className="rounded cursor-pointer group-hover:opacity-70"
+          className="rounded cursor-pointer group-hover:opacity-70 h-[220px] object-contain"
         />
         <p className="font-bold">{truncate(drink.strDrink)}</p>
       </Link>
