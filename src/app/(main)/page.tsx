@@ -6,7 +6,7 @@ import Hero from "../../components/MainPage/Hero";
 
 // const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export default function HomePage() {
   return (
     <div className="w-full">
       <Hero />

@@ -3,12 +3,15 @@
 import { FC } from "react";
 import { Drink, DrinkApiType } from "types/Types";
 import useSWR from "swr";
-import { addDrinktoLibrary, deleteDrinkFromLibrary } from "@/lib/api/UserApi";
+import {
+  addDrinktoLibrary,
+  deleteDrinkFromLibrary,
+  getUser,
+} from "@/lib/api/UserApi";
 
 const fetcher = async (): Promise<Drink[] | undefined> => {
-  const res = await fetch("/api/user");
-  const data = await res.json();
-  return data.data.drinks;
+  const data = await getUser();
+  return data ? data.drinks : undefined;
 };
 type Props = {
   drink: DrinkApiType;
