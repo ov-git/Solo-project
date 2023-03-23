@@ -19,12 +19,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(200);
       res.json(user);
     } else {
-      throw new Error("no user found");
+      res.status(200);
+      res.json(null);
     }
   } catch (err) {
     console.log(err);
     res.status(404);
-    res.json(null);
   }
 };
 
