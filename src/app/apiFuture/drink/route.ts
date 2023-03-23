@@ -6,6 +6,7 @@ import { CreatedDrink } from "types/Types";
 
 export async function GET(req: NextRequest) {
   const category = req.nextUrl.searchParams.get("category");
+  console.log(category);
 
   const drinks = category
     ? await prisma.createdDrink.findMany({

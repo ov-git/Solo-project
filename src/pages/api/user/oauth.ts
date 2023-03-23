@@ -1,6 +1,8 @@
 import prisma from "../../../lib/Prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 
+// Storing the user after google login
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     try {
