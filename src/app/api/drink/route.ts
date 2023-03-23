@@ -7,9 +7,11 @@ import { CreatedDrink } from "types/Types";
 export async function GET(req: NextRequest) {
   const category = req.nextUrl.searchParams.get("category");
 
-  const drinks = await prisma.createdDrink.findMany({
-    where: { strCategory: category },
-  });
+  const drinks = category
+    ? await prisma.createdDrink.findMany({
+        where: { strCategory: category },
+      })
+    : { drinks: [] };
 
   return NextResponse.json({ drinks: drinks });
 }
@@ -38,11 +40,11 @@ export async function DELETE(req: NextRequest) {
 
   const drinkId: string = await req.json();
 
-  console.log("deleting:", drinkId.data);
+  console.log("deleting:", drinkId);
 
   const drink = await prisma.createdDrink.delete({
     where: {
-      idDrink: drinkId.data,
+      idDrink: drinkId,
     },
   });
 

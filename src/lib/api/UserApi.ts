@@ -25,10 +25,11 @@ export const registerUser = async (
   return response.data;
 };
 
+// Drinks from public API
+
 export const addDrinktoLibrary = async (
   drink: Drink
 ): Promise<Drink | undefined> => {
-  // const response = await userApi.post("/api/drink", {
   const response = await userApi.post("/api/user/library", {
     drink,
   });
@@ -39,7 +40,6 @@ export const addDrinktoLibrary = async (
 export const deleteDrinkFromLibrary = async (
   id: string
 ): Promise<Drink | undefined> => {
-  // const response = await userApi.delete("/api/drink", {
   const response = await userApi.delete("/api/user/library", {
     data: id,
   });
@@ -47,9 +47,17 @@ export const deleteDrinkFromLibrary = async (
   return response.data;
 };
 
+// Created Drinks
 export const createNewDrink = async (drink: Partial<CreatedDrink>) => {
   const response = await userApi.post("/api/drink", {
     drink,
+  });
+  return response.data;
+};
+
+export const deleteCreatedDrink = async (id: string) => {
+  const response = await userApi.delete("/api/drink", {
+    data: id,
   });
   return response.data;
 };

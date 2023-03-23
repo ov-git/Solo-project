@@ -7,6 +7,7 @@ import { getDetailsById } from "@/lib/api/DrinkApi";
 import DrinkReviews from "./DrinkReviews";
 
 import { DrinkWithDetails } from "types/Types";
+import DrinkMeasures from "./DrinkMeasures";
 
 const getData = async (id: string) => {
   let drink = null;
@@ -51,14 +52,15 @@ const DrinkDetails = async ({ params }: Props) => {
         </div>
         <div className="flex flex-col justify-around gap-4 p-8 text-lg rounded-md bg-dYellow">
           <p>{drink.strInstructions}</p>
-          <div className="grid grid-cols-2">
-            <div className="">
+          <div className="grid grid-cols-5">
+            <DrinkMeasures drink={drink} />
+            {/* <div className="">
               <h3 className="font-bold ">Ingredients:</h3>
               {formatMeasures(drink).map((el, i) => (
                 <p key={el}>{el}</p>
               ))}
-            </div>
-            <div className="flex flex-col justify-between gap-8 ml-8">
+            </div> */}
+            <div className="flex flex-col justify-between col-span-2 gap-8 ml-8">
               <div>
                 <p className="font-bold ">Drink category:</p>
                 <p>{drink.strCategory}</p>
@@ -89,7 +91,7 @@ const formatMeasures = (drink: DrinkWithDetails) => {
     const measure = drink[`strMeasure${i}` as keyof DrinkWithDetails];
 
     if (ingredient && measure) {
-      formated.push(ingredient + " :  " + measure);
+      formated.push(ingredient + " :  " + measure + "eu");
     }
   }
   return formated;
