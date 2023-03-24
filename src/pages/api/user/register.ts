@@ -1,29 +1,35 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { User } from "types/Types";
 
 import { hashPassword } from "../../../lib/auth";
 import prisma from "../../../lib/Prisma";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  //
   if (req.method === "POST") {
-    try {
-      const { email, password } = req.body.user;
-      const user = await prisma.user.create({
-        data: {
-          email,
-          password: await hashPassword(password),
-        },
-      });
-      console.log(user);
+    res
+      .status(500)
+      .json({ message: "HTTP method not valid only POST Accepted" });
+    return;
+  }
+  //
+  try {
+    const { email, password } = req.body.user;
 
-      res.status(201);
-      res.json(user);
-    } catch (err) {
-      console.log(err);
-      res.status(404);
+    if (!email || !password) {
+      res.status(404).json({ message: "Invalid request" });
+      return;
     }
-  } else {
-    res.status(500);
-    res.json({ message: "HTTP method not valid only POST Accepted" });
+
+    const user = await prisma.user.create({
+      data: {
+        email,
+        password: await hashPassword(password),
+      },
+    });
+    res.status(201).json(user);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to register user" });
   }
 };
 

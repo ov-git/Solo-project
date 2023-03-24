@@ -28,8 +28,11 @@ export const authOptions: NextAuthOptions = {
         },
       },
       async authorize(credentials, req) {
-        const { email, password } = credentials as any;
         try {
+          const { email, password } = credentials as {
+            email: string;
+            password: string;
+          };
           const options = {
             method: "POST",
             body: JSON.stringify({ email, password }),
@@ -57,25 +60,41 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   callbacks: {
+    // @ts-ignore
     async signIn({ account, profile }) {
+      //
       if (account?.provider === "google") {
-        const { email, name, picture, sub } = profile;
-        const user = {
-          id: sub,
-          email,
-          name,
-          image: picture,
-        };
-        const options = {
-          method: "POST",
-          body: JSON.stringify(user),
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        };
-        const response = await fetch(`${url}/api/user/oauth`, options);
-        return response.ok ? true : false;
+        try {
+          const { email, name, picture, sub } = profile as {
+            email: string;
+            name: string;
+            picture: string;
+            sub: string;
+          };
+
+          const user = {
+            id: sub,
+            email,
+            name,
+            image: picture,
+          };
+
+          const options = {
+            method: "POST",
+            body: JSON.stringify(user),
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          };
+          const response = await fetch(`${url}/api/user/oauth`, options);
+          return response.ok ? true : false;
+          //
+        } catch (error) {
+          console.log("error at signin", error);
+        }
+
+        //
       } else if (account?.provider === "credentials") {
         // already authorized above
         return true;

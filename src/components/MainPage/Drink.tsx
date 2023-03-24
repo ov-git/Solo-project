@@ -5,16 +5,17 @@ import { DrinkApiType } from "types/Types";
 
 type Props = {
   drink: DrinkApiType;
+  loggedIn: boolean;
 };
 
-function Drink({ drink }: Props) {
+function Drink({ drink, loggedIn }: Props) {
   function truncate(name: string) {
     return name.length > 25 ? name.slice(0, 22) + "..." : name;
   }
+
   return (
     <div>
       <Link
-        prefetch={false}
         href={`/drink/${drink.idDrink}`}
         className="flex flex-col items-center p-2 rounded w-60 gap-y-4 h-68 hover:bg-dLightGreen"
       >
@@ -27,7 +28,7 @@ function Drink({ drink }: Props) {
         />
         <p className="font-bold">{truncate(drink.strDrink)}</p>
       </Link>
-      <AddButton drink={drink} />
+      {loggedIn && <AddButton drink={drink} />}
     </div>
   );
 }
